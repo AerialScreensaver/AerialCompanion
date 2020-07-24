@@ -686,11 +686,11 @@
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="XfG-lQ-9wD" customClass="ViewController" customModule="AerialUpdater" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="392" height="185"/>
+                        <rect key="frame" x="0.0" y="0.0" width="462" height="215"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Vs-gp-15X">
-                                <rect key="frame" x="175" y="131" width="168" height="40"/>
+                                <rect key="frame" x="175" y="161" width="168" height="40"/>
                                 <popUpButtonCell key="cell" type="push" title="Release (stable)" bezelStyle="rounded" alignment="left" controlSize="large" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ODe-iT-bQg" id="ebS-oY-s0t">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -707,7 +707,7 @@
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHQ-kl-Gd8">
-                                <rect key="frame" x="60" y="143" width="102" height="16"/>
+                                <rect key="frame" x="60" y="173" width="102" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Desired version:" id="FcP-U5-dBi">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -715,7 +715,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31W-lc-dSb">
-                                <rect key="frame" x="43" y="101" width="119" height="16"/>
+                                <rect key="frame" x="43" y="131" width="119" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Currently installed:" id="Tqc-5z-agH">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -723,7 +723,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ish-Ba-7Yp">
-                                <rect key="frame" x="60" y="65" width="102" height="16"/>
+                                <rect key="frame" x="60" y="95" width="102" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Latest available:" id="QGM-v8-TYZ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -731,7 +731,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HaJ-0z-nGG">
-                                <rect key="frame" x="178" y="101" width="37" height="16"/>
+                                <rect key="frame" x="178" y="131" width="37" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="b5F-H3-o9D">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -739,15 +739,18 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bod-Mv-xj4">
-                                <rect key="frame" x="178" y="65" width="37" height="16"/>
+                                <rect key="frame" x="178" y="95" width="37" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="I1U-hN-3bT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="o9o-q7-cnR">
+                                <rect key="frame" x="20" y="14" width="16" height="16"/>
+                            </progressIndicator>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c4d-nl-9Kc">
-                                <rect key="frame" x="174" y="14" width="109" height="40"/>
+                                <rect key="frame" x="174" y="44" width="109" height="40"/>
                                 <buttonCell key="cell" type="push" title="Install now" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W8n-4Z-5QQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -756,20 +759,33 @@
                                     <action selector="installNowButtonClick:" target="XfG-lQ-9wD" id="qil-HB-44r"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="25" verticalHuggingPriority="75" horizontalCompressionResistancePriority="75" verticalCompressionResistancePriority="75" translatesAutoresizingMaskIntoConstraints="NO" id="MI1-En-lZD">
+                                <rect key="frame" x="54" y="14" width="37" height="16"/>
+                                <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="RPJ-eh-obu">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="o9o-q7-cnR" firstAttribute="top" secondItem="c4d-nl-9Kc" secondAttribute="bottom" constant="20" id="CxN-pW-iCs"/>
                             <constraint firstItem="bod-Mv-xj4" firstAttribute="leading" secondItem="3Vs-gp-15X" secondAttribute="leading" id="NYj-8I-zuX"/>
                             <constraint firstItem="bod-Mv-xj4" firstAttribute="leading" secondItem="ish-Ba-7Yp" secondAttribute="trailing" constant="20" id="NaZ-e0-PaH"/>
+                            <constraint firstItem="o9o-q7-cnR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="35620" id="Nhk-Th-DQn"/>
                             <constraint firstItem="3Vs-gp-15X" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="180" id="P7o-PA-Kxw"/>
                             <constraint firstItem="3Vs-gp-15X" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="Peu-1r-6Lg"/>
                             <constraint firstItem="HaJ-0z-nGG" firstAttribute="firstBaseline" secondItem="31W-lc-dSb" secondAttribute="firstBaseline" id="RoZ-2K-Dlk"/>
+                            <constraint firstItem="MI1-En-lZD" firstAttribute="leading" secondItem="o9o-q7-cnR" secondAttribute="trailing" constant="20" id="SpV-3I-J4S"/>
                             <constraint firstItem="3Vs-gp-15X" firstAttribute="leading" secondItem="PHQ-kl-Gd8" secondAttribute="trailing" constant="20" id="SwP-G6-f27"/>
+                            <constraint firstItem="o9o-q7-cnR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Yyt-kv-85f"/>
                             <constraint firstItem="c4d-nl-9Kc" firstAttribute="leading" secondItem="bod-Mv-xj4" secondAttribute="leading" id="e7Q-4p-jsQ"/>
                             <constraint firstItem="3Vs-gp-15X" firstAttribute="firstBaseline" secondItem="PHQ-kl-Gd8" secondAttribute="firstBaseline" id="glW-C1-7de"/>
                             <constraint firstItem="bod-Mv-xj4" firstAttribute="top" secondItem="HaJ-0z-nGG" secondAttribute="bottom" constant="20" id="he6-gK-ybt"/>
                             <constraint firstItem="c4d-nl-9Kc" firstAttribute="top" secondItem="bod-Mv-xj4" secondAttribute="bottom" constant="17" id="kZV-jt-7FS"/>
                             <constraint firstItem="HaJ-0z-nGG" firstAttribute="leading" secondItem="3Vs-gp-15X" secondAttribute="leading" id="lYl-Wn-bZ3"/>
                             <constraint firstItem="bod-Mv-xj4" firstAttribute="firstBaseline" secondItem="ish-Ba-7Yp" secondAttribute="firstBaseline" id="mF9-zu-SRj"/>
+                            <constraint firstItem="MI1-En-lZD" firstAttribute="centerY" secondItem="o9o-q7-cnR" secondAttribute="centerY" id="mVJ-qF-APF"/>
                             <constraint firstItem="HaJ-0z-nGG" firstAttribute="top" secondItem="3Vs-gp-15X" secondAttribute="bottom" constant="20" id="ucs-fV-c1Q"/>
                             <constraint firstItem="HaJ-0z-nGG" firstAttribute="leading" secondItem="31W-lc-dSb" secondAttribute="trailing" constant="20" id="woA-1U-WiC"/>
                         </constraints>
@@ -779,11 +795,13 @@
                         <outlet property="desiredVersionPopup" destination="3Vs-gp-15X" id="qvw-Sc-yk0"/>
                         <outlet property="installNowButton" destination="c4d-nl-9Kc" id="710-Kz-pCr"/>
                         <outlet property="latestAvailableLabel" destination="bod-Mv-xj4" id="6CA-FQ-ZT1"/>
+                        <outlet property="progressLabel" destination="MI1-En-lZD" id="xTQ-MG-MXw"/>
+                        <outlet property="spinner" destination="o9o-q7-cnR" id="n1s-lJ-fQP"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56" y="360.5"/>
+            <point key="canvasLocation" x="-7875" y="375.5"/>
         </scene>
     </scenes>
 </document>

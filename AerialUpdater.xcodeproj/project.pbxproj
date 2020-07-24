@@ -12,6 +12,8 @@
 		03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5C24CB0CA900494D32 /* Assets.xcassets */; };
 		03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5E24CB0CA900494D32 /* Main.storyboard */; };
 		03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F6824CB157E00494D32 /* VersionChecker.swift */; };
+		03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7D24CB43FE00494D32 /* Manifest.swift */; };
+		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		03CE4F6124CB0CA900494D32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AerialUpdater.entitlements; sourceTree = "<group>"; };
 		03CE4F6824CB157E00494D32 /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
+		03CE4F7D24CB43FE00494D32 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
+		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 				03CE4F5E24CB0CA900494D32 /* Main.storyboard */,
 				03CE4F6124CB0CA900494D32 /* Info.plist */,
 				03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */,
+				03CE4F7D24CB43FE00494D32 /* Manifest.swift */,
+				03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */,
 			);
 			path = AerialUpdater;
 			sourceTree = "<group>";
@@ -135,9 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
 				03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
 				03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */,
+				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

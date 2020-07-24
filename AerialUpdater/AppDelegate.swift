@@ -16,9 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.title = "✈️"
         statusItem.button?.target = self
         statusItem.button?.action = #selector(showSettings)
-        
-        // VersionChecker.getAerialVersion()
-        VersionChecker.getAerialCreationDate()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
