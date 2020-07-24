@@ -11,6 +11,7 @@
 		03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F5A24CB0CA700494D32 /* ViewController.swift */; };
 		03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5C24CB0CA900494D32 /* Assets.xcassets */; };
 		03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5E24CB0CA900494D32 /* Main.storyboard */; };
+		03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F6824CB157E00494D32 /* VersionChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		03CE4F5F24CB0CA900494D32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03CE4F6124CB0CA900494D32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AerialUpdater.entitlements; sourceTree = "<group>"; };
+		03CE4F6824CB157E00494D32 /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				03CE4F5824CB0CA700494D32 /* AppDelegate.swift */,
 				03CE4F5A24CB0CA700494D32 /* ViewController.swift */,
+				03CE4F6824CB157E00494D32 /* VersionChecker.swift */,
 				03CE4F5C24CB0CA900494D32 /* Assets.xcassets */,
 				03CE4F5E24CB0CA900494D32 /* Main.storyboard */,
 				03CE4F6124CB0CA900494D32 /* Info.plist */,
@@ -134,6 +137,7 @@
 			files = (
 				03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
+				03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +285,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -302,6 +307,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
