@@ -24,9 +24,9 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        manifest = VersionChecker.getManifest()
+        //manifest = VersionChecker.getManifest()
 
-        currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
+        //currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
         desiredVersionPopup.selectItem(at: desiredVersion.rawValue)
         installNowButton.isEnabled = false
 
@@ -43,7 +43,7 @@ class ViewController: NSViewController {
     }
 
     @IBAction func desiredVersionPopupChange(_ sender: NSPopUpButton) {
-        currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
+        //currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
 
         switch sender.indexOfSelectedItem {
         case 0: // Alpha
@@ -87,7 +87,7 @@ class ViewController: NSViewController {
             spinner.startAnimation(self)
             progressLabel.isHidden = false
 
-            VersionChecker.updateTo(desired: desiredVersion, manifest: manifest, vc: self)
+            //VersionChecker.updateTo(desired: desiredVersion, manifest: manifest, vc: self)
         }
     }
     
@@ -98,7 +98,7 @@ class ViewController: NSViewController {
                 self.spinner.stopAnimation(self)
                 self.spinner.isHidden = true
                 
-                self.currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
+                //self.currentlyInstalledLabel.stringValue = VersionChecker.getAerialVersion()
             } else {
                 self.progressLabel.stringValue = string
             }

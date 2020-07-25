@@ -11,9 +11,9 @@ class FileDownloader {
 
     static func loadFileSync(url: URL, completion: @escaping (String?, Error?) -> Void)
     {
-        let documentsUrl = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let supportUrl = URL(fileURLWithPath: Helpers.supportPath)
 
-        let destinationUrl = documentsUrl.appendingPathComponent(url.lastPathComponent)
+        let destinationUrl = supportUrl.appendingPathComponent(url.lastPathComponent)
 
         if FileManager().fileExists(atPath: destinationUrl.path)
         {
@@ -43,9 +43,9 @@ class FileDownloader {
 
     static func loadFileAsync(url: URL, completion: @escaping (String?, Error?) -> Void)
     {
-        let documentsUrl =  FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
+        let supportUrl = URL(fileURLWithPath: Helpers.supportPath)
 
-        let destinationUrl = documentsUrl.appendingPathComponent(url.lastPathComponent)
+        let destinationUrl = supportUrl.appendingPathComponent(url.lastPathComponent)
 
         if FileManager().fileExists(atPath: destinationUrl.path)
         {

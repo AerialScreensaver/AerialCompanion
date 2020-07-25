@@ -7,16 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
+		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
+		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
+		03592ABC24CC821500C1AE52 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592ABB24CC821500C1AE52 /* Update.swift */; };
+		03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592ABD24CC86E900C1AE52 /* CachedManifest.swift */; };
+		035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */; };
 		03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F5824CB0CA700494D32 /* AppDelegate.swift */; };
 		03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F5A24CB0CA700494D32 /* ViewController.swift */; };
 		03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5C24CB0CA900494D32 /* Assets.xcassets */; };
 		03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5E24CB0CA900494D32 /* Main.storyboard */; };
-		03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F6824CB157E00494D32 /* VersionChecker.swift */; };
 		03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7D24CB43FE00494D32 /* Manifest.swift */; };
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
+		03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D50E6A24CC35F600D391D1 /* MenuView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
+		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		03592ABB24CC821500C1AE52 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		03592ABD24CC86E900C1AE52 /* CachedManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedManifest.swift; sourceTree = "<group>"; };
+		035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLog.swift; sourceTree = "<group>"; };
 		03CE4F5524CB0CA700494D32 /* AerialUpdater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AerialUpdater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03CE4F5824CB0CA700494D32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03CE4F5A24CB0CA700494D32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,9 +36,9 @@
 		03CE4F5F24CB0CA900494D32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03CE4F6124CB0CA900494D32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AerialUpdater.entitlements; sourceTree = "<group>"; };
-		03CE4F6824CB157E00494D32 /* VersionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChecker.swift; sourceTree = "<group>"; };
 		03CE4F7D24CB43FE00494D32 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		03D50E6A24CC35F600D391D1 /* MenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +52,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03592AB624CC80A600C1AE52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				035F6F1924CC8774002E4EEE /* Manifest */,
+				035F6F1A24CC8842002E4EEE /* Helpers */,
+				03592AB124CC765500C1AE52 /* Preferences.swift */,
+				03592AB424CC809F00C1AE52 /* LocalVersion.swift */,
+				03592ABB24CC821500C1AE52 /* Update.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		035F6F1924CC8774002E4EEE /* Manifest */ = {
+			isa = PBXGroup;
+			children = (
+				03CE4F7D24CB43FE00494D32 /* Manifest.swift */,
+				03592ABD24CC86E900C1AE52 /* CachedManifest.swift */,
+			);
+			path = Manifest;
+			sourceTree = "<group>";
+		};
+		035F6F1A24CC8842002E4EEE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				03592AB724CC80FD00C1AE52 /* Helpers.swift */,
+				03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */,
+				035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		03CE4F4C24CB0CA700494D32 = {
 			isa = PBXGroup;
 			children = (
@@ -61,13 +104,12 @@
 			children = (
 				03CE4F5824CB0CA700494D32 /* AppDelegate.swift */,
 				03CE4F5A24CB0CA700494D32 /* ViewController.swift */,
-				03CE4F6824CB157E00494D32 /* VersionChecker.swift */,
 				03CE4F5C24CB0CA900494D32 /* Assets.xcassets */,
 				03CE4F5E24CB0CA900494D32 /* Main.storyboard */,
+				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
 				03CE4F6124CB0CA900494D32 /* Info.plist */,
 				03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */,
-				03CE4F7D24CB43FE00494D32 /* Manifest.swift */,
-				03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */,
+				03592AB624CC80A600C1AE52 /* Model */,
 			);
 			path = AerialUpdater;
 			sourceTree = "<group>";
@@ -130,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
+				03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,10 +185,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
+				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
+				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */,
+				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
+				03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */,
+				03592AB224CC765500C1AE52 /* Preferences.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
-				03CE4F6924CB157E00494D32 /* VersionChecker.swift in Sources */,
 				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
+				035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +342,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -316,6 +365,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
