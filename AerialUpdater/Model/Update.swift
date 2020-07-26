@@ -8,10 +8,58 @@
 import Foundation
 
 // Again this is a bit messy...
-struct Update {
+class Update {
+    static let instance: Update = Update()
+
+    var appDelegate: AppDelegate?
+    var shouldReport = false
+    
+    func setAppDelegate(ad: AppDelegate) {
+        appDelegate = ad
+    }
+    
+    func unattendedCheck() {
+        debugLog("Checking for new version...")
+        if !LocalVersion.isInstalled() {
+            return
+        }
+        CachedManifest.instance.updateNow()
+        
+        var shouldUpdate = false
+        if let manifest = CachedManifest.instance.manifest {
+            let localVersion = LocalVersion.get()
+            
+            switch Preferences.desiredVersion {
+            case .alpha:
+                if localVersion != manifest.alphaVersion {
+                    shouldUpdate = true
+                }
+            case .beta:
+                if localVersion != manifest.betaVersion {
+                    shouldUpdate = true
+                }
+            case .release:
+                if localVersion != manifest.releaseVersion {
+                    shouldUpdate = true
+                }
+            }
+            
+            if shouldUpdate {
+                debugLog("New version available !")
+                if Preferences.updateMode == .automatic {
+                    unattendedPerform()
+                } else {
+                    if let ad = appDelegate {
+                        ad.setIcon(mode: .notification)
+                    }
+                }
+            }
+        }
+
+    }
     
     // What should we do, is there a new version available ?
-    static func check() -> (String, Bool) {
+    func check() -> (String, Bool) {
         if !LocalVersion.isInstalled() {
             return ("Not installed!", true)
         }
@@ -19,7 +67,7 @@ struct Update {
         if let manifest = CachedManifest.instance.manifest {
             let localVersion = LocalVersion.get()
             
-            debugLog("local \(localVersion), alpha \(manifest.alphaVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
+            debugLog("Versions: local \(localVersion), alpha \(manifest.alphaVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
             
             switch Preferences.desiredVersion {
             case .alpha:
@@ -46,10 +94,41 @@ struct Update {
         }
     }
     
-    static func perform(ad: AppDelegate) {
+    
+    func unattendedPerform() {
+        shouldReport = false
+        doPerform()
+    }
+    
+    func perform(ad: AppDelegate) {
+        appDelegate = ad
+        shouldReport = true
+        doPerform()
+    }
+    
+    func report(string: String, done: Bool) {
+        if shouldReport {
+            if let ad = appDelegate {
+                ad.updateProgress(string: string, done: done)
+            }
+        }
+
+        if done {
+            if let ad = appDelegate {
+                ad.setIcon(mode: .normal)
+                ad.updateMenuContent()
+            }
+        }
+    }
+    
+    func doPerform() {
+        if let ad = appDelegate {
+            ad.setIcon(mode: .updating)
+        }
+
         guard let manifest = CachedManifest.instance.manifest else {
             errorLog("Trying to perform update with no manifest, please report")
-            ad.updateProgress(string: "Error: No manifest", done: true)
+            report(string: "Error: No manifest", done: true)
             return
         }
         
@@ -69,7 +148,7 @@ struct Update {
             } catch {
                 // ERROR
                 errorLog("Cannot delete zip in AppSupport")
-                ad.updateProgress(string: "Cannot delete zip in AppSupport", done: true)
+                report(string: "Cannot delete zip in AppSupport", done: true)
                 return
             }
         }
@@ -82,7 +161,7 @@ struct Update {
             } catch {
                 // ERROR
                 errorLog("Cannot delete Aerial.saver in AppSupport")
-                ad.updateProgress(string: "Cannot delete Aerial.saver in AppSupport", done: true)
+                report(string: "Cannot delete Aerial.saver in AppSupport", done: true)
                 return
             }
         }
@@ -98,22 +177,22 @@ struct Update {
             zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.releaseVersion)/Aerial.saver.zip"
         }
         debugLog("Downloading...")
-        ad.updateProgress(string: "Downloading...", done: false)
+        report(string: "Downloading...", done: false)
         
         FileDownloader.loadFileAsync(url: URL(string:zipPath)!) { (path, error) in
             if let perror = error {
                 errorLog("Download error: \(perror.localizedDescription)")
-                ad.updateProgress(string: "Error: \(perror.localizedDescription)", done: true)
+                self.report(string: "Error: \(perror.localizedDescription)", done: true)
             } else {
-                verifyFile(path: path!, manifest: manifest, ad: ad)
+                self.verifyFile(path: path!, manifest: manifest)
             }
         }
     }
     
     // MARK: - Private helpers
-    private static func verifyFile(path: String, manifest: Manifest, ad: AppDelegate) {
+    private func verifyFile(path: String, manifest: Manifest) {
         debugLog("Verifying...")
-        ad.updateProgress(string: "Verifying...", done: false)
+        report(string: "Verifying...", done: false)
         
         if FileManager.default.fileExists(atPath: path) {
             let dlsha = getZipSHA256(path: path)
@@ -130,49 +209,48 @@ struct Update {
 
             if tsha == dlsha {
                 debugLog("Unzipping...")
-                ad.updateProgress(string: "Unzipping...", done: false)
+                report(string: "Unzipping...", done: false)
 
                 _ = Helpers.shell(launchPath: "/usr/bin/unzip", arguments: ["-d", String(path[...path.lastIndex(of: "/")!]), path])
                 
                 var saverPath = path
                 saverPath.removeLast(4)
                 debugLog("Verifying signature...")
-                ad.updateProgress(string: "Verifying signature...", done: false)
+                report(string: "Verifying signature...", done: false)
 
                 if FileManager.default.fileExists(atPath: saverPath) {
                     let result = Helpers.shell(launchPath: "/usr/bin/codesign", arguments: ["-v", "-d", saverPath])
                     
                     if checkCodesign(result) {
-                        if install(saverPath, ad: ad) {
+                        if install(saverPath) {
                             // Pfew...
                             debugLog("Installed !")
-                            ad.updateProgress(string: "OK", done: true)
+                            report(string: "OK", done: true)
                         } else {
                             errorLog("Cannot copy .saver")
-                            ad.updateProgress(string: "Cannot copy .saver", done: true)
-
+                            report(string: "Cannot copy .saver", done: true)
                         }
                         
                     } else {
                         errorLog("Codesigning verification failed")
-                        ad.updateProgress(string: "Codesigning verification failed", done: true)
+                        report(string: "Codesigning verification failed", done: true)
                     }
                 } else {
                     errorLog("Aerial.saver not found in zip")
-                    ad.updateProgress(string: "Aerial.saver not found in zip", done: true)
+                    report(string: "Aerial.saver not found in zip", done: true)
                 }
             } else {
                 errorLog("Downloaded file is corrupted")
-                ad.updateProgress(string: "Downloaded file is corrupted", done: true)
+                report(string: "Downloaded file is corrupted", done: true)
             }
         } else {
             errorLog("Downloaded file not found")
-            ad.updateProgress(string: "Downloaded file not found", done: true)
+            report(string: "Downloaded file not found", done: true)
         }
         
     }
 
-    private static func checkCodesign(_ result: String?) -> Bool {
+    private func checkCodesign(_ result: String?) -> Bool {
         if let presult = result {
             let lines = presult.split(separator: "\n")
             
@@ -180,7 +258,6 @@ struct Update {
             var devIDVer = false
             
             for line in lines {
-                print(line)
                 if line.starts(with: "Identifier=com.JohnCoates.Aerial") {
                     bundleVer = true
                 }
@@ -200,10 +277,10 @@ struct Update {
         }
     }
     
-    private static func install(_ path: String, ad: AppDelegate) -> Bool {
+    private func install(_ path: String) -> Bool {
         if FileManager.default.fileExists(atPath: LocalVersion.aerialPath) {
             debugLog("Removing old version...")
-            ad.updateProgress(string: "Removing old version...", done: false)
+            report(string: "Removing old version...", done: false)
             if FileManager().fileExists(atPath: LocalVersion.aerialPath)
             {
                 do {
@@ -211,25 +288,24 @@ struct Update {
                 } catch {
                     // ERROR
                     errorLog("Cannot delete zip in downloads directory")
-                    ad.updateProgress(string: "Cannot delete zip in downloads directory", done: true)
+                    report(string: "Cannot delete zip in downloads directory", done: true)
                     return false
                 }
             }
         }
         debugLog("Installing...")
-        ad.updateProgress(string: "Installing...", done: false)
+        report(string: "Installing...", done: false)
 
         do {
             try FileManager.default.moveItem(atPath: path, toPath: LocalVersion.aerialPath)
             return true
-            
         } catch {
             return false
         }
         
     }
     
-    private static func getZipSHA256(path: String) -> String {
+    private func getZipSHA256(path: String) -> String {
         if FileManager.default.fileExists(atPath: path) {
             return String(Helpers.shell(launchPath: "/usr/bin/shasum",arguments: ["-a","256",path])!.split(separator: " ")[0])
         }

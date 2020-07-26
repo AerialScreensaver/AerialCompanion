@@ -15,6 +15,7 @@ class CachedManifest {
     func updateNow() {
         do {
             let tManifest = try Manifest(fromURL: URL(string: "https://raw.githubusercontent.com/glouel/AerialUpdater/main/manifest.json")!)
+            debugLog("Manifest downloaded, alpha: \(tManifest.alphaVersion), beta: \(tManifest.betaVersion), release: \(tManifest.releaseVersion)")
             // All good ? Save
             manifest = tManifest
         } catch {

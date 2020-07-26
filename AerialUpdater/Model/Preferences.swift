@@ -11,6 +11,14 @@ enum DesiredVersion: Int, Codable {
     case alpha, beta, release
 }
 
+enum UpdateMode: Int, Codable {
+    case automatic, notifyme
+}
+
+enum CheckEvery: Int, Codable {
+    case hour, day, week
+}
+
 struct Preferences {
     // Which version are we looking for ? Defaults to release
     @SimpleStorage(key: "intDesiredVersion", defaultValue: DesiredVersion.release.rawValue)
@@ -24,6 +32,37 @@ struct Preferences {
         }
         set(value) {
             intDesiredVersion = value.rawValue
+        }
+    }
+    
+    // Automatic or notifications ?
+    @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.automatic.rawValue)
+    static var intUpdateMode: Int
+
+    // We wrap in a separate value, as we can't store an enum as a Codable in
+    // macOS < 10.15
+    static var updateMode: UpdateMode {
+        get {
+            return UpdateMode(rawValue: intUpdateMode)!
+        }
+        set(value) {
+            intUpdateMode = value.rawValue
+        }
+    }
+    
+    
+    // Check frequency
+    @SimpleStorage(key: "intCheckEvery", defaultValue: CheckEvery.day.rawValue)
+    static var intCheckEvery: Int
+
+    // We wrap in a separate value, as we can't store an enum as a Codable in
+    // macOS < 10.15
+    static var checkEvery: CheckEvery {
+        get {
+            return CheckEvery(rawValue: intCheckEvery)!
+        }
+        set(value) {
+            intCheckEvery = value.rawValue
         }
     }
     

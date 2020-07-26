@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319460524CDBD2600F37B35 /* BackgroundCheck.swift */; };
 		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
 		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
 		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0319460524CDBD2600F37B35 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
 		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				03592AB124CC765500C1AE52 /* Preferences.swift */,
 				03592AB424CC809F00C1AE52 /* LocalVersion.swift */,
 				03592ABB24CC821500C1AE52 /* Update.swift */,
+				0319460524CDBD2600F37B35 /* BackgroundCheck.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -102,11 +105,11 @@
 		03CE4F5724CB0CA700494D32 /* AerialUpdater */ = {
 			isa = PBXGroup;
 			children = (
+				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
 				03CE4F5824CB0CA700494D32 /* AppDelegate.swift */,
 				03CE4F5A24CB0CA700494D32 /* ViewController.swift */,
 				03CE4F5C24CB0CA900494D32 /* Assets.xcassets */,
 				03CE4F5E24CB0CA900494D32 /* Main.storyboard */,
-				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
 				03CE4F6124CB0CA900494D32 /* Info.plist */,
 				03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */,
 				03592AB624CC80A600C1AE52 /* Model */,
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
+				0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */,
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */,
@@ -342,7 +346,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -365,7 +369,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

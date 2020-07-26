@@ -12,10 +12,7 @@ struct LocalVersion {
         let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
         if let pathComponent = url.appendingPathComponent("Screen Savers/Aerial.saver") {
-            let filePath = pathComponent.path
-            print(filePath)
-
-            return filePath
+            return pathComponent.path
         } else {
             return ""
         }
@@ -25,10 +22,7 @@ struct LocalVersion {
         let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
         if let pathComponent = url.appendingPathComponent("Screen Savers/Aerial.saver") {
-            let filePath = pathComponent.path
-            print(filePath)
-
-            return filePath
+            return pathComponent.path
         } else {
             return ""
         }

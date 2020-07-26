@@ -10,8 +10,14 @@
             <connections>
                 <outlet property="goodTrick" destination="7ly-UJ-lL0" id="yHd-Iv-qOj"/>
                 <outlet property="menuAlpha" destination="aTb-6M-eNd" id="7jb-Sl-2hx"/>
+                <outlet property="menuAutomatic" destination="c1V-9r-2xp" id="hj0-Kd-mHb"/>
                 <outlet property="menuBeta" destination="B8x-rn-xbe" id="P0J-eq-Tx3"/>
+                <outlet property="menuDay" destination="h6f-dk-Iwj" id="4zL-Rt-6f0"/>
+                <outlet property="menuDebugMode" destination="eJg-F9-nT7" id="fTX-im-Ypz"/>
+                <outlet property="menuHour" destination="cZD-K7-Kbp" id="oC5-uG-Tik"/>
+                <outlet property="menuNotifyMe" destination="gEv-rH-Fdb" id="eJ5-Gi-CLc"/>
                 <outlet property="menuRelease" destination="s1K-sM-h3S" id="8uQ-6f-cpw"/>
+                <outlet property="menuWeek" destination="lpf-93-vcm" id="7eA-3E-moZ"/>
                 <outlet property="versionImageView" destination="e6g-aK-Vba" id="0c0-u3-wvs"/>
                 <outlet property="versionInstallNow" destination="dVF-dg-jpC" id="aws-UQ-bRL"/>
                 <outlet property="versionLabel" destination="lRz-SV-1wN" id="46a-dH-qql"/>
@@ -75,32 +81,56 @@
                         <items>
                             <menuItem title="Automatic" id="c1V-9r-2xp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateModeChange:" target="-2" id="pSQ-Ge-EeP"/>
+                                </connections>
                             </menuItem>
-                            <menuItem title="Notify me" id="gEv-rH-Fdb">
+                            <menuItem title="Notify Me" id="gEv-rH-Fdb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateModeChange:" target="-2" id="UuI-Tf-eKM"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Check every" id="1PK-ne-kan">
+                <menuItem title="Check Every" id="1PK-ne-kan">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Check every" id="kSO-VG-6Wh">
+                    <menu key="submenu" title="Check Every" id="kSO-VG-6Wh">
                         <items>
                             <menuItem title="Hour" id="cZD-K7-Kbp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkEveryChange:" target="-2" id="qYO-ZZ-uqC"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Day" id="h6f-dk-Iwj">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkEveryChange:" target="-2" id="zmq-ct-4Ad"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Week" id="lpf-93-vcm">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkEveryChange:" target="-2" id="rhz-7r-4nd"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
+                </menuItem>
+                <menuItem title="Check Now" id="vi9-P6-dJg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="checkNow:" target="-2" id="0Y0-jp-KHW"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="nSj-ef-RJd"/>
                 <menuItem title="Debug Mode" id="eJg-F9-nT7">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="debugMode:" target="-2" id="1DB-YX-3sD"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="6Za-pH-EhU"/>
                 <menuItem title="Quit" id="L0h-mF-RtP">
