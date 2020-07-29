@@ -6,6 +6,12 @@ The official install/auto-update tool for the [Aerial screen saver](https://gith
 
 As the name implies, this utility will install Aerial's latest versions on your system and keep you up to date. 
 
+## Installation
+
+Download the [latest release](https://github.com/glouel/AerialUpdater/releases), unzip and copy `AerialUpdater.app` to `/Applications` (or some other place of your choice, then double-click to launch. 
+
+To uninstall, simply delete `AerialUpdater.app`. 
+
 ## I thought Aerial had auto-updates already ?  
 
 Aerial had auto-updates starting with [version 1.5.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#150---may-31-2019), this feature was provided by the [Sparkle framework](https://sparkle-project.org). 
