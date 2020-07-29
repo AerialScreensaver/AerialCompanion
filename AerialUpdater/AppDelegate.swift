@@ -138,6 +138,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.menuAlpha.title = "Alpha (\(manifest.alphaVersion))"
                 self.menuBeta.title = "Beta (\(manifest.betaVersion))"
                 self.menuRelease.title = "Release (\(manifest.releaseVersion))"
+                
+                if manifest.updaterVersion != Helpers.version {
+                    print(manifest.updaterVersion)
+                    print(Helpers.version)
+                    self.versionLabel.stringValue = "New AerialUpdater"
+                    self.versionImageView.isHidden = true
+                    self.versionInstallNow.isHidden = false
+                    self.goodTrick.isHidden = true
+                    return
+                }
             }
             
             let (statusString, shouldInstall) = Update.instance.check()
@@ -178,6 +188,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // Installation Button
     @IBAction func versionInstallNowClick(_ sender: Any) {
+        if let manifest = CachedManifest.instance.manifest {
+            if manifest.updaterVersion != Helpers.version {
+                let workspace = NSWorkspace.shared
+                let url = URL(string: "https://github.com/glouel/AerialUpdater/releases")!
+                workspace.open(url)
+                return
+            }
+        }
+        
+        
         versionInstallNow.isHidden = true
         versionLabel.stringValue = "Hold on..."
         // Start spinning
