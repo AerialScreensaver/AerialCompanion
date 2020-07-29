@@ -1,6 +1,6 @@
 {
   "alphaSHA256" : "acdc017ffc08be666d05bd6f0ad06bddf569a47235276215566fdfc7c8f7aab2",
-  "updaterVersion" : "0.1",
+  "updaterVersion" : "0.4",
   "releaseSHA256" : "1d21511a31895ece4a18c93c779cbb35a643c5a957a16748cbf4e35a611a27ba",
   "releaseVersion" : "1.9.2",
   "betaVersion" : "1.9.2",
