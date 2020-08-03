@@ -62,12 +62,14 @@ class UpdateCheckWindowController: NSWindowController, UpdateCallback {
         menuCallback!.updateMenuContent()
     }
     
-    @IBAction func actionButtonClick(_ sender: Any) {
+    @IBAction func actionButtonClick(_ sender: NSButton) {
         if UpdaterVersion.needsUpdating() {
             let workspace = NSWorkspace.shared
             let url = URL(string: "https://github.com/glouel/AerialUpdater/releases")!
             workspace.open(url)
             return
+        } else if sender.title == "Close" || sender.title == "Show me" {
+            close()
         }
         
         let (_, shouldInstall) = Update.instance.check()
