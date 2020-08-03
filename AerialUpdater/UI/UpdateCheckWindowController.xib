@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17132" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17132"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="UpdateCheckWindowController" customModule="AerialUpdater" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="kfs-cv-OUn" id="bI7-BF-gFf"/>
+                <outlet property="largeGoodTrick" destination="Txh-J8-4Fg" id="IOj-4T-7UU"/>
+                <outlet property="progressLabel" destination="zgw-TZ-0O3" id="qSr-9K-C4S"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Aerial Updater" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="76"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="76"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <progressIndicator maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Txh-J8-4Fg">
+                        <rect key="frame" x="22" y="22" width="32" height="32"/>
+                    </progressIndicator>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-TZ-0O3">
+                        <rect key="frame" x="72" y="30" width="37" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Fud-tY-77Z">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kfs-cv-OUn">
+                        <rect key="frame" x="377" y="18" width="85" height="40"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZiW-gH-LpO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="actionButtonClick:" target="-2" id="zey-yY-jeB"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Txh-J8-4Fg" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="22" id="3pv-4j-rkN"/>
+                    <constraint firstAttribute="bottom" secondItem="Txh-J8-4Fg" secondAttribute="bottom" constant="22" id="9qz-JA-UU3"/>
+                    <constraint firstAttribute="trailing" secondItem="kfs-cv-OUn" secondAttribute="trailing" constant="24" id="CYt-19-Urq"/>
+                    <constraint firstItem="zgw-TZ-0O3" firstAttribute="leading" secondItem="Txh-J8-4Fg" secondAttribute="trailing" constant="20" id="aQY-lz-i8p"/>
+                    <constraint firstItem="zgw-TZ-0O3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="30" id="mfS-Q4-iWD"/>
+                    <constraint firstItem="Txh-J8-4Fg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="22" id="oPW-2l-77T"/>
+                    <constraint firstItem="kfs-cv-OUn" firstAttribute="centerY" secondItem="zgw-TZ-0O3" secondAttribute="centerY" id="qZP-t8-wcY"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-164" y="47"/>
+        </window>
+    </objects>
+</document>

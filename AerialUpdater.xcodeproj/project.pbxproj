@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319460524CDBD2600F37B35 /* BackgroundCheck.swift */; };
+		031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A3A6524D835B10011E738 /* InfoWindowController.swift */; };
+		031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031A3A6624D835B10011E738 /* InfoWindowController.xib */; };
+		0333115224D8369700E4622D /* btn_donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0333115124D8369700E4622D /* btn_donate.png */; };
+		0333115624D8448E00E4622D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115424D8448E00E4622D /* MenuViewController.swift */; };
+		0333115924D85CCA00E4622D /* String+version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115824D85CCA00E4622D /* String+version.swift */; };
+		0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115A24D85D4600E4622D /* UpdaterVersion.swift */; };
+		0333115E24D8796F00E4622D /* UpdateCheckWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */; };
+		0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */; };
 		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
 		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
 		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
@@ -25,6 +33,14 @@
 
 /* Begin PBXFileReference section */
 		0319460524CDBD2600F37B35 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
+		031A3A6524D835B10011E738 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
+		031A3A6624D835B10011E738 /* InfoWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindowController.xib; sourceTree = "<group>"; };
+		0333115124D8369700E4622D /* btn_donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate.png; sourceTree = "<group>"; };
+		0333115424D8448E00E4622D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		0333115824D85CCA00E4622D /* String+version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+version.swift"; sourceTree = "<group>"; };
+		0333115A24D85D4600E4622D /* UpdaterVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterVersion.swift; sourceTree = "<group>"; };
+		0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckWindowController.swift; sourceTree = "<group>"; };
+		0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateCheckWindowController.xib; sourceTree = "<group>"; };
 		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
 		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -54,6 +70,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031A3A6924D835B90011E738 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		0333115024D8360A00E4622D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0333115124D8369700E4622D /* btn_donate.png */,
+				031A3A6624D835B10011E738 /* InfoWindowController.xib */,
+				031A3A6524D835B10011E738 /* InfoWindowController.swift */,
+				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
+				0333115424D8448E00E4622D /* MenuViewController.swift */,
+				0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */,
+				0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		03592AB624CC80A600C1AE52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +98,7 @@
 				035F6F1A24CC8842002E4EEE /* Helpers */,
 				03592AB124CC765500C1AE52 /* Preferences.swift */,
 				03592AB424CC809F00C1AE52 /* LocalVersion.swift */,
+				0333115A24D85D4600E4622D /* UpdaterVersion.swift */,
 				03592ABB24CC821500C1AE52 /* Update.swift */,
 				0319460524CDBD2600F37B35 /* BackgroundCheck.swift */,
 			);
@@ -82,6 +120,7 @@
 				03592AB724CC80FD00C1AE52 /* Helpers.swift */,
 				03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */,
 				035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */,
+				0333115824D85CCA00E4622D /* String+version.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -105,14 +144,15 @@
 		03CE4F5724CB0CA700494D32 /* AerialUpdater */ = {
 			isa = PBXGroup;
 			children = (
-				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
+				0333115024D8360A00E4622D /* UI */,
 				03CE4F5824CB0CA700494D32 /* AppDelegate.swift */,
-				03CE4F5A24CB0CA700494D32 /* ViewController.swift */,
 				03CE4F5C24CB0CA900494D32 /* Assets.xcassets */,
 				03CE4F5E24CB0CA900494D32 /* Main.storyboard */,
 				03CE4F6124CB0CA900494D32 /* Info.plist */,
 				03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */,
+				03CE4F5A24CB0CA700494D32 /* ViewController.swift */,
 				03592AB624CC80A600C1AE52 /* Model */,
+				031A3A6924D835B90011E738 /* New Group */,
 			);
 			path = AerialUpdater;
 			sourceTree = "<group>";
@@ -175,8 +215,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
+				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
 				03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */,
+				0333115224D8369700E4622D /* btn_donate.png in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
+				0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,13 +230,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */,
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
+				031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */,
 				0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */,
+				0333115924D85CCA00E4622D /* String+version.swift in Sources */,
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03CE4F5B24CB0CA700494D32 /* ViewController.swift in Sources */,
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
+				0333115624D8448E00E4622D /* MenuViewController.swift in Sources */,
 				03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */,
+				0333115E24D8796F00E4622D /* UpdateCheckWindowController.swift in Sources */,
 				03592AB224CC765500C1AE52 /* Preferences.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
 				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
@@ -346,7 +394,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -369,7 +417,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

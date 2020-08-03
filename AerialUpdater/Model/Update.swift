@@ -7,15 +7,21 @@
 
 import Foundation
 
+protocol UpdateCallback {
+    func updateProgress(string: String, done: Bool)
+    func updateMenuContent()
+    func setIcon(mode: IconMode)
+}
+
 // Again this is a bit messy...
 class Update {
     static let instance: Update = Update()
 
-    var appDelegate: AppDelegate?
+    var uiCallback: UpdateCallback?
     var shouldReport = false
     
-    func setAppDelegate(ad: AppDelegate) {
-        appDelegate = ad
+    func setCallback(_ cb: UpdateCallback) {
+        uiCallback = cb
     }
     
     func unattendedCheck() {
@@ -49,13 +55,12 @@ class Update {
                 if Preferences.updateMode == .automatic {
                     unattendedPerform()
                 } else {
-                    if let ad = appDelegate {
-                        ad.setIcon(mode: .notification)
+                    if let cb = uiCallback {
+                        cb.setIcon(mode: .notification)
                     }
                 }
             }
         }
-
     }
     
     // What should we do, is there a new version available ?
@@ -100,30 +105,30 @@ class Update {
         doPerform()
     }
     
-    func perform(ad: AppDelegate) {
-        appDelegate = ad
+    func perform(_ cb: UpdateCallback) {
+        uiCallback = cb
         shouldReport = true
         doPerform()
     }
     
     func report(string: String, done: Bool) {
         if shouldReport {
-            if let ad = appDelegate {
-                ad.updateProgress(string: string, done: done)
+            if let cb = uiCallback {
+                cb.updateProgress(string: string, done: done)
             }
         }
 
         if done {
-            if let ad = appDelegate {
-                ad.setIcon(mode: .normal)
-                ad.updateMenuContent()
+            if let cb = uiCallback {
+                cb.setIcon(mode: .normal)
+                cb.updateMenuContent()
             }
         }
     }
     
     func doPerform() {
-        if let ad = appDelegate {
-            ad.setIcon(mode: .updating)
+        if let cb = uiCallback {
+            cb.setIcon(mode: .updating)
         }
 
         guard let manifest = CachedManifest.instance.manifest else {

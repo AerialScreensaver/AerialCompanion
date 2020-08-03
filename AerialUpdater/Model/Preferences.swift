@@ -36,7 +36,7 @@ struct Preferences {
     }
     
     // Automatic or notifications ?
-    @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.automatic.rawValue)
+    @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.notifyme.rawValue)
     static var intUpdateMode: Int
 
     // We wrap in a separate value, as we can't store an enum as a Codable in
@@ -69,6 +69,11 @@ struct Preferences {
     @SimpleStorage(key: "debugMode", defaultValue: false)
     static var debugMode: Bool
 
+    @SimpleStorage(key: "launchAtStartup", defaultValue: false)
+    static var launchAtStartup: Bool
+
+    @SimpleStorage(key: "launchInBackground", defaultValue: false)
+    static var launchInBackground: Bool
 }
 
 

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17132" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17132"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="InfoWindowController" customModule="AerialUpdater" customModuleProvider="target">
+            <connections>
+                <outlet property="versionLabel" destination="RbC-8A-N98" id="YaZ-rI-gBc"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="592" height="319"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="592" height="319"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j2N-0v-XVI">
+                        <rect key="frame" x="45" y="87" width="187" height="187"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="187" id="61A-ns-csM"/>
+                            <constraint firstAttribute="width" constant="187" id="XSC-AU-uGp"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-320" id="66t-TY-QWq"/>
+                    </imageView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Jm-iv-5xn">
+                        <rect key="frame" x="255" y="244" width="200" height="35"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Updater" id="TCN-xS-7eE">
+                            <font key="font" metaFont="systemSemibold" size="30"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-4o-Bha">
+                        <rect key="frame" x="255" y="125" width="304" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="300" id="qvT-gX-bqi"/>
+                        </constraints>
+                        <textFieldCell key="cell" id="jsD-QT-aCv">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">A free, open source, auto updater for the Aerial macOS Screen Saver developped and maintained by Guillaume Louel. 
+
+Enjoying Aerial and want to buy me a coffee ? </string>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-8A-N98">
+                        <rect key="frame" x="255" y="221" width="118" height="15"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Version 123456789" id="cgg-uu-bQR">
+                            <font key="font" metaFont="systemMedium" size="12"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="oze-qA-3fW">
+                        <rect key="frame" x="257" y="88" width="74" height="21"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="btn_donate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0PT-EG-wyV">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="donateButtonClick:" target="-2" id="6cA-09-wha"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-4T-o6L">
+                        <rect key="frame" x="251" y="34" width="190" height="40"/>
+                        <buttonCell key="cell" type="push" title="Check project on github" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HOy-rd-iF8">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="githubButtonClick:" target="-2" id="MQM-mM-JrM"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="oze-qA-3fW" firstAttribute="leading" secondItem="rFk-4o-Bha" secondAttribute="leading" id="4PX-ye-SCU"/>
+                    <constraint firstItem="rFk-4o-Bha" firstAttribute="top" secondItem="RbC-8A-N98" secondAttribute="bottom" constant="16" id="Am5-yQ-foW"/>
+                    <constraint firstItem="7Jm-iv-5xn" firstAttribute="leading" secondItem="j2N-0v-XVI" secondAttribute="trailing" constant="25" id="Bco-0i-0AC"/>
+                    <constraint firstItem="5yF-4T-o6L" firstAttribute="top" secondItem="oze-qA-3fW" secondAttribute="bottom" constant="20" id="DIs-05-YAH"/>
+                    <constraint firstAttribute="bottom" secondItem="5yF-4T-o6L" secondAttribute="bottom" constant="40" id="Eda-q5-NdZ"/>
+                    <constraint firstItem="RbC-8A-N98" firstAttribute="leading" secondItem="7Jm-iv-5xn" secondAttribute="leading" id="Jrk-hh-d9W"/>
+                    <constraint firstItem="rFk-4o-Bha" firstAttribute="leading" secondItem="7Jm-iv-5xn" secondAttribute="leading" id="bao-nR-dZm"/>
+                    <constraint firstItem="oze-qA-3fW" firstAttribute="top" secondItem="rFk-4o-Bha" secondAttribute="bottom" constant="16" id="eSo-kx-cpK"/>
+                    <constraint firstItem="5yF-4T-o6L" firstAttribute="leading" secondItem="oze-qA-3fW" secondAttribute="leading" id="lBP-as-6qM"/>
+                    <constraint firstItem="7Jm-iv-5xn" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="40" id="oah-7Y-Hyf"/>
+                    <constraint firstItem="oze-qA-3fW" firstAttribute="leading" secondItem="7Jm-iv-5xn" secondAttribute="leading" id="sAX-rp-wpm"/>
+                    <constraint firstItem="j2N-0v-XVI" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="45" id="tnC-a1-X37"/>
+                    <constraint firstItem="j2N-0v-XVI" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="45" id="un4-Zo-A5N"/>
+                    <constraint firstItem="RbC-8A-N98" firstAttribute="top" secondItem="7Jm-iv-5xn" secondAttribute="bottom" constant="8" id="wqz-kE-h5b"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-222" y="150.5"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="btn_donate" width="74" height="21"/>
+        <image name="icon-320" width="320" height="320"/>
+    </resources>
+</document>
