@@ -10,7 +10,6 @@ import Foundation
 struct UpdaterVersion {
     
     static func needsUpdating() -> Bool {
-        return true
         if let manifest = CachedManifest.instance.manifest {
             if manifest.updaterVersion > Helpers.version {
                 return true
@@ -19,5 +18,5 @@ struct UpdaterVersion {
         
         return false
     }
-    
+
 }

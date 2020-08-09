@@ -8,6 +8,19 @@
 import Cocoa
 
 struct Helpers {
+    static func showAlert(question: String, text: String, button1: String = "OK", button2: String = "Cancel") -> Bool {
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = text
+        alert.alertStyle = .warning
+        alert.icon = NSImage(named: NSImage.cautionName)
+        alert.addButton(withTitle: button1)
+        alert.addButton(withTitle: button2)
+        
+        alert.buttons[0].isHighlighted = true
+        return alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
+    }
+    
     static var version: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }

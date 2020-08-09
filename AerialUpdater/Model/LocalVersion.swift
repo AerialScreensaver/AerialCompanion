@@ -8,8 +8,8 @@
 import Foundation
 
 struct LocalVersion {
-    private static let aerialAllUsersPath: String = {
-        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
+    static let aerialAllUsersPath: String = {
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .localDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
         if let pathComponent = url.appendingPathComponent("Screen Savers/Aerial.saver") {
             return pathComponent.path
@@ -27,6 +27,11 @@ struct LocalVersion {
             return ""
         }
     }()
+
+    static func isInstalledForAllUsers() -> Bool {
+        return FileManager.default.fileExists(atPath: aerialAllUsersPath)
+    }
+
     
     static func isInstalled() -> Bool {
         return FileManager.default.fileExists(atPath: aerialPath)
@@ -46,6 +51,18 @@ struct LocalVersion {
         }
     }
     
+    // This does not work so in the meantime we'll prompt the user
+    // https://stackoverflow.com/questions/36957837/how-to-delete-system-domain-files-on-os-x-using-swift-2#36973684
+    // https://developer.apple.com/documentation/servicemanagement/1431078-smjobbless
+    /*static func removeForAllUsers() {
+        if isInstalledForAllUsers() {
+            do {
+                try FileManager.default.removeItem(atPath: aerialAllUsersPath)
+            } catch {
+                print(error)
+            }
+        }
+    }*/
 }
 
 

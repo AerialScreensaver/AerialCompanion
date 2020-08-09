@@ -36,10 +36,6 @@ class Update {
             let localVersion = LocalVersion.get()
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                if localVersion != manifest.alphaVersion {
-                    shouldUpdate = true
-                }
             case .beta:
                 if localVersion != manifest.betaVersion {
                     shouldUpdate = true
@@ -75,12 +71,6 @@ class Update {
             debugLog("Versions: local \(localVersion), alpha \(manifest.alphaVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                if localVersion == manifest.alphaVersion {
-                    return ("\(localVersion) is installed", false)
-                } else {
-                    return ("\(manifest.alphaVersion) is available", true)
-                }
             case .beta:
                 if localVersion == manifest.betaVersion {
                     return ("\(localVersion) is installed", false)
@@ -174,10 +164,8 @@ class Update {
         var zipPath: String = ""
 
         switch Preferences.desiredVersion {
-        case .alpha:
-            zipPath = "https://github.com/glouel/Aerial/releases/download/v\(manifest.alphaVersion)/Aerial.saver.zip"
         case .beta:
-            zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.betaVersion)/Aerial.saver.zip"
+            zipPath = "https://github.com/JohnCoates/Aerial/relefases/download/v\(manifest.betaVersion)/Aerial.saver.zip"
         case .release:
             zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.releaseVersion)/Aerial.saver.zip"
         }
@@ -204,8 +192,6 @@ class Update {
             var tsha: String
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                tsha = manifest.alphaSHA256
             case .beta:
                 tsha = manifest.betaSHA256
             case .release:

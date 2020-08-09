@@ -81,6 +81,9 @@ class FileDownloader {
                             {
                                 completion(destinationUrl.path, error)
                             }
+                        } else {
+                            let lerror = NSError(domain: "", code: response.statusCode, userInfo: nil)
+                            completion(destinationUrl.path, lerror)
                         }
                     }
                 }

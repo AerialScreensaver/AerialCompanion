@@ -6,11 +6,16 @@
 //
 
 import Cocoa
+enum ProgressStatus {
+    case none, working, done, warning
+}
 
-class UpdateCheckWindowController: NSWindowController, UpdateCallback {
+class UpdateCheckWindowController:
+    NSWindowController, UpdateCallback {
 
     @IBOutlet var largeGoodTrick: NSProgressIndicator!
     
+    @IBOutlet var progressImageView: NSImageView!
     @IBOutlet var progressLabel: NSTextField!
     
     @IBOutlet var actionButton: NSButton!
@@ -20,26 +25,50 @@ class UpdateCheckWindowController: NSWindowController, UpdateCallback {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        largeGoodTrick.startAnimation(self)
+        setProgress(to: .none)
         progressLabel.stringValue = "Hold on..."
         actionButton.isHidden = true
+        actionButton.isHighlighted = true   // Color our button
     }
     
     func setCallback(_ cb: MenuViewController) {
         menuCallback = cb
     }
     
+    func setProgress(to: ProgressStatus) {
+        switch to {
+        case .none:
+            progressImageView.isHidden = true
+            largeGoodTrick.isHidden = true
+            largeGoodTrick.stopAnimation(self)
+        case .working:
+            largeGoodTrick.isHidden = false
+            largeGoodTrick.startAnimation(self)
+            progressImageView.isHidden = true
+        case .done:
+            largeGoodTrick.isHidden = true
+            largeGoodTrick.stopAnimation(self)
+            progressImageView.isHidden = false
+            progressImageView.image = NSImage(named: "checkmark.circle")
+        case .warning:
+            largeGoodTrick.isHidden = true
+            largeGoodTrick.stopAnimation(self)
+            progressImageView.isHidden = false
+            progressImageView.image = NSImage(named: "exclamationmark.triangle")
+        }
+    }
+    
+    
     func startCheck() {
-        largeGoodTrick.startAnimation(self)
+        setProgress(to: .working)
         progressLabel.stringValue = "Looking for new version..."
 
         // Force a cache update
         CachedManifest.instance.updateNow()
-        
-        largeGoodTrick.stopAnimation(self)
 
         // Make sure we don't need to update, or redirect you there
         if UpdaterVersion.needsUpdating() {
+            setProgress(to: .warning)
             progressLabel.stringValue = "A new version of AerialUpdater is required"
             actionButton.title = "Show me"
             actionButton.isHidden = false
@@ -47,11 +76,13 @@ class UpdateCheckWindowController: NSWindowController, UpdateCallback {
             let (statusString, shouldInstall) = Update.instance.check()
 
             if shouldInstall {
+                setProgress(to: .warning)
                 progressLabel.stringValue = "New version : \(statusString)"
                 actionButton.title = "Install"
                 actionButton.isHidden = false
 
             } else {
+                setProgress(to: .done)
                 progressLabel.stringValue = "No new version available"
                 actionButton.title = "Close"
                 actionButton.isHidden = false
@@ -77,7 +108,7 @@ class UpdateCheckWindowController: NSWindowController, UpdateCallback {
         if shouldInstall {
             actionButton.title = "Close"
             actionButton.isHidden = true
-            largeGoodTrick.startAnimation(self)
+            setProgress(to: .working)
             Update.instance.perform(self)
         } else {
             close()
@@ -92,7 +123,10 @@ class UpdateCheckWindowController: NSWindowController, UpdateCallback {
             if done {
                 self.largeGoodTrick.stopAnimation(self)
                 if string == "OK" {
+                    self.setProgress(to: .done)
                     self.progressLabel.stringValue = "Update successfully completed"
+                } else {
+                    self.setProgress(to: .warning)
                 }
                 self.actionButton.isHidden = false
 

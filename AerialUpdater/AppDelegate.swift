@@ -24,6 +24,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // TODO detect launch params
         
         
+        // Ensure we don't have something in /Library/Screen Savers/
+        if LocalVersion.isInstalledForAllUsers() {
+            NSApp.activate(ignoringOtherApps: true)
+            // Open finder with the file selected
+            NSWorkspace.shared.selectFile(LocalVersion.aerialAllUsersPath, inFileViewerRootedAtPath: "/Library/Screen Savers/")
+
+            while LocalVersion.isInstalledForAllUsers() {
+                let result = Helpers.showAlert(question: "Aerial is currently installed for All Users", text: "In order for the updater to work, you need to uninstall the current version of Aerial. \n\nYou can do this by deleting the Aerial.saver file in the Finder window that just opened. Press Try Again when done.", button1: "Try Again", button2: "Quit")
+
+                if !result {
+                    // Quit !
+                    NSApplication.shared.terminate(self)
+                }
+            }
+        }
+        
         // Menu mode
         
         // Set the icon

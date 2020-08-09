@@ -8,7 +8,7 @@
 import Foundation
 
 enum DesiredVersion: Int, Codable {
-    case alpha, beta, release
+    case beta, release
 }
 
 enum UpdateMode: Int, Codable {

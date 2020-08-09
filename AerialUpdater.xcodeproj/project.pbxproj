@@ -10,6 +10,8 @@
 		0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319460524CDBD2600F37B35 /* BackgroundCheck.swift */; };
 		031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A3A6524D835B10011E738 /* InfoWindowController.swift */; };
 		031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031A3A6624D835B10011E738 /* InfoWindowController.xib */; };
+		0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBE824E005270041759E /* checkmark.circle.pdf */; };
+		0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */; };
 		0333115224D8369700E4622D /* btn_donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0333115124D8369700E4622D /* btn_donate.png */; };
 		0333115624D8448E00E4622D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115424D8448E00E4622D /* MenuViewController.swift */; };
 		0333115924D85CCA00E4622D /* String+version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115824D85CCA00E4622D /* String+version.swift */; };
@@ -35,6 +37,8 @@
 		0319460524CDBD2600F37B35 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 		031A3A6524D835B10011E738 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		031A3A6624D835B10011E738 /* InfoWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindowController.xib; sourceTree = "<group>"; };
+		0323BBE824E005270041759E /* checkmark.circle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = checkmark.circle.pdf; sourceTree = "<group>"; };
+		0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.triangle.pdf; sourceTree = "<group>"; };
 		0333115124D8369700E4622D /* btn_donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate.png; sourceTree = "<group>"; };
 		0333115424D8448E00E4622D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		0333115824D85CCA00E4622D /* String+version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+version.swift"; sourceTree = "<group>"; };
@@ -80,11 +84,13 @@
 		0333115024D8360A00E4622D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0323BBE824E005270041759E /* checkmark.circle.pdf */,
+				0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */,
 				0333115124D8369700E4622D /* btn_donate.png */,
-				031A3A6624D835B10011E738 /* InfoWindowController.xib */,
-				031A3A6524D835B10011E738 /* InfoWindowController.swift */,
 				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
 				0333115424D8448E00E4622D /* MenuViewController.swift */,
+				031A3A6624D835B10011E738 /* InfoWindowController.xib */,
+				031A3A6524D835B10011E738 /* InfoWindowController.swift */,
 				0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */,
 				0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */,
 			);
@@ -214,8 +220,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */,
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
 				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
+				0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */,
 				03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */,
 				0333115224D8369700E4622D /* btn_donate.png in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,

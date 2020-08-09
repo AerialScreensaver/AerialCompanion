@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17132" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17132"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MenuViewController" customModule="AerialUpdater" customModuleProvider="target">
             <connections>
                 <outlet property="goodTrick" destination="7ly-UJ-lL0" id="yHd-Iv-qOj"/>
-                <outlet property="menuAlpha" destination="aTb-6M-eNd" id="7jb-Sl-2hx"/>
                 <outlet property="menuAutomatic" destination="c1V-9r-2xp" id="hj0-Kd-mHb"/>
                 <outlet property="menuBeta" destination="B8x-rn-xbe" id="P0J-eq-Tx3"/>
                 <outlet property="menuDay" destination="h6f-dk-Iwj" id="4zL-Rt-6f0"/>
@@ -65,12 +64,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="desiredVersionChange:" target="-2" id="OU8-tt-1lp"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Alpha" id="aTb-6M-eNd">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="desiredVersionChange:" target="-2" id="Mxg-0S-SNS"/>
                                 </connections>
                             </menuItem>
                         </items>

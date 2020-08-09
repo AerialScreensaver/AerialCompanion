@@ -20,7 +20,6 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     // Menu entries
     // Desired version
-    @IBOutlet var menuAlpha: NSMenuItem!
     @IBOutlet var menuBeta: NSMenuItem!
     @IBOutlet var menuRelease: NSMenuItem!
     
@@ -58,6 +57,7 @@ class MenuViewController: NSViewController, UpdateCallback {
         updateMenuSettings()
         updateMenuContent()
         
+        
         // Then set the callback
         //BackgroundCheck.instance.set()
     }
@@ -70,8 +70,6 @@ class MenuViewController: NSViewController, UpdateCallback {
     func updateMenuSettings() {
         // Desired video format
         switch Preferences.desiredVersion {
-        case .alpha:
-            menuAlpha.state = .on
         case .beta:
             menuBeta.state = .on
         case .release:
@@ -102,7 +100,6 @@ class MenuViewController: NSViewController, UpdateCallback {
         DispatchQueue.main.async {
             // If we have fetched the versions, put them in the UI
             if let manifest = CachedManifest.instance.manifest {
-                self.menuAlpha.title = "Alpha (\(manifest.alphaVersion))"
                 self.menuBeta.title = "Beta (\(manifest.betaVersion))"
                 self.menuRelease.title = "Release (\(manifest.releaseVersion))"
                 
@@ -184,16 +181,10 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBAction func desiredVersionChange(_ sender: NSMenuItem) {
         // There's probably a better way to do this...
         sender.state = .on
-        if sender == menuAlpha {
-            menuBeta.state = .off
-            menuRelease.state = .off
-            Preferences.desiredVersion = .alpha
-        } else if sender == menuBeta {
-            menuAlpha.state = .off
+        if sender == menuBeta {
             menuRelease.state = .off
             Preferences.desiredVersion = .beta
         } else if sender == menuRelease {
-            menuAlpha.state = .off
             menuBeta.state = .off
             Preferences.desiredVersion = .release
         }
@@ -239,7 +230,8 @@ class MenuViewController: NSViewController, UpdateCallback {
         updateCheckWindowController.setCallback(self)
         updateCheckWindowController.windowDidLoad()
         updateCheckWindowController.showWindow(self)
-        updateCheckWindowController.window!.makeKeyAndOrderFront(self)
+        updateCheckWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
         updateCheckWindowController.startCheck()
     }
     
@@ -255,7 +247,8 @@ class MenuViewController: NSViewController, UpdateCallback {
         }
         infoWindowController.windowDidLoad()
         infoWindowController.showWindow(self)
-        infoWindowController.window!.makeKeyAndOrderFront(self)
+        infoWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     @IBAction func launchAtStartup(_ sender: NSMenuItem) {
