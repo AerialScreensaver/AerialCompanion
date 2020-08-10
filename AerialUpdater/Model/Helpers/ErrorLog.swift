@@ -50,7 +50,7 @@ func Log(level: ErrorLevel, message: String) {
 }
 
 func logToDisk(_ message: String) {
-    DispatchQueue.main.async {
+    //DispatchQueue.main.async {
         // Prefix message with date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
@@ -67,9 +67,10 @@ func logToDisk(_ message: String) {
                 let fileHandle = try FileHandle(forWritingTo: cacheFileUrl)
                 fileHandle.seekToEndOfFile()
                 fileHandle.write(data)
+                fileHandle.synchronizeFile()
                 fileHandle.closeFile()
             } catch {
-                NSLog("AerialUpdater: Can't open handle for Log.txt")
+                NSLog("AerialUpdater: Can't open handle for Log.txt \(error.localizedDescription)")
             }
         } else {
             // Create new log
@@ -79,7 +80,7 @@ func logToDisk(_ message: String) {
                 NSLog("AerialUpdater: Can't write to Log.txt")
             }
         }
-    }
+    //}
 }
 
 func debugLog(_ message: String) {

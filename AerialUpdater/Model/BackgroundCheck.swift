@@ -45,4 +45,14 @@ class BackgroundCheck {
         }
     }
     
+    func getTimer() -> Int {
+        switch Preferences.checkEvery {
+        case .hour:
+            return hourSeconds
+        case .day:
+            return daySeconds
+        case .week:
+            return weekSeconds
+        }
+    }
 }

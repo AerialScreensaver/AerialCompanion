@@ -25,7 +25,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="76"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldu-Oj-ypX">
                         <rect key="frame" x="22" y="22" width="32" height="32"/>
@@ -63,7 +63,7 @@
                             <real value="3.4028234663852886e+38"/>
                         </customSpacing>
                     </stackView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-TZ-0O3">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-TZ-0O3">
                         <rect key="frame" x="72" y="30" width="37" height="16"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Fud-tY-77Z">
                             <font key="font" usesAppearanceFont="YES"/>
@@ -87,6 +87,7 @@ Gw
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="kfs-cv-OUn" secondAttribute="trailing" constant="24" id="CYt-19-Urq"/>
+                    <constraint firstItem="zgw-TZ-0O3" firstAttribute="leading" secondItem="ldu-Oj-ypX" secondAttribute="trailing" constant="20" id="GMQ-na-qpK"/>
                     <constraint firstItem="ldu-Oj-ypX" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="22" id="dAf-Ap-BUM"/>
                     <constraint firstItem="ldu-Oj-ypX" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="22" id="fdu-2R-lsU"/>
                     <constraint firstItem="zgw-TZ-0O3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="30" id="mfS-Q4-iWD"/>

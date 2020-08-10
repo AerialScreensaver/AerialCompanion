@@ -30,7 +30,7 @@ class UpdateCheckWindowController:
         actionButton.isHidden = true
         actionButton.isHighlighted = true   // Color our button
     }
-    
+
     func setCallback(_ cb: MenuViewController) {
         menuCallback = cb
     }
@@ -127,6 +127,7 @@ class UpdateCheckWindowController:
                     self.progressLabel.stringValue = "Update successfully completed"
                 } else {
                     self.setProgress(to: .warning)
+                    Helpers.showErrorAlert(question: "Installation error", text: "\(string)\n\nPlease report.\n\nPlease report.")
                 }
                 self.actionButton.isHidden = false
 

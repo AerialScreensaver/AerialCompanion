@@ -34,6 +34,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     
 
     // Settings
+    @IBOutlet var menuLaunchManually: NSMenuItem!
     @IBOutlet var menuLaunchAtStartup: NSMenuItem!
     @IBOutlet var menuLaunchInBackground: NSMenuItem!
 
@@ -57,9 +58,8 @@ class MenuViewController: NSViewController, UpdateCallback {
         updateMenuSettings()
         updateMenuContent()
         
-        
         // Then set the callback
-        //BackgroundCheck.instance.set()
+        BackgroundCheck.instance.set()
     }
     
     func setDelegate(_ delegate: AppDelegate) {
@@ -92,6 +92,15 @@ class MenuViewController: NSViewController, UpdateCallback {
             menuWeek.state = .on
         }
         
+        switch Preferences.launchMode {
+        case .manual:
+            menuLaunchManually.state = .on
+        case .startup:
+            menuLaunchAtStartup.state = .on
+        case .background:
+            menuLaunchInBackground.state = .on
+        }
+        
         menuDebugMode.state = Preferences.debugMode ? .on : .off
     }
     
@@ -105,9 +114,10 @@ class MenuViewController: NSViewController, UpdateCallback {
                 
                 // We may need to update AerialUpdater. This will be done as infrequently as possible, only in case of a security issue (not for features)
                 if UpdaterVersion.needsUpdating() {
+                    self.setIcon(mode: .notification)
                     print(manifest.updaterVersion)
                     print(Helpers.version)
-                    self.versionLabel.stringValue = "New AerialUpdater"
+                    self.versionLabel.stringValue = "New updater version"
                     self.versionImageView.isHidden = true
                     self.versionInstallNow.isHidden = false
                     self.goodTrick.isHidden = true
@@ -122,10 +132,13 @@ class MenuViewController: NSViewController, UpdateCallback {
 
             if shouldInstall {
                 // Make the button visible
+                self.setIcon(mode: .notification)
+
                 self.versionImageView.isHidden = true
                 self.versionInstallNow.isHidden = false
             } else {
                 // Make the button visible
+                self.setIcon(mode: .normal)
                 self.versionImageView.isHidden = false
                 self.versionInstallNow.isHidden = true
             }
@@ -143,6 +156,8 @@ class MenuViewController: NSViewController, UpdateCallback {
                 
                 if string == "OK" {
                     self.updateMenuContent()
+                } else {
+                    Helpers.showErrorAlert(question: "Installation error", text: "\(string) \n\nPlease report.)")
                 }
             } else {
                 self.versionLabel.stringValue = string
@@ -235,7 +250,35 @@ class MenuViewController: NSViewController, UpdateCallback {
         updateCheckWindowController.startCheck()
     }
     
-    // MARK: - Settings
+    // MARK: - Launch
+    
+    /// Handle the launch submenu
+    @IBAction func launchModeChange(_ sender: NSMenuItem) {
+        if sender == menuLaunchInBackground {
+            // Let's make sure they understand
+            if !Helpers.showAlert(question: "Background mode", text: "By enabling background mode, Aerial Updater will shedule itself to run for a few seconds at the frequency you selected.\n\nThe updater will quit the menu so make sure you change your other settings first. Know you can launch the updater manually at any time to change any setting.", button1: "Go in the background and Quit", button2: "Cancel") {
+                return
+            }
+        }
+
+        sender.state = .on
+        if sender == menuLaunchManually {
+            menuLaunchAtStartup.state = .off
+            menuLaunchInBackground.state = .off
+            Preferences.launchMode = .manual
+        } else if sender == menuLaunchAtStartup {
+            menuLaunchManually.state = .off
+            menuLaunchAtStartup.state = .off
+            Preferences.launchMode = .startup
+        } else if sender == menuLaunchInBackground {
+            menuLaunchManually.state = .off
+            menuLaunchInBackground.state = .off
+            Preferences.launchMode = .background
+        }
+        
+        LaunchAgent.update()
+    }
+    
     
     /// Show About Updater version window
     @IBAction func aboutUpdater(_ sender: NSMenuItem) {
@@ -251,17 +294,6 @@ class MenuViewController: NSViewController, UpdateCallback {
         NSApp.activate(ignoringOtherApps: true)
     }
     
-    @IBAction func launchAtStartup(_ sender: NSMenuItem) {
-        Preferences.launchAtStartup = !Preferences.launchAtStartup
-        
-        sender.state = Preferences.launchAtStartup ? .on : .off
-    }
-    
-    @IBAction func launchInBackground(_ sender: NSMenuItem) {
-        Preferences.launchInBackground = !Preferences.launchInBackground
-        
-        sender.state = Preferences.launchInBackground ? .on : .off
-    }
     
     @IBAction func debugMode(_ sender: Any) {
         Preferences.debugMode = !Preferences.debugMode

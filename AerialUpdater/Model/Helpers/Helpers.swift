@@ -8,6 +8,16 @@
 import Cocoa
 
 struct Helpers {
+    static func showErrorAlert(question: String, text: String, button: String = "OK") {
+        let alert = NSAlert()
+        alert.messageText = question
+        alert.informativeText = text
+        alert.alertStyle = .critical
+        alert.icon = NSImage(named: NSImage.cautionName)
+        alert.addButton(withTitle: button)
+        alert.runModal()
+    }
+    
     static func showAlert(question: String, text: String, button1: String = "OK", button2: String = "Cancel") -> Bool {
         let alert = NSAlert()
         alert.messageText = question

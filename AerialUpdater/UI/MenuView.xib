@@ -16,6 +16,7 @@
                 <outlet property="menuHour" destination="cZD-K7-Kbp" id="oC5-uG-Tik"/>
                 <outlet property="menuLaunchAtStartup" destination="DGI-48-AGs" id="opf-4F-KKT"/>
                 <outlet property="menuLaunchInBackground" destination="4Xh-ro-WIk" id="m5V-Vd-2ab"/>
+                <outlet property="menuLaunchManually" destination="Grb-Y7-lrP" id="ID8-C4-g1S"/>
                 <outlet property="menuNotifyMe" destination="gEv-rH-Fdb" id="eJ5-Gi-CLc"/>
                 <outlet property="menuRelease" destination="s1K-sM-h3S" id="8uQ-6f-cpw"/>
                 <outlet property="menuWeek" destination="lpf-93-vcm" id="7eA-3E-moZ"/>
@@ -121,27 +122,39 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="nSj-ef-RJd"/>
-                <menuItem title="Settings" id="MIu-Mv-QOL">
+                <menuItem title="Launch" id="6j4-SK-FMK">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Settings" id="S8J-9P-W4j">
+                    <menu key="submenu" title="Launch" id="cck-pf-4yI">
+                        <items>
+                            <menuItem title="Manually" id="Grb-Y7-lrP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="0j1-7G-eqQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="At Startup" id="DGI-48-AGs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="JTF-zW-Zzw"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="In the background (no menu)" id="4Xh-ro-WIk">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="PJo-Sm-Bvf"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="About" id="MIu-Mv-QOL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="About" id="S8J-9P-W4j">
                         <items>
                             <menuItem title="About Aerial Updater" id="fGs-X4-PIA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="aboutUpdater:" target="-2" id="zMI-ny-u9E"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="Zwf-mj-UiN"/>
-                            <menuItem title="Launch at Startup" id="DGI-48-AGs">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="launchAtStartup:" target="-2" id="krL-J1-ojd"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Launch in the background" id="4Xh-ro-WIk">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="launchInBackground:" target="-2" id="H02-fN-640"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="twA-5H-R7z"/>

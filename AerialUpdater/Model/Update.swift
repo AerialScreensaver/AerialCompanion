@@ -5,7 +5,7 @@
 //  Created by Guillaume Louel on 25/07/2020.
 //
 
-import Foundation
+import Cocoa
 
 protocol UpdateCallback {
     func updateProgress(string: String, done: Bool)
@@ -16,10 +16,11 @@ protocol UpdateCallback {
 // Again this is a bit messy...
 class Update {
     static let instance: Update = Update()
-
+    
     var uiCallback: UpdateCallback?
     var shouldReport = false
-    
+    var commandLine = false
+
     func setCallback(_ cb: UpdateCallback) {
         uiCallback = cb
     }
@@ -55,7 +56,7 @@ class Update {
                         cb.setIcon(mode: .notification)
                     }
                 }
-            }
+            } 
         }
     }
     
@@ -68,7 +69,7 @@ class Update {
         if let manifest = CachedManifest.instance.manifest {
             let localVersion = LocalVersion.get()
             
-            debugLog("Versions: local \(localVersion), alpha \(manifest.alphaVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
+            debugLog("Versions: local \(localVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
             
             switch Preferences.desiredVersion {
             case .beta:
@@ -112,6 +113,15 @@ class Update {
             if let cb = uiCallback {
                 cb.setIcon(mode: .normal)
                 cb.updateMenuContent()
+            }
+            
+            if commandLine {
+                // We quit here
+                DispatchQueue.main.async {
+                    debugLog("Update process done, quitting in 20sec.")
+                    RunLoop.main.run(until: Date() + 0x14)
+                    NSApplication.shared.terminate(self)
+                }
             }
         }
     }
@@ -165,7 +175,7 @@ class Update {
 
         switch Preferences.desiredVersion {
         case .beta:
-            zipPath = "https://github.com/JohnCoates/Aerial/relefases/download/v\(manifest.betaVersion)/Aerial.saver.zip"
+            zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.betaVersion)/Aerial.saver.zip"
         case .release:
             zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.releaseVersion)/Aerial.saver.zip"
         }
@@ -289,6 +299,8 @@ class Update {
 
         do {
             try FileManager.default.moveItem(atPath: path, toPath: LocalVersion.aerialPath)
+            
+            debugLog("Installed!")
             return true
         } catch {
             return false

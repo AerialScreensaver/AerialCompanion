@@ -19,12 +19,68 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        debugLog("Version \(Helpers.version) launched")
+        debugLog("Version \(Helpers.version) launched on  \(ProcessInfo.processInfo.operatingSystemVersionString)")
 
-        // TODO detect launch params
+        let arguments = ProcessInfo.processInfo.arguments
+
+        // This is imperative, breaks everything
+        ensureNotInstalledForAllUsers()
         
+        if arguments.contains("--silent") {
+            debugLog("Background mode")
+
+            // Returns true if we need to stay around
+            if !silentModeCheck() {
+                return
+            }
+            // We're staying then !
+            debugLog("Falling back to menu for a notification")
+        }
         
-        // Ensure we don't have something in /Library/Screen Savers/
+        // Menu mode, we may fall down here from silent mode too in notify mode,
+        // or if we must update
+        
+        // Set the icon
+        setIcon(mode: .normal)
+        
+        createMenu()
+    }
+    
+    // This returns true if we should stay around, and false if we can safely return
+    func silentModeCheck() -> Bool {
+        Update.instance.commandLine = true
+
+        // Force a cache update
+        CachedManifest.instance.updateNow()
+
+        // Make sure we don't need to update, or redirect you there
+        if UpdaterVersion.needsUpdating() {
+            return true         // Then stay around !
+        }
+        
+        let (stringVersion, shouldInstall) = Update.instance.check()
+
+        if shouldInstall {
+            debugLog(stringVersion)
+            if Preferences.updateMode == .automatic {
+                Update.instance.unattendedPerform()
+                return false    // We are done
+            } else {
+                return true     // Stay around !
+            }
+        } else {
+            // We need to stay around for a bit, because if not
+            // launchd will think we are crashing...
+            debugLog("No new version, quitting in 20sec.")
+            RunLoop.main.run(until: Date() + 0x14)
+            NSApplication.shared.terminate(self)
+
+            return false
+        }
+    }
+    
+    // Ensure we don't have something in /Library/Screen Savers/
+    func ensureNotInstalledForAllUsers() {
         if LocalVersion.isInstalledForAllUsers() {
             NSApp.activate(ignoringOtherApps: true)
             // Open finder with the file selected
@@ -39,14 +95,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         }
-        
-        // Menu mode
-        
-        // Set the icon
-        setIcon(mode: .normal)
-        
-        createMenu()
-        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -56,14 +104,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Change the icon based on status
     func setIcon(mode: IconMode) {
         DispatchQueue.main.async {
-            print("setIcon")
+            print("setIcon \(mode)")
             switch mode {
             case .normal:
                 self.statusItem.image = NSImage(named: "Status48")
             case .updating:
                 self.statusItem.image = NSImage(named: "StatusTransp48")
             case .notification:
-                self.statusItem.image = NSImage(named: "StatusGreen48")
+                self.statusItem.image = NSImage(named: "Status48Attention")
             }
 
             self.statusItem.image?.size.width = 22
