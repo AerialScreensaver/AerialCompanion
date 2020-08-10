@@ -2,7 +2,7 @@
 
 The official install/auto-update tool for the [Aerial screen saver](https://github.com/JohnCoates/Aerial/) for macOS. 
 
-![Capture d’écran 2020-07-26 à 17 52 17](https://user-images.githubusercontent.com/37544189/88483620-54d54480-cf69-11ea-9a53-413be671d3f7.png)
+![Capture d’écran 2020-08-10 à 18 31 50](https://user-images.githubusercontent.com/37544189/89806761-d915f300-db37-11ea-8356-bb01b83bed9f.png)
 
 As the name implies, this utility will install Aerial's latest versions on your system and keep you up to date. 
 
@@ -48,12 +48,11 @@ And you can always manually download and install Aerial from its Github reposito
 
 ## I don't want one more icon on my status bar !
 
-The current version only works as a status bar item, but the option to run it as a daemon will happen in a subsequent release. 
+Starting with version 0.5, Aerial Updater can now run in the background !
 
-## Any known caveats/issues with version 0.3
+## Any known caveats/issues with version 0.5
 
-- This tool only install/updates Aerial if you install it for your user only, and not for all users. Installing a screen saver for all users require an administrator password at install, and at each subsequent update, defeating the purpose of an auto-updater. It's recommended to check if you have an `Aerial.saver` file in `/Library/Screen Savers/`If you do, please remove it as you'll get two versions of Aerial alongside each other in your  
-- Like always when updating a screen saver, you must first close System Preferences. If you don't, you will need to restart it after installation to reload the new version as the old one will remain in memory. 
+- Like always when updating a screen saver, you must first close System Preferences. If you don't, you will need to restart it after installation to reload the new version as the old preference panel will remain in memory. The screensaver when running in full screen will however load correctly.
 
 ## Why should I trust you ? Who are you ?
 
