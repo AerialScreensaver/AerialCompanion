@@ -8,7 +8,7 @@ As the name implies, this utility will install Aerial's latest versions on your 
 
 ## Installation
 
-Download the [latest release](https://github.com/glouel/AerialUpdater/releases), unzip and copy `AerialUpdater.app` to `/Applications` (or some other place of your choice, then double-click to launch. 
+Download the [latest release](https://github.com/glouel/AerialUpdater/releases), unzip and copy `AerialUpdater.app` to `/Applications` (or some other place of your choice, then double-click to launch. Follow the instructions from the first time setup to get you going. 
 
 To uninstall, simply delete `AerialUpdater.app`. 
 
