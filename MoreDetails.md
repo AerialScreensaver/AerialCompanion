@@ -1,6 +1,6 @@
 ## I thought Aerial had auto-updates already?  
 
-Aerial had auto-updates starting with [version 1.5.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#150---may-31-2019), this feature was provided by the [Sparkle framework](https://sparkle-project.org). 
+Aerial had auto-updates starting with [version 1.5.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#150---may-31-2019), this feature was provided by the (awesome) [Sparkle framework](https://sparkle-project.org). 
 
 With the introduction of macOS 10.15 (Catalina), things changed for screen savers and Aerial was no longer able to update itself because of the new security restrictions introduced with sandboxing. A temporary workaround was put in place in [version 1.8.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#180---february-18-2020) where you could get notified of a new version.
 
@@ -26,19 +26,15 @@ Periodically, AerialUpdater checks the manifest to see if a new version was rele
 
 If and only if everything checks out, then `Aerial.saver` gets copied to `~/Library/Screen Savers/`. 
 
-## Do I have to use this ? Is there an alternative ?
+## Do I have to use this? Is there an alternative?
 
 You don't, and sure, as pointed out in Aerial's [installation instructions](https://github.com/JohnCoates/Aerial/blob/master/Documentation/Installation.md), you can also use `homebrew` if you want automatic updates. 
 
 And you can always manually download and install Aerial from its Github repository.
 
-## I don't want one more icon on my status bar !
+## I don't want one more icon on my status bar!
 
 Starting with version 0.5, Aerial Updater can now run in the background !
-
-## Any known caveats/issues with version 0.5
-
-- Like always when updating a screen saver, you must first close System Preferences. If you don't, you will need to restart it after installation to reload the new version as the old preference panel will remain in memory. The screensaver when running in full screen will however load correctly.
 
 ## Why should I trust you ? Who are you ?
 
