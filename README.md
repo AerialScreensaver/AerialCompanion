@@ -17,6 +17,8 @@ To uninstall, simply delete `Aerial.app`.
 
 Yes! Long story short: it's about automatic updates. With security changes made in Catalina, a screen saver can no longer update itself, which lead me to develop this new solution. As a bonus it takes care of installation if you didn't have a previous version already, and various issues one may encounter while installing. [More details here](https://github.com/glouel/AerialUpdater/blob/main/MoreDetails.md).
 
+And yes, it can check for updates in the background, you don't have to have one more icon in your menu bar if you don't want to.
+
 ## Can I still just download the zip like I used to?
 
 Yes! You don't have to use this companion app, but in order to get auto-updates, you'll either need this, or you'll have to install through homebrew. You can check the [instructions here that explains all of this](https://github.com/JohnCoates/Aerial/blob/master/Documentation/Installation.md).
