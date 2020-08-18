@@ -1,4 +1,4 @@
-# Aerial companion app
+# Aerial Companion app
 
 The official companion app for the [Aerial screen saver](https://github.com/JohnCoates/Aerial/) for macOS. It takes care of install, automatic updates and more.
 
