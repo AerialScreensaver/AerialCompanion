@@ -21,6 +21,6 @@ Yes! Long story short: it's about auto-updates. With security changes made in Ca
 
 Yes! You don't have to use this companion app, but in order to get auto-updates, you'll either need this, or you'll have to install through homebrew. You can check the extended instructions here that recaps all of this.
 
-## Why should I trust you ? Who are you ?
+## Why should I trust you? Who are you?
 
 I'm [Guillaume Louel](https://github.com/glouel), the developer of [Aerial](https://github.com/JohnCoates/Aerial/) since version 1.4. 
