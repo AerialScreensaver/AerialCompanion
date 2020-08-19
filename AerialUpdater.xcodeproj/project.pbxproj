@@ -18,6 +18,24 @@
 		0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115A24D85D4600E4622D /* UpdaterVersion.swift */; };
 		0333115E24D8796F00E4622D /* UpdateCheckWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */; };
 		0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */; };
+		033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B5224E95DDD00622CA7 /* FirstTimeSetupWindowController.swift */; };
+		033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B5324E95DDD00622CA7 /* FirstTimeSetupWindowController.xib */; };
+		033B0B5924E9644D00622CA7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B5724E9644D00622CA7 /* WelcomeViewController.swift */; };
+		033B0B5A24E9644D00622CA7 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B5824E9644D00622CA7 /* WelcomeViewController.xib */; };
+		033B0B5D24E9655E00622CA7 /* ReleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B5B24E9655E00622CA7 /* ReleaseViewController.swift */; };
+		033B0B5E24E9655E00622CA7 /* ReleaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B5C24E9655E00622CA7 /* ReleaseViewController.xib */; };
+		033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B5F24E9658D00622CA7 /* MenuModeViewController.swift */; };
+		033B0B6224E9658D00622CA7 /* MenuModeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6024E9658D00622CA7 /* MenuModeViewController.xib */; };
+		033B0B6524E967C600622CA7 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B6324E967C600622CA7 /* NextViewController.swift */; };
+		033B0B6624E967C600622CA7 /* NextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6424E967C600622CA7 /* NextViewController.xib */; };
+		033B0B6924E96CE200622CA7 /* ant.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6824E96CE200622CA7 /* ant.pdf */; };
+		033B0B6C24E96D4C00622CA7 /* sun.max.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6A24E96D4C00622CA7 /* sun.max.pdf */; };
+		033B0B6D24E96D4C00622CA7 /* cloud.sun.rain.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6B24E96D4C00622CA7 /* cloud.sun.rain.pdf */; };
+		033B0B7124E9749400622CA7 /* clock.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6E24E9749300622CA7 /* clock.pdf */; };
+		033B0B7224E9749400622CA7 /* moon.zzz.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B6F24E9749400622CA7 /* moon.zzz.pdf */; };
+		033B0B7324E9749400622CA7 /* exclamationmark.bubble.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */; };
+		033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B7424E9767700622CA7 /* ThanksViewController.swift */; };
+		033B0B7724E9767700622CA7 /* ThanksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7524E9767700622CA7 /* ThanksViewController.xib */; };
 		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
 		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
 		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
@@ -45,6 +63,24 @@
 		0333115A24D85D4600E4622D /* UpdaterVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterVersion.swift; sourceTree = "<group>"; };
 		0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckWindowController.swift; sourceTree = "<group>"; };
 		0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateCheckWindowController.xib; sourceTree = "<group>"; };
+		033B0B5224E95DDD00622CA7 /* FirstTimeSetupWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeSetupWindowController.swift; sourceTree = "<group>"; };
+		033B0B5324E95DDD00622CA7 /* FirstTimeSetupWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstTimeSetupWindowController.xib; sourceTree = "<group>"; };
+		033B0B5724E9644D00622CA7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		033B0B5824E9644D00622CA7 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		033B0B5B24E9655E00622CA7 /* ReleaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseViewController.swift; sourceTree = "<group>"; };
+		033B0B5C24E9655E00622CA7 /* ReleaseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReleaseViewController.xib; sourceTree = "<group>"; };
+		033B0B5F24E9658D00622CA7 /* MenuModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModeViewController.swift; sourceTree = "<group>"; };
+		033B0B6024E9658D00622CA7 /* MenuModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuModeViewController.xib; sourceTree = "<group>"; };
+		033B0B6324E967C600622CA7 /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		033B0B6424E967C600622CA7 /* NextViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NextViewController.xib; sourceTree = "<group>"; };
+		033B0B6824E96CE200622CA7 /* ant.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ant.pdf; sourceTree = "<group>"; };
+		033B0B6A24E96D4C00622CA7 /* sun.max.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sun.max.pdf; sourceTree = "<group>"; };
+		033B0B6B24E96D4C00622CA7 /* cloud.sun.rain.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cloud.sun.rain.pdf; sourceTree = "<group>"; };
+		033B0B6E24E9749300622CA7 /* clock.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = clock.pdf; sourceTree = "<group>"; };
+		033B0B6F24E9749400622CA7 /* moon.zzz.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = moon.zzz.pdf; sourceTree = "<group>"; };
+		033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.bubble.pdf; sourceTree = "<group>"; };
+		033B0B7424E9767700622CA7 /* ThanksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksViewController.swift; sourceTree = "<group>"; };
+		033B0B7524E9767700622CA7 /* ThanksViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThanksViewController.xib; sourceTree = "<group>"; };
 		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
 		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -52,7 +88,7 @@
 		03592ABD24CC86E900C1AE52 /* CachedManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedManifest.swift; sourceTree = "<group>"; };
 		035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLog.swift; sourceTree = "<group>"; };
 		03ADA8EB24E034A40093D0A2 /* LaunchAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAgent.swift; sourceTree = "<group>"; };
-		03CE4F5524CB0CA700494D32 /* AerialUpdater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AerialUpdater.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03CE4F5524CB0CA700494D32 /* Aerial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aerial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03CE4F5824CB0CA700494D32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03CE4F5C24CB0CA900494D32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03CE4F5F24CB0CA900494D32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +131,38 @@
 				0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		033B0B5624E9641A00622CA7 /* First Time setup */ = {
+			isa = PBXGroup;
+			children = (
+				033B0B5324E95DDD00622CA7 /* FirstTimeSetupWindowController.xib */,
+				033B0B5224E95DDD00622CA7 /* FirstTimeSetupWindowController.swift */,
+				033B0B5824E9644D00622CA7 /* WelcomeViewController.xib */,
+				033B0B5724E9644D00622CA7 /* WelcomeViewController.swift */,
+				033B0B5C24E9655E00622CA7 /* ReleaseViewController.xib */,
+				033B0B5B24E9655E00622CA7 /* ReleaseViewController.swift */,
+				033B0B6024E9658D00622CA7 /* MenuModeViewController.xib */,
+				033B0B5F24E9658D00622CA7 /* MenuModeViewController.swift */,
+				033B0B7524E9767700622CA7 /* ThanksViewController.xib */,
+				033B0B7424E9767700622CA7 /* ThanksViewController.swift */,
+				033B0B6424E967C600622CA7 /* NextViewController.xib */,
+				033B0B6324E967C600622CA7 /* NextViewController.swift */,
+			);
+			path = "First Time setup";
+			sourceTree = "<group>";
+		};
+		033B0B6724E96CD100622CA7 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				033B0B6B24E96D4C00622CA7 /* cloud.sun.rain.pdf */,
+				033B0B6A24E96D4C00622CA7 /* sun.max.pdf */,
+				033B0B6824E96CE200622CA7 /* ant.pdf */,
+				033B0B6E24E9749300622CA7 /* clock.pdf */,
+				033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */,
+				033B0B6F24E9749400622CA7 /* moon.zzz.pdf */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		03592AB624CC80A600C1AE52 /* Model */ = {
@@ -143,7 +211,7 @@
 		03CE4F5624CB0CA700494D32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03CE4F5524CB0CA700494D32 /* AerialUpdater.app */,
+				03CE4F5524CB0CA700494D32 /* Aerial.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,6 +219,8 @@
 		03CE4F5724CB0CA700494D32 /* AerialUpdater */ = {
 			isa = PBXGroup;
 			children = (
+				033B0B6724E96CD100622CA7 /* Icons */,
+				033B0B5624E9641A00622CA7 /* First Time setup */,
 				0333115024D8360A00E4622D /* UI */,
 				03CE4F5824CB0CA700494D32 /* AppDelegate.swift */,
 				03CE4F5C24CB0CA900494D32 /* Assets.xcassets */,
@@ -166,9 +236,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03CE4F5424CB0CA700494D32 /* AerialUpdater */ = {
+		03CE4F5424CB0CA700494D32 /* Aerial */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "AerialUpdater" */;
+			buildConfigurationList = 03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial" */;
 			buildPhases = (
 				03CE4F5124CB0CA700494D32 /* Sources */,
 				03CE4F5224CB0CA700494D32 /* Frameworks */,
@@ -178,9 +248,9 @@
 			);
 			dependencies = (
 			);
-			name = AerialUpdater;
+			name = Aerial;
 			productName = AerialUpdater;
-			productReference = 03CE4F5524CB0CA700494D32 /* AerialUpdater.app */;
+			productReference = 03CE4F5524CB0CA700494D32 /* Aerial.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +280,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03CE4F5424CB0CA700494D32 /* AerialUpdater */,
+				03CE4F5424CB0CA700494D32 /* Aerial */,
 			);
 		};
 /* End PBXProject section */
@@ -221,13 +291,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */,
+				033B0B7224E9749400622CA7 /* moon.zzz.pdf in Resources */,
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
+				033B0B5E24E9655E00622CA7 /* ReleaseViewController.xib in Resources */,
 				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
 				0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */,
+				033B0B6624E967C600622CA7 /* NextViewController.xib in Resources */,
 				03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */,
+				033B0B7324E9749400622CA7 /* exclamationmark.bubble.pdf in Resources */,
+				033B0B7724E9767700622CA7 /* ThanksViewController.xib in Resources */,
+				033B0B7124E9749400622CA7 /* clock.pdf in Resources */,
+				033B0B5A24E9644D00622CA7 /* WelcomeViewController.xib in Resources */,
 				0333115224D8369700E4622D /* btn_donate.png in Resources */,
+				033B0B6224E9658D00622CA7 /* MenuModeViewController.xib in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
+				033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */,
+				033B0B6924E96CE200622CA7 /* ant.pdf in Resources */,
+				033B0B6D24E96D4C00622CA7 /* cloud.sun.rain.pdf in Resources */,
 				0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */,
+				033B0B6C24E96D4C00622CA7 /* sun.max.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */,
+				033B0B6524E967C600622CA7 /* NextViewController.swift in Sources */,
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
 				031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */,
 				0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */,
@@ -246,6 +329,11 @@
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
+				033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */,
+				033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */,
+				033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */,
+				033B0B5924E9644D00622CA7 /* WelcomeViewController.swift in Sources */,
+				033B0B5D24E9655E00622CA7 /* ReleaseViewController.swift in Sources */,
 				0333115624D8448E00E4622D /* MenuViewController.swift in Sources */,
 				03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */,
 				0333115E24D8796F00E4622D /* UpdateCheckWindowController.swift in Sources */,
@@ -402,7 +490,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -425,7 +513,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -444,7 +532,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "AerialUpdater" */ = {
+		03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03CE4F6624CB0CA900494D32 /* Debug */,

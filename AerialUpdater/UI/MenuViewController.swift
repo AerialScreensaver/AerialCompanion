@@ -68,18 +68,23 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     // This is only called once at startup
     func updateMenuSettings() {
+        debugLog("ums")
         // Desired video format
         switch Preferences.desiredVersion {
         case .beta:
             menuBeta.state = .on
+            menuRelease.state = .off
         case .release:
+            menuBeta.state = .off
             menuRelease.state = .on
         }
         
         switch Preferences.updateMode {
         case .automatic:
             menuAutomatic.state = .on
+            menuNotifyMe.state = .off
         case .notifyme:
+            menuAutomatic.state = .off
             menuNotifyMe.state = .on
         }
 
@@ -95,9 +100,15 @@ class MenuViewController: NSViewController, UpdateCallback {
         switch Preferences.launchMode {
         case .manual:
             menuLaunchManually.state = .on
+            menuLaunchAtStartup.state = .off
+            menuLaunchInBackground.state = .off
         case .startup:
+            menuLaunchManually.state = .off
             menuLaunchAtStartup.state = .on
+            menuLaunchInBackground.state = .off
         case .background:
+            menuLaunchManually.state = .off
+            menuLaunchAtStartup.state = .off
             menuLaunchInBackground.state = .on
         }
         
@@ -106,6 +117,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     // This is called periodically to refresh the view
     func updateMenuContent() {
+        debugLog("umc")
         DispatchQueue.main.async {
             // If we have fetched the versions, put them in the UI
             if let manifest = CachedManifest.instance.manifest {
@@ -126,7 +138,8 @@ class MenuViewController: NSViewController, UpdateCallback {
             }
             
             let (statusString, shouldInstall) = Update.instance.check()
-
+            debugLog("\(statusString) \(shouldInstall)")
+            
             self.versionLabel.stringValue = statusString
             self.goodTrick.isHidden = true
 
@@ -176,7 +189,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBAction func versionInstallNowClick(_ sender: Any) {
         if UpdaterVersion.needsUpdating() {
             let workspace = NSWorkspace.shared
-            let url = URL(string: "https://github.com/glouel/AerialUpdater/releases")!
+            let url = URL(string: "https://github.com/glouel/AerialCompanion/releases")!
             workspace.open(url)
             return
         }
@@ -193,6 +206,10 @@ class MenuViewController: NSViewController, UpdateCallback {
     }
     
     // MARK: - Menu callbacks
+    @IBAction func openScreenSaverSettings(_ sender: Any) {
+        NSWorkspace.shared.openFile("/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane")
+    }
+    
     @IBAction func desiredVersionChange(_ sender: NSMenuItem) {
         // There's probably a better way to do this...
         sender.state = .on
@@ -256,7 +273,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBAction func launchModeChange(_ sender: NSMenuItem) {
         if sender == menuLaunchInBackground {
             // Let's make sure they understand
-            if !Helpers.showAlert(question: "Background mode", text: "By enabling background mode, Aerial Updater will shedule itself to run for a few seconds at the frequency you selected.\n\nThe updater will quit the menu so make sure you change your other settings first. Know you can launch the updater manually at any time to change any setting.", button1: "Go in the background and Quit", button2: "Cancel") {
+            if !Helpers.showAlert(question: "Background mode", text: "By enabling background mode, Aerial Companion will shedule itself to run for a few seconds at the frequency you selected.\n\nThe updater will quit the menu so make sure you change your other settings first. You can launch Aerial Companion manually at any time to change your settings.", button1: "Quit and run in background", button2: "Cancel") {
                 return
             }
         }

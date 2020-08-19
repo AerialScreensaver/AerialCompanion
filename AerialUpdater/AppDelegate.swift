@@ -15,14 +15,20 @@ enum IconMode {
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
+    lazy var firstTimeSetupWindowController = FirstTimeSetupWindowController()
+
     lazy var menuViewController = MenuViewController()
     
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         debugLog("Version \(Helpers.version) launched on  \(ProcessInfo.processInfo.operatingSystemVersionString)")
-
+        //Preferences.firstTimeSetup = false
+        
         let arguments = ProcessInfo.processInfo.arguments
 
+        // Ensure not in bundle
+        ensureNotInBundle()
+        
         // This is imperative, breaks everything
         ensureNotInstalledForAllUsers()
         
@@ -35,6 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             // We're staying then !
             debugLog("Falling back to menu for a notification")
+        } else if !Preferences.firstTimeSetup {
+            debugLog("Do First Time Setup")
+            doFirstTimeSetup()
         }
         
         // Menu mode, we may fall down here from silent mode too in notify mode,
@@ -44,6 +53,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setIcon(mode: .normal)
         
         createMenu()
+    }
+    
+    func ensureNotInBundle() {
+        do {
+            let info = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeNameKey])
+            if let volume = info.volumeName {
+                if volume.starts(with: "Aerial") {
+                    Helpers.showErrorAlert(question: "Oops", text: "Aerial can only be run from the Applications folder. Drag Aerial to Applications, then open Applications and run it again.", button: "Ok")
+                    
+                    NSApplication.shared.terminate(self)
+                }
+            }
+        } catch {
+            errorLog("Ensure bundle error")
+        }
+    }
+    
+    func doFirstTimeSetup() {
+        var topLevelObjects: NSArray? = NSArray()
+        if !Bundle.main.loadNibNamed(NSNib.Name("FirstTimeSetupWindowController"),
+                            owner: firstTimeSetupWindowController,
+                            topLevelObjects: &topLevelObjects) {
+            errorLog("Could not load nib for FirstTimeSetup, please report")
+        }
+        firstTimeSetupWindowController.windowDidLoad()
+        firstTimeSetupWindowController.showWindow(self)
+        firstTimeSetupWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     // This returns true if we should stay around, and false if we can safely return
@@ -124,7 +161,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func createMenu() {
         var topLevelObjects: NSArray? = NSArray()
 
-
         menuViewController.setDelegate(self)
         // Grab the menu from the nib
         Bundle.main.loadNibNamed("MenuView", owner: menuViewController, topLevelObjects: &topLevelObjects)
@@ -140,6 +176,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 statusItem.menu = obj as? NSMenu
             }
         }
+    }
+    
+    func updateMenu() {
+        print("upd")
+        menuViewController.updateMenuSettings()
+    }
+    func updateMenuContent() {
+        menuViewController.updateMenuContent()
     }
 }
 

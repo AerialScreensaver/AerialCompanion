@@ -63,7 +63,7 @@ class Update {
     // What should we do, is there a new version available ?
     func check() -> (String, Bool) {
         if !LocalVersion.isInstalled() {
-            return ("Not installed!", true)
+            return ("Plug-in not installed!", true)
         }
 
         if let manifest = CachedManifest.instance.manifest {
@@ -103,6 +103,7 @@ class Update {
     }
     
     func report(string: String, done: Bool) {
+        debugLog("report \(done)")
         if shouldReport {
             if let cb = uiCallback {
                 cb.updateProgress(string: string, done: done)

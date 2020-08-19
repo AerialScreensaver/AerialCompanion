@@ -85,7 +85,16 @@ struct Helpers {
 
         return output
     }
+    
+    static func getSymbol(_ named: String) -> NSImage? {
+        if let imagePath = Bundle(for: MenuViewController.self).path(
+            forResource: named,
+            ofType: "pdf") {
+            return NSImage(contentsOfFile: imagePath)
+        }
 
+        return nil
+    }
 
 }
 

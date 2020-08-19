@@ -87,6 +87,10 @@ struct Preferences {
     
     @SimpleStorage(key: "debugMode", defaultValue: false)
     static var debugMode: Bool
+
+    @SimpleStorage(key: "firstTimeSetup", defaultValue: false)
+    static var firstTimeSetup: Bool
+
 }
 
 

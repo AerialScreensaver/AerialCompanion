@@ -26,7 +26,7 @@ class InfoWindowController: NSWindowController {
     @IBAction func githubButtonClick(_ sender: Any) {
         print("github")
         let workspace = NSWorkspace.shared
-        let url = URL(string: "https://github.com/glouel/AerialUpdater")!
+        let url = URL(string: "https://github.com/glouel/AerialCompanion")!
         workspace.open(url)
     }
 }
