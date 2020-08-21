@@ -1,37 +1,46 @@
-# AerialUpdater
+# Aerial Companion
+
+<img width="400" alt="Screen Shot 2020-08-20 at 8 55 22 PM" src="https://user-images.githubusercontent.com/18543749/90840244-7a1a6000-e327-11ea-8e3e-2cddda38cbe4.png"> <img width="300" alt="Screen Shot 2020-08-20 at 8 54 42 PM" src="https://user-images.githubusercontent.com/18543749/90840214-65d66300-e327-11ea-937c-6885f1ff1b4c.png">
 
 The official install/auto-update tool for the [Aerial screen saver](https://github.com/JohnCoates/Aerial/) for macOS. 
 
-![Capture d’écran 2020-07-26 à 17 52 17](https://user-images.githubusercontent.com/37544189/88483620-54d54480-cf69-11ea-9a53-413be671d3f7.png)
+This utility will install the Aerial screensaver and keep you up to date! 
 
-As the name implies, this utility will install Aerial's latest versions on your system and keep you up to date. 
+*Previously called AerialUpdater*
 
 ## Installation
 
-Download the [latest release](https://github.com/glouel/AerialUpdater/releases), unzip and copy `AerialUpdater.app` to `/Applications` (or some other place of your choice, then double-click to launch. 
+1. Download the [latest release](https://github.com/glouel/AerialUpdater/releases)
+2. Unzip and copy `AerialUpdater.app` to `/Applications` 
+<img width="300" alt="Screen Shot 2020-08-20 at 8 18 56 PM" src="https://user-images.githubusercontent.com/18543749/90838862-0165d480-e324-11ea-8741-aef4da8d0d1a.png">
+3. Once copied, double click to launch `Aerial.app` in your Applications Folder 
+4. Aerial will be installed if this is your first time, or prompt you to update to the latest version! 
 
-To uninstall, simply delete `AerialUpdater.app`. 
+## Uninstall
 
-## I thought Aerial had auto-updates already ?  
+- To uninstall the Aerial Companion App simply delete `Aerial.app` from your Applications folder. 
+- To uninstall the Aerial screen saver, please follow the directions [here](https://github.com/JohnCoates/Aerial/blob/master/Documentation/Installation.md#uninstallation)
 
-Aerial had auto-updates starting with [version 1.5.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#150---may-31-2019), this feature was provided by the [Sparkle framework](https://sparkle-project.org). 
+## I thought Aerial had auto-updates with Sparkle? 
 
-With the introduction of macOS 10.15 (Catalina), things changed for screen savers and Aerial was no longer able to update itself because of the new security restrictions introduced with sandboxing. A temporary workaround was put in place in [version 1.8.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#180---february-18-2020) where you could get notified of a new version.
+Aerial used to automatically update (since [version 1.5.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#150---may-31-2019)) using  the [Sparkle framework](https://sparkle-project.org). 
+
+With the introduction of macOS 10.15 (Catalina), things changed for screen savers and Aerial was no longer able to update itself because of the new security restrictions introduced with sandboxing. A temporary workaround was put in place in [version 1.8.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#180---february-18-2020) where you could get notified of a new version but not automatically install.
 
 ![74758954-5858f700-5278-11ea-8e17-d034fdf57f33](https://user-images.githubusercontent.com/37544189/88542800-4e050b00-d017-11ea-8a80-6c9e0ef7b93b.jpg)
 
-While this worked *most of the time*, for some users, the update check caused the ScreenSaverEngine to lose the keyboard/mouse focus, and pressing a key would no longer let you exit the screen saver (pressing `cmd-alt-shift-esc` would workaround the issue). This issue seem to trigger a lot more often in macOS 11 (Big Sur), so because of this, Sparkle was completely removed from Aerial with version 2.0.0, and this tool was created to replace it. 
+While this worked *most of the time*, for some users, the update check caused the `ScreenSaverEngine` to lose the keyboard/mouse focus, and pressing a key would no longer let you exit the screen saver (pressing `cmd-alt-shift-esc` could be used as a workaround). This issue seem to trigger a lot more often in macOS 11 (Big Sur). Due to this, Sparkle was removed from Aerial starting in version 2.0.0 and native support was added using Aerial Companion. 
 
-## How does it work ? 
+## How does it work? 
 
-You simply pick in the menu which version of Aerial you want to use (you can specify if you just want releases or beta versions too), and whether you want updates to happen automatically in the background, or if you'd rather be notified. If you choose to be notified, the icon will change color and clicking the menu will let you install the new version. 
+During your first launch you will be able to set up Aerial Companion to keep you up to date the way that *you* want. Choose whether it checks for an update hourly, daily, weekly, or only when you want to update manually. Run the companion app in the foreground from your menubar, or in the background without any effort from you. Stay up to date with either stable releases or beta updates. 
 
-## I meant, how does it work technically ?
+## I meant, how does it work technically?
 
 In this repository, I store a [manifest file](https://github.com/glouel/AerialUpdater/blob/main/manifest.json) that contains the version number of the latest release, and also the sha256 of the releases. This is generated after Aerial gets notarized for distribution and before I upload a new version on Aerial's [releases page](https://github.com/JohnCoates/Aerial/releases). 
 
-Periodically, AerialUpdater checks the manifest to see if a new version was released. When you decide to perform an update, the following happens 
-- AerialUpdater uses the version number from the manifest to infer the download link from Aerial's repository (the download links are always of the same format, so version `1.9.2` will be available at `https://github.com/JohnCoates/Aerial/releases/download/v1.9.2/Aerial.saver.zip`)
+Periodically, Aerial Companion checks the manifest to see if a new version was released. When you decide to perform an update, the following happens 
+- Aerial Companion uses the version number from the manifest to infer the download link from Aerial's repository (the download links are always of the same format, so version `1.9.2` will be available at `https://github.com/JohnCoates/Aerial/releases/download/v1.9.2/Aerial.saver.zip`)
 - The zip file is downloaded to `~/Library/Application Support/AerialUpdater/`
 - The sha256 of the file is computed, and compared to the one from the manifest
 - The zip is unzipped in place, looking for `Aerial.saver`
@@ -40,21 +49,40 @@ Periodically, AerialUpdater checks the manifest to see if a new version was rele
 
 If and only if everything checks out, then `Aerial.saver` gets copied to `~/Library/Screen Savers/`. 
 
-## Do I have to use this ? Is there an alternative ?
+## Do I have to use this? Is there an alternative?
 
-You don't, and sure, as pointed out in Aerial's [installation instructions](https://github.com/JohnCoates/Aerial/blob/master/Documentation/Installation.md), you can also use `homebrew` if you want automatic updates. 
+You don't, and sure! 
 
-And you can always manually download and install Aerial from its Github repository.
+- As pointed out in Aerial's [installation instructions](https://github.com/JohnCoates/Aerial/blob/master/Documentation/Installation.md), you can also use `homebrew` to install and/or update Aerial automatically.
+- You will always be able to manually download and install Aerial from its Github repository.
 
-## I don't want one more icon on my status bar !
+## I don't want yet ANOTHER icon on my status bar!
 
-The current version only works as a status bar item, but the option to run it as a daemon will happen in a subsequent release. 
+Do not fear! After installing Aerial Companion you can do the following:
 
-## Any known caveats/issues with version 0.3
+If you want to **update in the background** and hide the status icon: 
+1. Change your `Check Every` settings to Hourly, Daily, or Weekly
+2. Set your `Update Mode` to `Automatic`
+3. Open the menu one last time and select `Launch > In the background (no menu)` 
+4. This will then quit Aerial Companion and you are all set!
 
-- This tool only install/updates Aerial if you install it for your user only, and not for all users. Installing a screen saver for all users require an administrator password at install, and at each subsequent update, defeating the purpose of an auto-updater. It's recommended to check if you have an `Aerial.saver` file in `/Library/Screen Savers/`If you do, please remove it as you'll get two versions of Aerial alongside each other in your  
-- Like always when updating a screen saver, you must first close System Preferences. If you don't, you will need to restart it after installation to reload the new version as the old one will remain in memory. 
+If you want to **update manually**
+1. Simply quit Aerial Companion by clicking `Quit` at the bottom of the menu 
+2. When you want to check for an update, launch `Aerial.app` from your `/Applications` folder and click `Check Now` from the menubar icon. 
+3. Once installed, quit Aerial Companion again by clicking `Quit` at the bottom of the menu
 
-## Why should I trust you ? Who are you ?
+## Known Issues
+
+- This tool only installs/updates Aerial if you install it for your user only, and not for all users. Installing a screen saver for all users requires an administrator password at install, and at each subsequent update, defeating the purpose of an auto-updater. It's recommended to check if you have an `Aerial.saver` file in `/Library/Screen Savers/`. If you do, please remove it as you'll get two versions of Aerial alongside each other.  
+- When updating a screen saver, you must first close System Preferences. If you don't, you will need to quit and restart System Preferences after installing to reload the new version as the old one will remain in memory. 
+
+## Why should I trust you? Who are you?
 
 I'm [Guillaume Louel](https://github.com/glouel), the developer of [Aerial](https://github.com/JohnCoates/Aerial/) since version 1.4. 
+
+## I have more questions!
+
+Great! We love questions! Please feel free to send us bug reports, feature requests, and ask questions through any of the following methods: 
+
+- **Report bugs or post feature requests on [GitHub](https://github.com/glouel/AerialCompanion/issues)** 
+- **Join our [Community Discord server](https://discord.gg/TPuA5WG)** for technical support, feature requests, and a fun time!
