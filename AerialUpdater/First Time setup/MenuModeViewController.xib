@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MenuModeViewController" customModule="Aerial" customModuleProvider="target">
+            <connections>
+                <outlet property="allBackground" destination="vAz-t3-ViV" id="1MG-sn-2kg"/>
+                <outlet property="backgroundNotify" destination="lty-lY-vfB" id="EWs-L8-3xC"/>
+                <outlet property="imageView1" destination="7Iv-aY-VBS" id="Huw-Ge-Q3f"/>
+                <outlet property="imageView2" destination="pc4-qQ-eVu" id="Awy-uG-FPh"/>
+                <outlet property="imageView3" destination="usb-ov-cgc" id="nol-4h-H5N"/>
+                <outlet property="menuBarNotify" destination="2LQ-zS-8zQ" id="nZn-oG-DQ7"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+            <subviews>
+                <box fixedFrame="YES" boxType="custom" borderType="none" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="g43-ss-6zy">
+                    <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <view key="contentView" id="ymn-0m-5cG">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="saT-aV-enx">
+                                <rect key="frame" x="141" y="435" width="419" height="35"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="How should updates happen?" id="r5n-dO-qGa">
+                                    <font key="font" metaFont="systemBold" size="30"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-mU-hYc">
+                                <rect key="frame" x="178" y="312" width="474" height="64"/>
+                                <textFieldCell key="cell" id="p1K-Wp-bHr">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">Screen saver updates will be automatically installed in the background. Aerial Companion will periodically launch itself, perform the update and quit. You will only occasionally be prompted if the Companion needs to be updated itself (which should be extremely infrequent).</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vAz-t3-ViV">
+                                <rect key="frame" x="147" y="385.5" width="503" height="22"/>
+                                <buttonCell key="cell" type="radio" title="Do everything silently in the background" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="large" inset="2" id="5fv-Ez-fzJ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choiceChange:" target="-2" id="2h8-2y-pQz"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lty-lY-vfB">
+                                <rect key="frame" x="147" y="272.5" width="386" height="22"/>
+                                <buttonCell key="cell" type="radio" title="Run in the background but notify me before installing" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="large" inset="2" id="RtE-Dz-kxD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choiceChange:" target="-2" id="JOA-h0-wxM"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="84r-lv-E6y">
+                                <rect key="frame" x="178" y="215" width="474" height="48"/>
+                                <textFieldCell key="cell" id="0kK-fr-37N">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">Update checks will still happen periodically in the background. When a new version is available, an icon will appear in your menu bar so you can review and perform the update when you want.</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2LQ-zS-8zQ">
+                                <rect key="frame" x="147" y="175.5" width="259" height="22"/>
+                                <buttonCell key="cell" type="radio" title="Run in the menu bar and notify me" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="large" inset="2" id="dxl-Cb-sP5">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choiceChange:" target="-2" id="vz8-SO-o97"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l5t-eC-Ltc">
+                                <rect key="frame" x="178" y="118" width="474" height="48"/>
+                                <textFieldCell key="cell" id="aUA-3H-hpr">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">Aerial Companion will launch at startup and stay in your menu bar, the icon changing to a warning sign to notify you of a new update. You can disable the launch at startup too in settings if you'd rather do things manually. </string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Iv-aY-VBS">
+                                <rect key="frame" x="36" y="341" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="KFc-c9-Kea"/>
+                                    <constraint firstAttribute="height" constant="64" id="z1e-hV-8WD"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="moon.zzz" id="22h-gV-aFE"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pc4-qQ-eVu">
+                                <rect key="frame" x="36" y="228" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="7o1-2v-Kre"/>
+                                    <constraint firstAttribute="height" constant="64" id="ZBx-XS-Xrx"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="exclamationmark.bubble" id="YTa-Pf-eeN"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="usb-ov-cgc">
+                                <rect key="frame" x="36" y="131" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="3VI-FK-6kH"/>
+                                    <constraint firstAttribute="height" constant="64" id="PJ1-Le-0Hl"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="clock" id="oKO-El-K35"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0p7-4a-Scx">
+                                <rect key="frame" x="55" y="16" width="591" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="You can change those settings at any time by launching this companion app again." id="gnk-q7-83u">
+                                    <font key="font" metaFont="systemSemibold" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="l5t-eC-Ltc" secondAttribute="trailing" constant="50" id="2lN-rc-tlR"/>
+                            <constraint firstItem="0p7-4a-Scx" firstAttribute="centerX" secondItem="ymn-0m-5cG" secondAttribute="centerX" id="3I5-pM-de6"/>
+                            <constraint firstAttribute="trailing" secondItem="vAz-t3-ViV" secondAttribute="trailing" constant="50" id="3fG-HM-Xkw"/>
+                            <constraint firstItem="2LQ-zS-8zQ" firstAttribute="top" secondItem="84r-lv-E6y" secondAttribute="bottom" constant="20" id="6VW-1O-9Jz"/>
+                            <constraint firstItem="lty-lY-vfB" firstAttribute="top" secondItem="pc4-qQ-eVu" secondAttribute="top" id="7R7-Lw-RFb"/>
+                            <constraint firstItem="l5t-eC-Ltc" firstAttribute="top" secondItem="2LQ-zS-8zQ" secondAttribute="bottom" constant="12" id="AHz-7v-db0"/>
+                            <constraint firstItem="84r-lv-E6y" firstAttribute="leading" secondItem="Zb5-mU-hYc" secondAttribute="leading" id="Aip-ha-tqW"/>
+                            <constraint firstAttribute="trailing" secondItem="84r-lv-E6y" secondAttribute="trailing" constant="50" id="AyE-N9-AJF"/>
+                            <constraint firstItem="saT-aV-enx" firstAttribute="top" secondItem="ymn-0m-5cG" secondAttribute="top" constant="30" id="Dr6-4I-SHf"/>
+                            <constraint firstItem="Zb5-mU-hYc" firstAttribute="top" secondItem="vAz-t3-ViV" secondAttribute="bottom" constant="12" id="DyJ-wa-90n"/>
+                            <constraint firstItem="vAz-t3-ViV" firstAttribute="top" secondItem="7Iv-aY-VBS" secondAttribute="top" id="Flr-Da-34w"/>
+                            <constraint firstItem="vAz-t3-ViV" firstAttribute="leading" secondItem="7Iv-aY-VBS" secondAttribute="trailing" constant="50" id="Hln-We-BFS"/>
+                            <constraint firstItem="saT-aV-enx" firstAttribute="centerX" secondItem="ymn-0m-5cG" secondAttribute="centerX" id="Hny-hF-jSk"/>
+                            <constraint firstItem="84r-lv-E6y" firstAttribute="top" secondItem="lty-lY-vfB" secondAttribute="bottom" constant="12" id="JbN-pC-0dK"/>
+                            <constraint firstAttribute="trailing" secondItem="84r-lv-E6y" secondAttribute="trailing" constant="50" id="Sxh-oV-pFP"/>
+                            <constraint firstItem="lty-lY-vfB" firstAttribute="leading" secondItem="vAz-t3-ViV" secondAttribute="leading" id="UjR-lv-12a"/>
+                            <constraint firstItem="2LQ-zS-8zQ" firstAttribute="leading" secondItem="lty-lY-vfB" secondAttribute="leading" id="WRQ-2R-x5w"/>
+                            <constraint firstAttribute="trailing" secondItem="Zb5-mU-hYc" secondAttribute="trailing" constant="50" id="Wpa-wg-Ki1"/>
+                            <constraint firstItem="usb-ov-cgc" firstAttribute="leading" secondItem="7Iv-aY-VBS" secondAttribute="leading" id="XhF-1e-Q0X"/>
+                            <constraint firstItem="pc4-qQ-eVu" firstAttribute="leading" secondItem="7Iv-aY-VBS" secondAttribute="leading" id="hjL-ZU-3Iq"/>
+                            <constraint firstItem="l5t-eC-Ltc" firstAttribute="leading" secondItem="84r-lv-E6y" secondAttribute="leading" id="n3C-jN-v2b"/>
+                            <constraint firstItem="2LQ-zS-8zQ" firstAttribute="top" secondItem="usb-ov-cgc" secondAttribute="top" id="oIg-Lk-EHK"/>
+                            <constraint firstAttribute="bottom" secondItem="0p7-4a-Scx" secondAttribute="bottom" constant="16" symbolic="YES" id="sFZ-pp-a3v"/>
+                            <constraint firstItem="vAz-t3-ViV" firstAttribute="leading" secondItem="ymn-0m-5cG" secondAttribute="leading" constant="150" id="vLd-RW-wHb"/>
+                            <constraint firstItem="Zb5-mU-hYc" firstAttribute="leading" secondItem="ymn-0m-5cG" secondAttribute="leading" constant="180" id="xvp-lx-Jkv"/>
+                            <constraint firstItem="vAz-t3-ViV" firstAttribute="top" secondItem="saT-aV-enx" secondAttribute="bottom" constant="30" id="yMV-NZ-hf5"/>
+                            <constraint firstItem="lty-lY-vfB" firstAttribute="top" secondItem="Zb5-mU-hYc" secondAttribute="bottom" constant="20" id="z5R-d3-Ikw"/>
+                        </constraints>
+                    </view>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="width" constant="700" id="jao-n4-CxX"/>
+                <constraint firstAttribute="height" constant="500" id="sh6-s7-caU"/>
+            </constraints>
+            <point key="canvasLocation" x="-162" y="154"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="clock" width="141" height="155"/>
+        <image name="exclamationmark.bubble" width="159" height="166"/>
+        <image name="moon.zzz" width="135" height="152"/>
+    </resources>
+</document>

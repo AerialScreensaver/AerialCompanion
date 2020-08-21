@@ -15,46 +15,123 @@ enum IconMode {
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-    // This is not particularly pretty, can't seem to manage to put the menu in a controller... !
-    @IBOutlet var versionLabel: NSTextField!
-    @IBOutlet var versionImageView: NSImageView!
-    @IBOutlet var versionInstallNow: NSButton!
-    
-    @IBOutlet var goodTrick: NSProgressIndicator!
-    
-    // Menu entries
-    // Desired version
-    @IBOutlet var menuAlpha: NSMenuItem!
-    @IBOutlet var menuBeta: NSMenuItem!
-    @IBOutlet var menuRelease: NSMenuItem!
-    
-    // Update mode
-    @IBOutlet var menuAutomatic: NSMenuItem!
-    @IBOutlet var menuNotifyMe: NSMenuItem!
-    
-    // Check every
-    @IBOutlet var menuHour: NSMenuItem!
-    @IBOutlet var menuDay: NSMenuItem!
-    @IBOutlet var menuWeek: NSMenuItem!
-    
-    @IBOutlet var menuDebugMode: NSMenuItem!
+    lazy var firstTimeSetupWindowController = FirstTimeSetupWindowController()
 
+    lazy var menuViewController = MenuViewController()
+    
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        debugLog("Version \(Helpers.version) launched")
-        // Let's make sure our delegate is set
-        Update.instance.setAppDelegate(ad: self)
+        debugLog("Version \(Helpers.version) launched on  \(ProcessInfo.processInfo.operatingSystemVersionString)")
+        //Preferences.firstTimeSetup = false
+        
+        let arguments = ProcessInfo.processInfo.arguments
 
-        // Let's check right now the manifest status
-        CachedManifest.instance.updateNow()
+        // Ensure not in bundle
+        ensureNotInBundle()
+        
+        // This is imperative, breaks everything
+        ensureNotInstalledForAllUsers()
+        
+        if arguments.contains("--silent") {
+            debugLog("Background mode")
+
+            // Returns true if we need to stay around
+            if !silentModeCheck() {
+                return
+            }
+            // We're staying then !
+            debugLog("Falling back to menu for a notification")
+        } else if !Preferences.firstTimeSetup {
+            debugLog("Do First Time Setup")
+            doFirstTimeSetup()
+        }
+        
+        // Menu mode, we may fall down here from silent mode too in notify mode,
+        // or if we must update
         
         // Set the icon
         setIcon(mode: .normal)
         
         createMenu()
+    }
+    
+    func ensureNotInBundle() {
+        do {
+            let info = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeNameKey])
+            if let volume = info.volumeName {
+                if volume.starts(with: "Aerial") {
+                    Helpers.showErrorAlert(question: "Oops", text: "Aerial can only be run from the Applications folder. Drag Aerial to Applications, then open Applications and run it again.", button: "Ok")
+                    
+                    NSApplication.shared.terminate(self)
+                }
+            }
+        } catch {
+            errorLog("Ensure bundle error")
+        }
+    }
+    
+    func doFirstTimeSetup() {
+        var topLevelObjects: NSArray? = NSArray()
+        if !Bundle.main.loadNibNamed(NSNib.Name("FirstTimeSetupWindowController"),
+                            owner: firstTimeSetupWindowController,
+                            topLevelObjects: &topLevelObjects) {
+            errorLog("Could not load nib for FirstTimeSetup, please report")
+        }
+        firstTimeSetupWindowController.windowDidLoad()
+        firstTimeSetupWindowController.showWindow(self)
+        firstTimeSetupWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+    
+    // This returns true if we should stay around, and false if we can safely return
+    func silentModeCheck() -> Bool {
+        Update.instance.commandLine = true
+
+        // Force a cache update
+        CachedManifest.instance.updateNow()
+
+        // Make sure we don't need to update, or redirect you there
+        if UpdaterVersion.needsUpdating() {
+            return true         // Then stay around !
+        }
         
-        // Then set the callback
-        BackgroundCheck.instance.set()
+        let (stringVersion, shouldInstall) = Update.instance.check()
+
+        if shouldInstall {
+            debugLog(stringVersion)
+            if Preferences.updateMode == .automatic {
+                Update.instance.unattendedPerform()
+                return false    // We are done
+            } else {
+                return true     // Stay around !
+            }
+        } else {
+            // We need to stay around for a bit, because if not
+            // launchd will think we are crashing...
+            debugLog("No new version, quitting in 20sec.")
+            RunLoop.main.run(until: Date() + 0x14)
+            NSApplication.shared.terminate(self)
+
+            return false
+        }
+    }
+    
+    // Ensure we don't have something in /Library/Screen Savers/
+    func ensureNotInstalledForAllUsers() {
+        if LocalVersion.isInstalledForAllUsers() {
+            NSApp.activate(ignoringOtherApps: true)
+            // Open finder with the file selected
+            NSWorkspace.shared.selectFile(LocalVersion.aerialAllUsersPath, inFileViewerRootedAtPath: "/Library/Screen Savers/")
+
+            while LocalVersion.isInstalledForAllUsers() {
+                let result = Helpers.showAlert(question: "Aerial is currently installed for All Users", text: "In order for the updater to work, you need to uninstall the current version of Aerial. \n\nYou can do this by deleting the Aerial.saver file in the Finder window that just opened. Press Try Again when done.", button1: "Try Again", button2: "Quit")
+
+                if !result {
+                    // Quit !
+                    NSApplication.shared.terminate(self)
+                }
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -64,14 +141,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Change the icon based on status
     func setIcon(mode: IconMode) {
         DispatchQueue.main.async {
-            print("setIcon")
+            print("setIcon \(mode)")
             switch mode {
             case .normal:
                 self.statusItem.image = NSImage(named: "Status48")
             case .updating:
                 self.statusItem.image = NSImage(named: "StatusTransp48")
             case .notification:
-                self.statusItem.image = NSImage(named: "StatusGreen48")
+                self.statusItem.image = NSImage(named: "Status48Attention")
             }
 
             self.statusItem.image?.size.width = 22
@@ -84,196 +161,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func createMenu() {
         var topLevelObjects: NSArray? = NSArray()
 
+        menuViewController.setDelegate(self)
         // Grab the menu from the nib
-        Bundle.main.loadNibNamed("MenuView", owner: self, topLevelObjects: &topLevelObjects)
-        let objs = topLevelObjects! as [AnyObject]
+        Bundle.main.loadNibNamed("MenuView", owner: menuViewController, topLevelObjects: &topLevelObjects)
         
+        // This bugs me a lot, I shouldn't have to call this manually ?
+        menuViewController.viewDidLoad()
+
+        // Grab the menu from the nib and set it
+        let objs = topLevelObjects! as [AnyObject]
         for obj in objs {
             if obj is NSMenu {
                 // Menu found, set it on our statusItem !
                 statusItem.menu = obj as? NSMenu
             }
         }
-
-        updateMenuSettings()
-        updateMenuContent()
-    }
-
-    // This is only called once at startup
-    func updateMenuSettings() {
-        // Desired video format
-        switch Preferences.desiredVersion {
-        case .alpha:
-            menuAlpha.state = .on
-        case .beta:
-            menuBeta.state = .on
-        case .release:
-            menuRelease.state = .on
-        }
-        
-        switch Preferences.updateMode {
-        case .automatic:
-            menuAutomatic.state = .on
-        case .notifyme:
-            menuNotifyMe.state = .on
-        }
-
-        switch Preferences.checkEvery {
-        case .hour:
-            menuHour.state = .on
-        case .day:
-            menuDay.state = .on
-        case .week:
-            menuWeek.state = .on
-        }
-        
-        menuDebugMode.state = Preferences.debugMode ? .on : .off
     }
     
-    // This is called periodically to refresh the view
+    func updateMenu() {
+        print("upd")
+        menuViewController.updateMenuSettings()
+    }
     func updateMenuContent() {
-        DispatchQueue.main.async {
-            // If we have fetched the versions, put them in the UI
-            if let manifest = CachedManifest.instance.manifest {
-                self.menuAlpha.title = "Alpha (\(manifest.alphaVersion))"
-                self.menuBeta.title = "Beta (\(manifest.betaVersion))"
-                self.menuRelease.title = "Release (\(manifest.releaseVersion))"
-                
-                if manifest.updaterVersion != Helpers.version {
-                    print(manifest.updaterVersion)
-                    print(Helpers.version)
-                    self.versionLabel.stringValue = "New AerialUpdater"
-                    self.versionImageView.isHidden = true
-                    self.versionInstallNow.isHidden = false
-                    self.goodTrick.isHidden = true
-                    return
-                }
-            }
-            
-            let (statusString, shouldInstall) = Update.instance.check()
-
-            self.versionLabel.stringValue = statusString
-            self.goodTrick.isHidden = true
-
-            if shouldInstall {
-                // Make the button visible
-                self.versionImageView.isHidden = true
-                self.versionInstallNow.isHidden = false
-            } else {
-                // Make the button visible
-                self.versionImageView.isHidden = false
-                self.versionInstallNow.isHidden = true
-            }
-        }
-    }
-    
-    // This is our callback
-    func updateProgress(string: String, done: Bool) {
-        DispatchQueue.main.async {
-            if done {
-                self.goodTrick.stopAnimation(self)
-                self.goodTrick.isHidden = true
-                self.versionLabel.stringValue = string
-                
-                if string == "OK" {
-                    self.updateMenuContent()
-                }
-            } else {
-                self.versionLabel.stringValue = string
-            }
-        }
-    }
-
-    // MARK: - Custom UI Actions
-    
-    // Installation Button
-    @IBAction func versionInstallNowClick(_ sender: Any) {
-        if let manifest = CachedManifest.instance.manifest {
-            if manifest.updaterVersion != Helpers.version {
-                let workspace = NSWorkspace.shared
-                let url = URL(string: "https://github.com/glouel/AerialUpdater/releases")!
-                workspace.open(url)
-                return
-            }
-        }
-        
-        
-        versionInstallNow.isHidden = true
-        versionLabel.stringValue = "Hold on..."
-        // Start spinning
-        goodTrick.isHidden = false
-        goodTrick.startAnimation(self)
-        
-        // Launch the update
-    
-        Update.instance.perform(ad: self)
-    }
-    
-    // MARK: - Menu callbacks
-    @IBAction func desiredVersionChange(_ sender: NSMenuItem) {
-        // There's probably a better way to do this...
-        sender.state = .on
-        if sender == menuAlpha {
-            menuBeta.state = .off
-            menuRelease.state = .off
-            Preferences.desiredVersion = .alpha
-        } else if sender == menuBeta {
-            menuAlpha.state = .off
-            menuRelease.state = .off
-            Preferences.desiredVersion = .beta
-        } else if sender == menuRelease {
-            menuAlpha.state = .off
-            menuBeta.state = .off
-            Preferences.desiredVersion = .release
-        }
-        
-        updateMenuContent()
-    }
-    
-    @IBAction func updateModeChange(_ sender: NSMenuItem) {
-        sender.state = .on
-        if sender == menuAutomatic {
-            menuNotifyMe.state = .off
-            Preferences.updateMode = .automatic
-        } else if sender == menuNotifyMe {
-            menuAutomatic.state = .off
-            Preferences.updateMode = .notifyme
-        }
-    }
-    
-    @IBAction func checkEveryChange(_ sender: NSMenuItem) {
-        sender.state = .on
-        if sender == menuHour {
-            menuDay.state = .off
-            menuWeek.state = .off
-            Preferences.checkEvery = .hour
-        } else if sender == menuDay {
-            menuHour.state = .off
-            menuWeek.state = .off
-            Preferences.checkEvery = .day
-        } else if sender == menuWeek {
-            menuHour.state = .off
-            menuDay.state = .off
-            Preferences.checkEvery = .week
-        }
-    }
-
-    @IBAction func checkNow(_ sender: NSMenuItem) {
-        // Force a cache update
-        CachedManifest.instance.updateNow()
-        // Then the UI
-        updateMenuContent()
-    }
-    
-    @IBAction func debugMode(_ sender: Any) {
-        Preferences.debugMode = !Preferences.debugMode
-        
-        menuDebugMode.state = Preferences.debugMode ? .on : .off
-    }
-    
-    // Bye
-    @IBAction func menuQuit(_ sender: NSMenuItem) {
-        NSApplication.shared.terminate(self)
+        menuViewController.updateMenuContent()
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 enum DesiredVersion: Int, Codable {
-    case alpha, beta, release
+    case beta, release
 }
 
 enum UpdateMode: Int, Codable {
@@ -17,6 +17,10 @@ enum UpdateMode: Int, Codable {
 
 enum CheckEvery: Int, Codable {
     case hour, day, week
+}
+
+enum LaunchMode: Int, Codable {
+    case manual, startup, background
 }
 
 struct Preferences {
@@ -36,7 +40,7 @@ struct Preferences {
     }
     
     // Automatic or notifications ?
-    @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.automatic.rawValue)
+    @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.notifyme.rawValue)
     static var intUpdateMode: Int
 
     // We wrap in a separate value, as we can't store an enum as a Codable in
@@ -66,8 +70,26 @@ struct Preferences {
         }
     }
     
+    // Automatic or notifications ?
+    @SimpleStorage(key: "intLaunchMode", defaultValue: LaunchMode.manual.rawValue)
+    static var intLaunchMode: Int
+
+    // We wrap in a separate value, as we can't store an enum as a Codable in
+    // macOS < 10.15
+    static var launchMode: LaunchMode {
+        get {
+            return LaunchMode(rawValue: intLaunchMode)!
+        }
+        set(value) {
+            intLaunchMode = value.rawValue
+        }
+    }
+    
     @SimpleStorage(key: "debugMode", defaultValue: false)
     static var debugMode: Bool
+
+    @SimpleStorage(key: "firstTimeSetup", defaultValue: false)
+    static var firstTimeSetup: Bool
 
 }
 

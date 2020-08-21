@@ -9,8 +9,9 @@ import Foundation
 
 // MARK: - Manifest
 struct Manifest: Codable {
-    let updaterVersion, alphaVersion, alphaSHA256, betaVersion: String
-    let betaSHA256, releaseVersion, releaseSHA256: String
+    let alphaVersion, alphaSHA256: String?  // This will go away soon
+    let updaterVersion, betaVersion, betaSHA256: String
+    let releaseVersion, releaseSHA256: String
 }
 
 // MARK: Manifest convenience initializers and mutators
@@ -31,7 +32,7 @@ extension Manifest {
         try self.init(data: try Data(contentsOf: url))
     }
 
-    func with(
+/*    func with(
         updaterVersion: String? = nil,
         alphaVersion: String? = nil,
         alphaSHA256: String? = nil,
@@ -49,7 +50,7 @@ extension Manifest {
             releaseVersion: releaseVersion ?? self.releaseVersion,
             releaseSHA256: releaseSHA256 ?? self.releaseSHA256
         )
-    }
+    }*/
 
     func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)

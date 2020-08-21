@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="UpdateCheckWindowController" customModule="Aerial" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="kfs-cv-OUn" id="bI7-BF-gFf"/>
+                <outlet property="largeGoodTrick" destination="Txh-J8-4Fg" id="IOj-4T-7UU"/>
+                <outlet property="progressImageView" destination="MIw-lE-ibw" id="0qa-AP-nhO"/>
+                <outlet property="progressLabel" destination="zgw-TZ-0O3" id="qSr-9K-C4S"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Aerial Companion" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="76"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="76"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldu-Oj-ypX">
+                        <rect key="frame" x="22" y="22" width="32" height="32"/>
+                        <subviews>
+                            <progressIndicator maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Txh-J8-4Fg">
+                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="Yln-df-S2y"/>
+                                    <constraint firstAttribute="height" constant="32" id="h8P-g3-ISj"/>
+                                </constraints>
+                            </progressIndicator>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MIw-lE-ibw">
+                                <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="U0e-e6-yoc"/>
+                                    <constraint firstAttribute="height" constant="32" id="ogN-zM-vph"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="Lgq-en-xWM">
+                                    <imageReference key="image" image="checkmark.circle" symbolScale="small"/>
+                                </imageCell>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MIw-lE-ibw" secondAttribute="trailing" id="SFp-AO-Gjn"/>
+                            <constraint firstItem="Txh-J8-4Fg" firstAttribute="top" secondItem="ldu-Oj-ypX" secondAttribute="top" id="mg0-zU-rzi"/>
+                            <constraint firstItem="MIw-lE-ibw" firstAttribute="top" secondItem="ldu-Oj-ypX" secondAttribute="top" id="vaQ-3y-e0f"/>
+                            <constraint firstItem="Txh-J8-4Fg" firstAttribute="leading" secondItem="ldu-Oj-ypX" secondAttribute="leading" id="yzK-PT-aaq"/>
+                        </constraints>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-TZ-0O3">
+                        <rect key="frame" x="72" y="30" width="37" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Fud-tY-77Z">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kfs-cv-OUn">
+                        <rect key="frame" x="377" y="18" width="85" height="40"/>
+                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZiW-gH-LpO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="actionButtonClick:" target="-2" id="zey-yY-jeB"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="kfs-cv-OUn" secondAttribute="trailing" constant="24" id="CYt-19-Urq"/>
+                    <constraint firstItem="zgw-TZ-0O3" firstAttribute="leading" secondItem="ldu-Oj-ypX" secondAttribute="trailing" constant="20" id="GMQ-na-qpK"/>
+                    <constraint firstItem="ldu-Oj-ypX" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="22" id="dAf-Ap-BUM"/>
+                    <constraint firstItem="ldu-Oj-ypX" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="22" id="fdu-2R-lsU"/>
+                    <constraint firstItem="zgw-TZ-0O3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="30" id="mfS-Q4-iWD"/>
+                    <constraint firstAttribute="bottom" secondItem="ldu-Oj-ypX" secondAttribute="bottom" constant="22" id="nfy-bT-mdn"/>
+                    <constraint firstItem="kfs-cv-OUn" firstAttribute="centerY" secondItem="zgw-TZ-0O3" secondAttribute="centerY" id="qZP-t8-wcY"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-164" y="47"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="checkmark.circle" width="141" height="155"/>
+    </resources>
+</document>

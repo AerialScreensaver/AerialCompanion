@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ReleaseViewController" customModule="AerialUpdater" customModuleProvider="target">
+            <connections>
+                <outlet property="betaButton" destination="9aL-BN-c4Y" id="xrJ-by-TnG"/>
+                <outlet property="imageView1" destination="d00-FI-xnD" id="QRR-v0-Vug"/>
+                <outlet property="imageView2" destination="suP-wZ-MgD" id="U5o-k2-GGx"/>
+                <outlet property="releasesButton" destination="qb2-za-hjf" id="W64-PT-8Vw"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+            <subviews>
+                <box boxType="custom" borderType="none" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="zhv-Dt-6q6">
+                    <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+                    <view key="contentView" id="2xt-Sa-mIf">
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lhu-yD-cCa">
+                                <rect key="frame" x="178" y="286" width="474" height="32"/>
+                                <textFieldCell key="cell" title="You will only get the regular releases versions of Aerial. Those are the most stable, they are a bit less frequent." id="kii-yk-zYs">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8d-LS-4P0">
+                                <rect key="frame" x="157" y="435" width="387" height="35"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Do you want beta releases?" id="KNQ-IS-0RB">
+                                    <font key="font" metaFont="systemBold" size="30"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qb2-za-hjf">
+                                <rect key="frame" x="157" y="335.5" width="299" height="22"/>
+                                <buttonCell key="cell" type="radio" title="No thanks, just give me release versions" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="large" inset="2" id="UG2-yi-5PN">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choiceChange:" target="-2" id="3BR-kU-bnh"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9aL-BN-c4Y">
+                                <rect key="frame" x="157" y="216.5" width="233" height="22"/>
+                                <buttonCell key="cell" type="radio" title="Yes, give me beta releases too" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="large" inset="2" id="uD5-2d-g0l">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="choiceChange:" target="-2" id="UJu-th-iOp"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sG2-Mu-gVK">
+                                <rect key="frame" x="178" y="167" width="474" height="32"/>
+                                <textFieldCell key="cell" title="You will always get the latest builds with the latest fixes and features, and, occasionally, the newest bugs !" id="ZGr-yZ-1Ib">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d00-FI-xnD">
+                                <rect key="frame" x="50" y="291" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="XDE-AB-arR"/>
+                                    <constraint firstAttribute="height" constant="64" id="dmo-uZ-S8L"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="i6E-os-aUJ">
+                                    <imageReference key="image" image="sun.max" symbolScale="large"/>
+                                </imageCell>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="suP-wZ-MgD">
+                                <rect key="frame" x="50" y="172" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="jcw-RS-MTk"/>
+                                    <constraint firstAttribute="width" constant="64" id="z7k-VQ-rTL"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Fll-ET-WSL">
+                                    <imageReference key="image" image="cloud.sun.rain" symbolScale="large"/>
+                                </imageCell>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Lhu-yD-cCa" firstAttribute="top" secondItem="qb2-za-hjf" secondAttribute="bottom" constant="20" id="6S4-Lf-MtH"/>
+                            <constraint firstAttribute="trailing" secondItem="sG2-Mu-gVK" secondAttribute="trailing" constant="50" id="70G-p1-SfR"/>
+                            <constraint firstAttribute="trailing" secondItem="Lhu-yD-cCa" secondAttribute="trailing" constant="50" id="89R-qh-AM9"/>
+                            <constraint firstItem="qb2-za-hjf" firstAttribute="leading" secondItem="2xt-Sa-mIf" secondAttribute="leading" constant="160" id="ES8-XT-52j"/>
+                            <constraint firstItem="sG2-Mu-gVK" firstAttribute="leading" secondItem="2xt-Sa-mIf" secondAttribute="leading" constant="180" id="Lga-hy-GaG"/>
+                            <constraint firstItem="qb2-za-hjf" firstAttribute="top" secondItem="d00-FI-xnD" secondAttribute="top" id="N3z-dW-jjD"/>
+                            <constraint firstItem="d00-FI-xnD" firstAttribute="leading" secondItem="2xt-Sa-mIf" secondAttribute="leading" constant="50" id="aqK-fH-tas"/>
+                            <constraint firstItem="suP-wZ-MgD" firstAttribute="leading" secondItem="2xt-Sa-mIf" secondAttribute="leading" constant="50" id="c5D-7f-VRv"/>
+                            <constraint firstItem="9aL-BN-c4Y" firstAttribute="leading" secondItem="qb2-za-hjf" secondAttribute="leading" id="ckf-aW-HZX"/>
+                            <constraint firstItem="Lhu-yD-cCa" firstAttribute="leading" secondItem="2xt-Sa-mIf" secondAttribute="leading" constant="180" id="fRn-X9-lkv"/>
+                            <constraint firstItem="9aL-BN-c4Y" firstAttribute="top" secondItem="Lhu-yD-cCa" secondAttribute="bottom" constant="50" id="j4z-cK-fNk"/>
+                            <constraint firstItem="F8d-LS-4P0" firstAttribute="centerX" secondItem="2xt-Sa-mIf" secondAttribute="centerX" id="kuv-d9-XY8"/>
+                            <constraint firstItem="F8d-LS-4P0" firstAttribute="top" secondItem="2xt-Sa-mIf" secondAttribute="top" constant="30" id="o2Y-zy-qYg"/>
+                            <constraint firstItem="qb2-za-hjf" firstAttribute="top" secondItem="F8d-LS-4P0" secondAttribute="bottom" constant="80" id="wJc-KG-ixd"/>
+                            <constraint firstItem="sG2-Mu-gVK" firstAttribute="top" secondItem="9aL-BN-c4Y" secondAttribute="bottom" constant="20" id="zHz-N1-TaS"/>
+                            <constraint firstItem="9aL-BN-c4Y" firstAttribute="top" secondItem="suP-wZ-MgD" secondAttribute="top" id="zoc-Rg-oqZ"/>
+                        </constraints>
+                    </view>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="height" constant="500" id="P00-A2-xUy"/>
+                <constraint firstItem="zhv-Dt-6q6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Tqy-Bl-EjQ"/>
+                <constraint firstAttribute="width" constant="700" id="cLt-Tz-ALR"/>
+                <constraint firstAttribute="trailing" secondItem="zhv-Dt-6q6" secondAttribute="trailing" id="drR-WC-T3q"/>
+                <constraint firstItem="zhv-Dt-6q6" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="jVo-LD-iTC"/>
+                <constraint firstAttribute="bottom" secondItem="zhv-Dt-6q6" secondAttribute="bottom" id="zRI-eh-oSV"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="cloud.sun.rain" width="189" height="241"/>
+        <image name="sun.max" width="146" height="164"/>
+    </resources>
+</document>

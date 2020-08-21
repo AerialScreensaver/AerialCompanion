@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17132" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17132"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="AppDelegate" customModule="AerialUpdater" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MenuViewController" customModule="Aerial" customModuleProvider="target">
             <connections>
                 <outlet property="goodTrick" destination="7ly-UJ-lL0" id="yHd-Iv-qOj"/>
-                <outlet property="menuAlpha" destination="aTb-6M-eNd" id="7jb-Sl-2hx"/>
                 <outlet property="menuAutomatic" destination="c1V-9r-2xp" id="hj0-Kd-mHb"/>
                 <outlet property="menuBeta" destination="B8x-rn-xbe" id="P0J-eq-Tx3"/>
                 <outlet property="menuDay" destination="h6f-dk-Iwj" id="4zL-Rt-6f0"/>
                 <outlet property="menuDebugMode" destination="eJg-F9-nT7" id="fTX-im-Ypz"/>
                 <outlet property="menuHour" destination="cZD-K7-Kbp" id="oC5-uG-Tik"/>
+                <outlet property="menuLaunchAtStartup" destination="DGI-48-AGs" id="opf-4F-KKT"/>
+                <outlet property="menuLaunchInBackground" destination="4Xh-ro-WIk" id="m5V-Vd-2ab"/>
+                <outlet property="menuLaunchManually" destination="Grb-Y7-lrP" id="ID8-C4-g1S"/>
                 <outlet property="menuNotifyMe" destination="gEv-rH-Fdb" id="eJ5-Gi-CLc"/>
                 <outlet property="menuRelease" destination="s1K-sM-h3S" id="8uQ-6f-cpw"/>
                 <outlet property="menuWeek" destination="lpf-93-vcm" id="7eA-3E-moZ"/>
@@ -27,7 +29,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu identifier="AUMenu" id="egT-Bp-Pxe">
             <items>
-                <menuItem title="Aerial Updater" id="DP3-rd-sf3">
+                <menuItem title="Aerial Companion" id="DP3-rd-sf3">
                     <attributedString key="attributedTitle">
                         <fragment content="Aerial Updater">
                             <attributes>
@@ -49,26 +51,27 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="VbR-MV-V8H"/>
+                <menuItem title="Open screen saver settings..." id="Ffz-l1-9dj">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openScreenSaverSettings:" target="-2" id="TDr-vP-Vj0"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="PCT-R8-f6l"/>
                 <menuItem title="Desired Version" id="zoT-A8-4As">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Desired Version" id="SOw-Dy-i8w">
                         <items>
-                            <menuItem title="Alpha" id="aTb-6M-eNd">
+                            <menuItem title="Release" id="s1K-sM-h3S">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="desiredVersionChange:" target="-2" id="Mxg-0S-SNS"/>
+                                    <action selector="desiredVersionChange:" target="-2" id="doC-Gf-38U"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Beta" id="B8x-rn-xbe">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="desiredVersionChange:" target="-2" id="OU8-tt-1lp"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Release" id="s1K-sM-h3S">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="desiredVersionChange:" target="-2" id="doC-Gf-38U"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -119,24 +122,63 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Check Now" id="vi9-P6-dJg">
+                <menuItem title="Check Now..." id="vi9-P6-dJg">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="checkNow:" target="-2" id="0Y0-jp-KHW"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="nSj-ef-RJd"/>
-                <menuItem title="Debug Mode" id="eJg-F9-nT7">
+                <menuItem title="Launch" id="6j4-SK-FMK">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="debugMode:" target="-2" id="1DB-YX-3sD"/>
-                    </connections>
+                    <menu key="submenu" title="Launch" id="cck-pf-4yI">
+                        <items>
+                            <menuItem title="Manually" id="Grb-Y7-lrP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="0j1-7G-eqQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="At Startup" id="DGI-48-AGs">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="JTF-zW-Zzw"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="In the background (no menu)" id="4Xh-ro-WIk">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchModeChange:" target="-2" id="PJo-Sm-Bvf"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="About" id="MIu-Mv-QOL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="About" id="S8J-9P-W4j">
+                        <items>
+                            <menuItem title="About Aerial Companion..." id="fGs-X4-PIA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="aboutUpdater:" target="-2" id="zMI-ny-u9E"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="twA-5H-R7z"/>
+                            <menuItem title="Debug Mode" id="eJg-F9-nT7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="debugMode:" target="-2" id="1DB-YX-3sD"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="6Za-pH-EhU"/>
                 <menuItem title="Quit" id="L0h-mF-RtP">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="menuQuit:" target="-2" id="5hA-9h-Eih"/>
+                        <action selector="quitButton:" target="-2" id="Unq-PA-h66"/>
                     </connections>
                 </menuItem>
             </items>
@@ -147,8 +189,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-Go-jS8">
-                    <rect key="frame" x="13" y="8" width="94" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Updater" id="9on-HL-otU">
+                    <rect key="frame" x="13" y="8" width="114" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="9on-HL-otU">
                         <font key="font" metaFont="systemMedium" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

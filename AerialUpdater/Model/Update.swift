@@ -5,17 +5,24 @@
 //  Created by Guillaume Louel on 25/07/2020.
 //
 
-import Foundation
+import Cocoa
+
+protocol UpdateCallback {
+    func updateProgress(string: String, done: Bool)
+    func updateMenuContent()
+    func setIcon(mode: IconMode)
+}
 
 // Again this is a bit messy...
 class Update {
     static let instance: Update = Update()
-
-    var appDelegate: AppDelegate?
-    var shouldReport = false
     
-    func setAppDelegate(ad: AppDelegate) {
-        appDelegate = ad
+    var uiCallback: UpdateCallback?
+    var shouldReport = false
+    var commandLine = false
+
+    func setCallback(_ cb: UpdateCallback) {
+        uiCallback = cb
     }
     
     func unattendedCheck() {
@@ -30,10 +37,6 @@ class Update {
             let localVersion = LocalVersion.get()
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                if localVersion != manifest.alphaVersion {
-                    shouldUpdate = true
-                }
             case .beta:
                 if localVersion != manifest.betaVersion {
                     shouldUpdate = true
@@ -49,33 +52,26 @@ class Update {
                 if Preferences.updateMode == .automatic {
                     unattendedPerform()
                 } else {
-                    if let ad = appDelegate {
-                        ad.setIcon(mode: .notification)
+                    if let cb = uiCallback {
+                        cb.setIcon(mode: .notification)
                     }
                 }
-            }
+            } 
         }
-
     }
     
     // What should we do, is there a new version available ?
     func check() -> (String, Bool) {
         if !LocalVersion.isInstalled() {
-            return ("Not installed!", true)
+            return ("Plug-in not installed!", true)
         }
 
         if let manifest = CachedManifest.instance.manifest {
             let localVersion = LocalVersion.get()
             
-            debugLog("Versions: local \(localVersion), alpha \(manifest.alphaVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
+            debugLog("Versions: local \(localVersion), beta \(manifest.betaVersion), release \(manifest.releaseVersion)")
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                if localVersion == manifest.alphaVersion {
-                    return ("\(localVersion) is installed", false)
-                } else {
-                    return ("\(manifest.alphaVersion) is available", true)
-                }
             case .beta:
                 if localVersion == manifest.betaVersion {
                     return ("\(localVersion) is installed", false)
@@ -100,30 +96,40 @@ class Update {
         doPerform()
     }
     
-    func perform(ad: AppDelegate) {
-        appDelegate = ad
+    func perform(_ cb: UpdateCallback) {
+        uiCallback = cb
         shouldReport = true
         doPerform()
     }
     
     func report(string: String, done: Bool) {
+        debugLog("report \(done)")
         if shouldReport {
-            if let ad = appDelegate {
-                ad.updateProgress(string: string, done: done)
+            if let cb = uiCallback {
+                cb.updateProgress(string: string, done: done)
             }
         }
 
         if done {
-            if let ad = appDelegate {
-                ad.setIcon(mode: .normal)
-                ad.updateMenuContent()
+            if let cb = uiCallback {
+                cb.setIcon(mode: .normal)
+                cb.updateMenuContent()
+            }
+            
+            if commandLine {
+                // We quit here
+                DispatchQueue.main.async {
+                    debugLog("Update process done, quitting in 20sec.")
+                    RunLoop.main.run(until: Date() + 0x14)
+                    NSApplication.shared.terminate(self)
+                }
             }
         }
     }
     
     func doPerform() {
-        if let ad = appDelegate {
-            ad.setIcon(mode: .updating)
+        if let cb = uiCallback {
+            cb.setIcon(mode: .updating)
         }
 
         guard let manifest = CachedManifest.instance.manifest else {
@@ -169,8 +175,6 @@ class Update {
         var zipPath: String = ""
 
         switch Preferences.desiredVersion {
-        case .alpha:
-            zipPath = "https://github.com/glouel/Aerial/releases/download/v\(manifest.alphaVersion)/Aerial.saver.zip"
         case .beta:
             zipPath = "https://github.com/JohnCoates/Aerial/releases/download/v\(manifest.betaVersion)/Aerial.saver.zip"
         case .release:
@@ -199,8 +203,6 @@ class Update {
             var tsha: String
             
             switch Preferences.desiredVersion {
-            case .alpha:
-                tsha = manifest.alphaSHA256
             case .beta:
                 tsha = manifest.betaSHA256
             case .release:
@@ -298,6 +300,8 @@ class Update {
 
         do {
             try FileManager.default.moveItem(atPath: path, toPath: LocalVersion.aerialPath)
+            
+            debugLog("Installed!")
             return true
         } catch {
             return false
