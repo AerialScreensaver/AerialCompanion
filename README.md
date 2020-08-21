@@ -1,6 +1,6 @@
 # Aerial Companion
 
-<img width="400" alt="Screen Shot 2020-08-20 at 8 55 22 PM" src="https://user-images.githubusercontent.com/18543749/90840244-7a1a6000-e327-11ea-8e3e-2cddda38cbe4.png"> <img width="300" alt="Screen Shot 2020-08-20 at 8 54 42 PM" src="https://user-images.githubusercontent.com/18543749/90840214-65d66300-e327-11ea-937c-6885f1ff1b4c.png">
+<img width="400" alt="About Aerial Companion" src="https://user-images.githubusercontent.com/18543749/90840244-7a1a6000-e327-11ea-8e3e-2cddda38cbe4.png"> <img width="300" alt="Aerial Companion in Action!" src="https://user-images.githubusercontent.com/18543749/90840214-65d66300-e327-11ea-937c-6885f1ff1b4c.png">
 
 The official install/auto-update tool for the [Aerial screen saver](https://github.com/JohnCoates/Aerial/) for macOS. 
 
@@ -29,7 +29,7 @@ Aerial used to automatically update (since [version 1.5.0](https://github.com/Jo
 
 With the introduction of macOS 10.15 (Catalina), things changed for screen savers and Aerial was no longer able to update itself because of the new security restrictions introduced with sandboxing. A temporary workaround was put in place in [version 1.8.0](https://github.com/JohnCoates/Aerial/blob/master/Documentation/ChangeLog.md#180---february-18-2020) where you could get notified of a new version but not automatically install.
 
-![74758954-5858f700-5278-11ea-8e17-d034fdf57f33](https://user-images.githubusercontent.com/37544189/88542800-4e050b00-d017-11ea-8a80-6c9e0ef7b93b.jpg)
+<img width="400" alt="Sparkle" src="https://user-images.githubusercontent.com/37544189/88542800-4e050b00-d017-11ea-8a80-6c9e0ef7b93b.jpg"> 
 
 While this worked *most of the time*, for some users, the update check caused the `ScreenSaverEngine` to lose the keyboard/mouse focus, and pressing a key would no longer let you exit the screen saver (pressing `cmd-alt-shift-esc` could be used as a workaround). This issue seem to trigger a lot more often in macOS 11 (Big Sur). Due to this, Sparkle was removed from Aerial starting in version 2.0.0 and native support was added using Aerial Companion. 
 
