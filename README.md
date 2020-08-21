@@ -12,7 +12,8 @@ This utility will install the Aerial screensaver and keep you up to date!
 
 1. Download the [latest release](https://github.com/glouel/AerialUpdater/releases)
 2. Unzip and copy `AerialUpdater.app` to `/Applications` 
-<img width="300" alt="Screen Shot 2020-08-20 at 8 18 56 PM" src="https://user-images.githubusercontent.com/18543749/90838862-0165d480-e324-11ea-8741-aef4da8d0d1a.png">
+
+<img width="300" alt="Drag and Drop" src="https://user-images.githubusercontent.com/18543749/90923714-24dc5e00-e3bc-11ea-9a24-a650f42ea734.gif">
 
 3. Once copied, double click to launch `Aerial.app` in your Applications Folder 
 
