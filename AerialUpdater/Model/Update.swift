@@ -295,6 +295,24 @@ class Update {
                 }
             }
         }
+        
+        // We may need to create the "Screen Savers" folder in library !
+        if !FileManager.default.fileExists(atPath: LocalVersion.userLibraryScreenSaverPath) {
+            debugLog("Creating /Screen Savers/ in user library")
+            
+            do {
+                try FileManager.default.createDirectory(
+                    atPath:LocalVersion.userLibraryScreenSaverPath,
+                    withIntermediateDirectories: true,
+                    attributes: nil)
+            } catch {
+                errorLog("Cannot create Screen Savers directory in your user library")
+                report(string: "Cannot create Screen Savers directory in your user library", done: true)
+
+                print(error.localizedDescription);
+            }
+        }
+        
         debugLog("Installing...")
         report(string: "Installing...", done: false)
 

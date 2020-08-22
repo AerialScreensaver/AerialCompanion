@@ -28,6 +28,16 @@ struct LocalVersion {
         }
     }()
 
+    static let userLibraryScreenSaverPath: String = {
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("Screen Savers/") {
+            return pathComponent.path
+        } else {
+            return ""
+        }
+    }()
+    
     static func isInstalledForAllUsers() -> Bool {
         return FileManager.default.fileExists(atPath: aerialAllUsersPath)
     }

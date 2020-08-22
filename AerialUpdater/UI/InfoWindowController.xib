@@ -45,9 +45,9 @@
                         </constraints>
                         <textFieldCell key="cell" id="jsD-QT-aCv">
                             <font key="font" metaFont="system"/>
-                            <string key="title">A free, open source, companion app `for the Aerial macOS Screen Saver developed and maintained by Guillaume Louel. 
+                            <string key="title">A free, open source, companion app for the Aerial macOS Screen Saver developed and maintained by Guillaume Louel. 
 
-Enjoying Aerial and want to buy me a coffee ? </string>
+Enjoying Aerial and want to buy me a coffee? </string>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
