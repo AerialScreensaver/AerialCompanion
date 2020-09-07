@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MenuViewController" customModule="Aerial" customModuleProvider="target">
             <connections>
                 <outlet property="goodTrick" destination="7ly-UJ-lL0" id="yHd-Iv-qOj"/>
+                <outlet property="launchAsWallpaper" destination="W1D-1o-AsE" id="zPE-6D-8kW"/>
+                <outlet property="launchHostedSettings" destination="tut-tg-wBX" id="OrS-bL-vLy"/>
                 <outlet property="menuAutomatic" destination="c1V-9r-2xp" id="hj0-Kd-mHb"/>
                 <outlet property="menuBeta" destination="B8x-rn-xbe" id="P0J-eq-Tx3"/>
                 <outlet property="menuDay" destination="h6f-dk-Iwj" id="4zL-Rt-6f0"/>
@@ -20,6 +22,7 @@
                 <outlet property="menuNotifyMe" destination="gEv-rH-Fdb" id="eJ5-Gi-CLc"/>
                 <outlet property="menuRelease" destination="s1K-sM-h3S" id="8uQ-6f-cpw"/>
                 <outlet property="menuWeek" destination="lpf-93-vcm" id="7eA-3E-moZ"/>
+                <outlet property="readThisFirst" destination="IS2-3c-0wU" id="EOR-lb-FxU"/>
                 <outlet property="versionImageView" destination="e6g-aK-Vba" id="0c0-u3-wvs"/>
                 <outlet property="versionInstallNow" destination="dVF-dg-jpC" id="aws-UQ-bRL"/>
                 <outlet property="versionLabel" destination="lRz-SV-1wN" id="46a-dH-qql"/>
@@ -29,7 +32,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu identifier="AUMenu" id="egT-Bp-Pxe">
             <items>
-                <menuItem title="Aerial Companion" id="DP3-rd-sf3">
+                <menuItem title="Aerial Updater" id="DP3-rd-sf3">
                     <attributedString key="attributedTitle">
                         <fragment content="Aerial Updater">
                             <attributes>
@@ -44,20 +47,37 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="msa-y6-pfS"/>
+                <menuItem title="Screen saver header" id="srg-Q8-qWV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <outlet property="view" destination="Rrb-ly-Wtl" id="Op3-sx-jna"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Item 2" id="wdZ-xa-kUA">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <outlet property="view" destination="glj-s1-sJk" id="nZj-iS-5v8"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="VbR-MV-V8H"/>
-                <menuItem title="Open screen saver settings..." id="Ffz-l1-9dj">
+                <menuItem title="Open settings..." id="Ffz-l1-9dj">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="openScreenSaverSettings:" target="-2" id="TDr-vP-Vj0"/>
                     </connections>
                 </menuItem>
+                <menuItem title="Launch Now" id="gSl-40-8Ci">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="aerialAsScreenSaver:" target="-2" id="omb-OO-iba"/>
+                    </connections>
+                </menuItem>
                 <menuItem isSeparatorItem="YES" id="PCT-R8-f6l"/>
+                <menuItem title="Updates header" id="Epr-QW-rgG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <outlet property="view" destination="D4Z-MI-fI0" id="46B-Ok-Ueh"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Desired Version" id="zoT-A8-4As">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Desired Version" id="SOw-Dy-i8w">
@@ -77,7 +97,6 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="x6j-2c-Ycl"/>
                 <menuItem title="Update Mode " id="93W-3A-Iqx">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Update Mode " id="Cow-ua-NSg">
@@ -129,6 +148,32 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="nSj-ef-RJd"/>
+                <menuItem title="Companion Header" id="JF0-Kd-wKi">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <outlet property="view" destination="hua-4b-jdu" id="jXJ-v9-erG"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="About" id="MIu-Mv-QOL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="About" id="S8J-9P-W4j">
+                        <items>
+                            <menuItem title="About Aerial Companion..." id="fGs-X4-PIA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="aboutUpdater:" target="-2" id="zMI-ny-u9E"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="twA-5H-R7z"/>
+                            <menuItem title="Debug Mode" id="eJg-F9-nT7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="debugMode:" target="-2" id="1DB-YX-3sD"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Launch" id="6j4-SK-FMK">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Launch" id="cck-pf-4yI">
@@ -154,21 +199,38 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="About" id="MIu-Mv-QOL">
+                <menuItem title="Experimental" id="bU5-zi-SXi">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="About" id="S8J-9P-W4j">
+                    <menu key="submenu" title="Experimental" showsStateColumn="NO" autoenablesItems="NO" id="cVf-En-7bL">
                         <items>
-                            <menuItem title="About Aerial Companion..." id="fGs-X4-PIA">
+                            <menuItem title="Item" id="Awe-UR-Bco">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="aboutUpdater:" target="-2" id="zMI-ny-u9E"/>
+                                    <outlet property="view" destination="q3W-Uo-5Ky" id="UD0-Ev-ihu"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="twA-5H-R7z"/>
-                            <menuItem title="Debug Mode" id="eJg-F9-nT7">
+                            <menuItem title="Copy Settings..." enabled="NO" id="IS2-3c-0wU">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="debugMode:" target="-2" id="1DB-YX-3sD"/>
+                                    <action selector="readMeFirst:" target="-2" id="yIc-NX-Cnk"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Launch Aerial Settings" enabled="NO" id="tut-tg-wBX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchHostedSettings:" target="-2" id="BOT-mf-h6e"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Launch Aerial In a Window" enabled="NO" id="nLM-FJ-bJL">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="aerialInWindow:" target="-2" id="RLf-7x-QoY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Launch Aerial as Wallpaper" enabled="NO" id="W1D-1o-AsE">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="launchAsWallpaper:" target="-2" id="oIF-RC-Yal"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -189,7 +251,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-Go-jS8">
-                    <rect key="frame" x="13" y="8" width="114" height="16"/>
+                    <rect key="frame" x="12" y="8" width="114" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="9on-HL-otU">
                         <font key="font" metaFont="systemMedium" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -201,7 +263,7 @@
                 </progressIndicator>
             </subviews>
             <constraints>
-                <constraint firstItem="yJN-Go-jS8" firstAttribute="leading" secondItem="IHs-60-Bdf" secondAttribute="leading" constant="15" id="53Y-fv-nWT"/>
+                <constraint firstItem="yJN-Go-jS8" firstAttribute="leading" secondItem="IHs-60-Bdf" secondAttribute="leading" constant="14" id="53Y-fv-nWT"/>
                 <constraint firstAttribute="trailing" secondItem="7ly-UJ-lL0" secondAttribute="trailing" constant="15" id="8Kk-SK-UAR"/>
                 <constraint firstItem="yJN-Go-jS8" firstAttribute="centerY" secondItem="IHs-60-Bdf" secondAttribute="centerY" id="Ruz-n1-t2b"/>
                 <constraint firstItem="7ly-UJ-lL0" firstAttribute="centerY" secondItem="IHs-60-Bdf" secondAttribute="centerY" id="uYu-a9-tZY"/>
@@ -209,11 +271,11 @@
             <point key="canvasLocation" x="-45" y="37"/>
         </customView>
         <customView id="glj-s1-sJk">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="250" height="28"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lRz-SV-1wN">
-                    <rect key="frame" x="13" y="8" width="128" height="16"/>
+                    <rect key="frame" x="12" y="6" width="128" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Version 2.0.0alpha3 " id="qfL-ev-gur">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -237,14 +299,94 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="dVF-dg-jpC" secondAttribute="trailing" constant="15" id="OGX-U3-oHS"/>
-                <constraint firstItem="dVF-dg-jpC" firstAttribute="top" secondItem="glj-s1-sJk" secondAttribute="top" constant="8" id="RAx-9m-8fJ"/>
-                <constraint firstAttribute="bottom" secondItem="lRz-SV-1wN" secondAttribute="bottom" constant="8" id="THj-be-nB2"/>
+                <constraint firstItem="dVF-dg-jpC" firstAttribute="top" secondItem="glj-s1-sJk" secondAttribute="top" constant="6" id="RAx-9m-8fJ"/>
+                <constraint firstAttribute="bottom" secondItem="lRz-SV-1wN" secondAttribute="bottom" constant="6" id="THj-be-nB2"/>
                 <constraint firstAttribute="trailing" secondItem="e6g-aK-Vba" secondAttribute="trailing" constant="15" id="VkG-Sb-jPN"/>
-                <constraint firstItem="e6g-aK-Vba" firstAttribute="top" secondItem="glj-s1-sJk" secondAttribute="top" constant="10" id="X2s-O1-LyV"/>
-                <constraint firstItem="lRz-SV-1wN" firstAttribute="leading" secondItem="glj-s1-sJk" secondAttribute="leading" constant="15" id="qwi-xi-bJL"/>
+                <constraint firstItem="e6g-aK-Vba" firstAttribute="top" secondItem="glj-s1-sJk" secondAttribute="top" constant="8" id="X2s-O1-LyV"/>
+                <constraint firstItem="lRz-SV-1wN" firstAttribute="leading" secondItem="glj-s1-sJk" secondAttribute="leading" constant="14" id="qwi-xi-bJL"/>
                 <constraint firstItem="lRz-SV-1wN" firstAttribute="top" secondItem="glj-s1-sJk" secondAttribute="top" constant="6" id="uVW-b8-GY6"/>
             </constraints>
             <point key="canvasLocation" x="-31" y="122"/>
+        </customView>
+        <customView id="Rrb-ly-Wtl">
+            <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PoV-Ry-EFG">
+                    <rect key="frame" x="12" y="1" width="78" height="14"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Screen Saver" id="gSc-Tv-V84">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="PoV-Ry-EFG" secondAttribute="bottom" constant="1" id="Ng5-nb-vta"/>
+                <constraint firstItem="PoV-Ry-EFG" firstAttribute="leading" secondItem="Rrb-ly-Wtl" secondAttribute="leading" constant="14" id="bjX-6j-2qX"/>
+                <constraint firstItem="PoV-Ry-EFG" firstAttribute="top" secondItem="Rrb-ly-Wtl" secondAttribute="top" id="d9a-Sc-KOZ"/>
+            </constraints>
+            <point key="canvasLocation" x="-70" y="194"/>
+        </customView>
+        <customView id="D4Z-MI-fI0">
+            <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-UG-diV">
+                    <rect key="frame" x="12" y="1" width="51" height="14"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Updates" id="37D-xG-QRh">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="4Ih-UG-diV" firstAttribute="top" secondItem="D4Z-MI-fI0" secondAttribute="top" id="NRr-O0-cYp"/>
+                <constraint firstItem="4Ih-UG-diV" firstAttribute="leading" secondItem="D4Z-MI-fI0" secondAttribute="leading" constant="14" id="TgT-hF-V8t"/>
+                <constraint firstAttribute="bottom" secondItem="4Ih-UG-diV" secondAttribute="bottom" constant="1" id="Yy6-P8-kq6"/>
+            </constraints>
+            <point key="canvasLocation" x="-70" y="260"/>
+        </customView>
+        <customView id="hua-4b-jdu">
+            <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfm-k4-eV3">
+                    <rect key="frame" x="12" y="1" width="68" height="14"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Companion" id="KfQ-0M-KR9">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dfm-k4-eV3" firstAttribute="top" secondItem="hua-4b-jdu" secondAttribute="top" id="5WH-WB-zin"/>
+                <constraint firstItem="dfm-k4-eV3" firstAttribute="leading" secondItem="hua-4b-jdu" secondAttribute="leading" constant="14" id="Nrs-a5-osV"/>
+                <constraint firstAttribute="bottom" secondItem="dfm-k4-eV3" secondAttribute="bottom" constant="1" id="nlV-az-kw1"/>
+            </constraints>
+            <point key="canvasLocation" x="-70" y="341"/>
+        </customView>
+        <customView id="q3W-Uo-5Ky">
+            <rect key="frame" x="0.0" y="0.0" width="213" height="15"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="snF-kM-dNr">
+                    <rect key="frame" x="12" y="1" width="175" height="14"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="This is still under development" id="WqL-aU-mkj">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="snF-kM-dNr" secondAttribute="bottom" constant="1" id="KWu-SR-716"/>
+                <constraint firstItem="snF-kM-dNr" firstAttribute="top" secondItem="q3W-Uo-5Ky" secondAttribute="top" id="dpA-iW-eml"/>
+                <constraint firstItem="snF-kM-dNr" firstAttribute="leading" secondItem="q3W-Uo-5Ky" secondAttribute="leading" constant="14" id="uBV-h7-FjO"/>
+            </constraints>
+            <point key="canvasLocation" x="-49.5" y="410.5"/>
         </customView>
     </objects>
     <resources>

@@ -19,7 +19,7 @@ class InfoWindowController: NSWindowController {
     @IBAction func donateButtonClick(_ sender: Any) {
         print("donate")
         let workspace = NSWorkspace.shared
-        let url = URL(string: "https://www.paypal.me/glouel/")!
+        let url = URL(string: "https://ko-fi.com/A0A32385Y")!
         workspace.open(url)
     }
     

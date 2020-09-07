@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -43,8 +43,8 @@ The Aerial screen saver and its Companion are both free and open-source. If you 
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="l9w-bk-NzT">
-                                <rect key="frame" x="313" y="230" width="74" height="21"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="btn_donate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="n7w-DC-Rk9">
+                                <rect key="frame" x="279" y="215" width="143" height="36"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="kofi1" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="n7w-DC-Rk9">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -74,6 +74,6 @@ The Aerial screen saver and its Companion are both free and open-source. If you 
         </customView>
     </objects>
     <resources>
-        <image name="btn_donate" width="74" height="21"/>
+        <image name="kofi1" width="142.5" height="36"/>
     </resources>
 </document>

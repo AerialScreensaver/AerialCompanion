@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,11 +19,11 @@
             <rect key="contentRect" x="196" y="240" width="592" height="319"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="592" height="319"/>
+                <rect key="frame" x="0.0" y="0.0" width="592" height="334"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j2N-0v-XVI">
-                        <rect key="frame" x="45" y="87" width="187" height="187"/>
+                        <rect key="frame" x="45" y="102" width="187" height="187"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="187" id="61A-ns-csM"/>
                             <constraint firstAttribute="width" constant="187" id="XSC-AU-uGp"/>
@@ -31,7 +31,7 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Updater512" id="66t-TY-QWq"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Jm-iv-5xn">
-                        <rect key="frame" x="255" y="244" width="246" height="35"/>
+                        <rect key="frame" x="255" y="259" width="246" height="35"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="TCN-xS-7eE">
                             <font key="font" metaFont="systemSemibold" size="30"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +39,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-4o-Bha">
-                        <rect key="frame" x="255" y="125" width="304" height="80"/>
+                        <rect key="frame" x="255" y="140" width="304" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="qvT-gX-bqi"/>
                         </constraints>
@@ -47,13 +47,13 @@
                             <font key="font" metaFont="system"/>
                             <string key="title">A free, open source, companion app for the Aerial macOS Screen Saver developed and maintained by Guillaume Louel. 
 
-Enjoying Aerial and want to buy me a coffee? </string>
+Enjoying Aerial? </string>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-8A-N98">
-                        <rect key="frame" x="255" y="221" width="118" height="15"/>
+                        <rect key="frame" x="255" y="236" width="118" height="15"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Version 123456789" id="cgg-uu-bQR">
                             <font key="font" metaFont="systemMedium" size="12"/>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -61,8 +61,8 @@ Enjoying Aerial and want to buy me a coffee? </string>
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="oze-qA-3fW">
-                        <rect key="frame" x="257" y="88" width="74" height="21"/>
-                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="btn_donate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0PT-EG-wyV">
+                        <rect key="frame" x="257" y="88" width="143" height="36"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="kofi1" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0PT-EG-wyV">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -71,7 +71,7 @@ Enjoying Aerial and want to buy me a coffee? </string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5yF-4T-o6L">
-                        <rect key="frame" x="251" y="34" width="194" height="40"/>
+                        <rect key="frame" x="251" y="34" width="182" height="40"/>
                         <buttonCell key="cell" type="push" title="Check project on GitHub" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HOy-rd-iF8">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -106,6 +106,6 @@ Enjoying Aerial and want to buy me a coffee? </string>
     </objects>
     <resources>
         <image name="Updater512" width="512" height="512"/>
-        <image name="btn_donate" width="74" height="21"/>
+        <image name="kofi1" width="142.5" height="36"/>
     </resources>
 </document>

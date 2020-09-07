@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import ScreenSaver
 
 class MenuViewController: NSViewController, UpdateCallback {
     lazy var infoWindowController = InfoWindowController()
@@ -40,6 +41,7 @@ class MenuViewController: NSViewController, UpdateCallback {
 
     @IBOutlet var menuDebugMode: NSMenuItem!
 
+    
     
     // The menu itself
     @IBOutlet var statusMenu: NSMenu!
@@ -206,10 +208,24 @@ class MenuViewController: NSViewController, UpdateCallback {
     }
     
     // MARK: - Menu callbacks
+    
+    // MARK: - Screen Saver
     @IBAction func openScreenSaverSettings(_ sender: Any) {
         NSWorkspace.shared.openFile("/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane")
     }
     
+    @IBAction func aerialAsScreenSaver(_ sender: Any) {
+        if let libHandle = dlopen("/System/Library/PrivateFrameworks/login.framework/Versions/Current/login", RTLD_LAZY) {
+            let sym = dlsym(libHandle, "SACScreenSaverStartNow")
+            typealias myFunction = @convention(c) () -> Void
+            let SACLockScreenImmediate = unsafeBitCast(sym, to: myFunction.self)
+            SACLockScreenImmediate()
+            dlclose(libHandle)
+        }
+    }
+    
+    // MARK: - Updates
+
     @IBAction func desiredVersionChange(_ sender: NSMenuItem) {
         // There's probably a better way to do this...
         sender.state = .on
@@ -267,7 +283,32 @@ class MenuViewController: NSViewController, UpdateCallback {
         updateCheckWindowController.startCheck()
     }
     
-    // MARK: - Launch
+    // MARK: - Companion
+
+    
+    // MARK: - Launch Companion
+    
+   
+    /// Show About Updater version window
+    @IBAction func aboutUpdater(_ sender: NSMenuItem) {
+        var topLevelObjects: NSArray? = NSArray()
+        if !Bundle.main.loadNibNamed(NSNib.Name("InfoWindowController"),
+                            owner: infoWindowController,
+                            topLevelObjects: &topLevelObjects) {
+            errorLog("Could not load nib for InfoWindow, please report")
+        }
+        infoWindowController.windowDidLoad()
+        infoWindowController.showWindow(self)
+        infoWindowController.window!.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+    
+    
+    @IBAction func debugMode(_ sender: Any) {
+        Preferences.debugMode = !Preferences.debugMode
+        
+        menuDebugMode.state = Preferences.debugMode ? .on : .off
+    }
     
     /// Handle the launch submenu
     @IBAction func launchModeChange(_ sender: NSMenuItem) {
@@ -296,27 +337,38 @@ class MenuViewController: NSViewController, UpdateCallback {
         LaunchAgent.update()
     }
     
-    
-    /// Show About Updater version window
-    @IBAction func aboutUpdater(_ sender: NSMenuItem) {
-        var topLevelObjects: NSArray? = NSArray()
-        if !Bundle.main.loadNibNamed(NSNib.Name("InfoWindowController"),
-                            owner: infoWindowController,
-                            topLevelObjects: &topLevelObjects) {
-            errorLog("Could not load nib for InfoWindow, please report")
+    // MARK: - Experimental
+
+    @IBAction func readMeFirst(_ sender: Any) {
+        if Helpers.showAlert(question: "Copy and adapt Aerial settings?", text: "When you use the functions below on macOS 10.15 or later, Aerial will run as a separate instance, with separate settings, and a separate cache from its screen saver mode that you know. In order to bridge that gap, Aerial Companion can copy your settings and try to adapt them to use the same cache.\n\nPlease note that when running this way, Aerial is no longer limited by the sandboxing restrictions, which means you can manually set a cache folder on a secondary or remote disk, or use the right arrow key to skip a video.", button1: "I understand, try to copy my settings!", button2: "I'll configure things separately") {
+            
         }
-        infoWindowController.windowDidLoad()
-        infoWindowController.showWindow(self)
-        infoWindowController.window!.makeKeyAndOrderFront(nil)
+    }
+
+    @IBAction func launchHostedSettings(_ sender: Any) {
+    }
+    
+    @IBAction func aerialInWindow(_ sender: Any) {
+        /*let mode = WindowMode()
+        mode.openInWindow()*/
+        let aerialWindowController = AerialWindow()
+
+        var topLevelObjects: NSArray? = NSArray()
+        if !Bundle.main.loadNibNamed(NSNib.Name("AerialWindow"),
+                            owner: aerialWindowController,
+                            topLevelObjects: &topLevelObjects) {
+            errorLog("Could not load nib for AerialWindow, please report")
+        }
+        aerialWindowController.windowDidLoad()
+        aerialWindowController.showWindow(self)
+        aerialWindowController.window!.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+       
+    }
+
+    @IBAction func launchAsWallpaper(_ sender: Any) {
     }
     
-    
-    @IBAction func debugMode(_ sender: Any) {
-        Preferences.debugMode = !Preferences.debugMode
-        
-        menuDebugMode.state = Preferences.debugMode ? .on : .off
-    }
     
     // Bye
     @IBAction func quitButton(_ sender: Any) {
