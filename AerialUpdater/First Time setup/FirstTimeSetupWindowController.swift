@@ -103,7 +103,7 @@ class FirstTimeSetupWindowController: NSWindowController, UpdateCallback {
                 let url = URL(string: "x-apple.systempreferences:com.apple.preference.desktopscreeneffect?ScreenSaverPref")!
                 workspace.open(url)*/
                 
-                NSWorkspace.shared.openFile("/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane")
+                //NSWorkspace.shared.openFile("/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane")
                 
                 // Launch agent
                 LaunchAgent.update()

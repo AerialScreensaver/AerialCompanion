@@ -17,6 +17,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBOutlet var versionImageView: NSImageView!
     @IBOutlet var versionInstallNow: NSButton!
     
+    @IBOutlet var companionTitleLabel: NSTextField!
     @IBOutlet var goodTrick: NSProgressIndicator!
     
     // Menu entries
@@ -50,7 +51,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        companionTitleLabel.stringValue = "Aerial Companion "+Helpers.version
         // Let's make sure our delegate is set
         Update.instance.setCallback(self)
 
@@ -211,7 +212,12 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     // MARK: - Screen Saver
     @IBAction func openScreenSaverSettings(_ sender: Any) {
-        NSWorkspace.shared.openFile("/System/Library/PreferencePanes/DesktopScreenEffectsPref.prefPane")
+        _ = Helpers.shell(launchPath: "/usr/bin/osascript", arguments: [
+        "-e", "tell application \"System Preferences\"",
+        "-e","set the current pane to pane id \"com.apple.preference.desktopscreeneffect\"",
+        "-e","reveal anchor \"ScreenSaverPref\" of pane id \"com.apple.preference.desktopscreeneffect\"",
+        "-e","activate",
+        "-e","end tell"])
     }
     
     @IBAction func aerialAsScreenSaver(_ sender: Any) {

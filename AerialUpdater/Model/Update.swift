@@ -226,7 +226,8 @@ class Update {
                     if checkCodesign(result) {
                         if install(saverPath) {
                             // Pfew...
-                            debugLog("Installed !")
+                            debugLog("Installed ! Setting up as default")
+                            setAsDefault()
                             report(string: "OK", done: true)
                         } else {
                             errorLog("Cannot copy .saver")
@@ -250,6 +251,13 @@ class Update {
             report(string: "Downloaded file not found", done: true)
         }
         
+    }
+    
+    private func setAsDefault() {
+        // defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName Flurry path /System/Library/Screen\ Savers/Flurry.saver/ type 0
+        
+        _ = Helpers.shell(launchPath: "/usr/bin/defaults", arguments: ["-currentHost","write","com.apple.screensaver","moduleDict","-dict","moduleName","Aerial","path",LocalVersion.aerialPath,"type","0"])
+        //debugLog(ret ?? "Defaults didn't return error")
     }
 
     private func checkCodesign(_ result: String?) -> Bool {
