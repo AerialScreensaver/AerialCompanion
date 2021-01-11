@@ -7,6 +7,10 @@
 
 import Foundation
 
+@objcMembers class Constant: NSObject {
+    static let aerialPath = LocalVersion.aerialPath
+}
+
 struct LocalVersion {
     static let aerialAllUsersPath: String = {
         let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .localDomainMask, true)[0] as String

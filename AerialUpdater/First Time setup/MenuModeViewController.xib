@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17700" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17700"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MenuModeViewController" customModule="Aerial" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="MenuModeViewController" customModule="Aerial_Companion" customModuleProvider="target">
             <connections>
                 <outlet property="allBackground" destination="vAz-t3-ViV" id="1MG-sn-2kg"/>
                 <outlet property="backgroundNotify" destination="lty-lY-vfB" id="EWs-L8-3xC"/>
@@ -89,7 +89,7 @@
                                 <rect key="frame" x="178" y="118" width="474" height="48"/>
                                 <textFieldCell key="cell" id="aUA-3H-hpr">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">Aerial Companion will launch at startup and stay in your menu bar, the icon changing to a warning sign to notify you of a new update. You can disable the launch at startup too in settings if you'd rather do things manually. </string>
+                                    <string key="title">Aerial Companion will launch at startup and stay in your menu bar, the icon showing a red dot to notify you of a new update. You can disable the launch at startup too in settings if you'd rather do things manually. </string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

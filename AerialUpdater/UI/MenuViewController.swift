@@ -51,7 +51,8 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        companionTitleLabel.stringValue = "Aerial Companion "+Helpers.version
+        companionTitleLabel.stringValue = Consts.productName + " " + Helpers.version
+        
         // Let's make sure our delegate is set
         Update.instance.setCallback(self)
 
@@ -332,11 +333,11 @@ class MenuViewController: NSViewController, UpdateCallback {
             Preferences.launchMode = .manual
         } else if sender == menuLaunchAtStartup {
             menuLaunchManually.state = .off
-            menuLaunchAtStartup.state = .off
+            menuLaunchInBackground.state = .off
             Preferences.launchMode = .startup
         } else if sender == menuLaunchInBackground {
             menuLaunchManually.state = .off
-            menuLaunchInBackground.state = .off
+            menuLaunchAtStartup.state = .off
             Preferences.launchMode = .background
         }
         
@@ -352,29 +353,19 @@ class MenuViewController: NSViewController, UpdateCallback {
     }
 
     @IBAction func launchHostedSettings(_ sender: Any) {
+        SaverLauncher.instance.openSettings()
     }
     
     @IBAction func aerialInWindow(_ sender: Any) {
-        /*let mode = WindowMode()
-        mode.openInWindow()*/
-        let aerialWindowController = AerialWindow()
-
-        var topLevelObjects: NSArray? = NSArray()
-        if !Bundle.main.loadNibNamed(NSNib.Name("AerialWindow"),
-                            owner: aerialWindowController,
-                            topLevelObjects: &topLevelObjects) {
-            errorLog("Could not load nib for AerialWindow, please report")
-        }
-        aerialWindowController.windowDidLoad()
-        aerialWindowController.showWindow(self)
-        aerialWindowController.window!.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-       
+        //let launcher = SaverLauncher()
+        //launcher.windowMode()
+        
+        SaverLauncher.instance.windowMode()
     }
 
     @IBAction func launchAsWallpaper(_ sender: Any) {
+        DesktopLauncher.instance.toggleLauncher()
     }
-    
     
     // Bye
     @IBAction func quitButton(_ sender: Any) {

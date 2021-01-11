@@ -1,15 +1,15 @@
 //
-//  AerialWindow.h
-//  Aerial
+//  AerialDesktop.h
+//  Aerial Companion
 //
-//  Created by Guillaume Louel on 29/08/2020.
+//  Created by Guillaume Louel on 02/12/2020.
 //
 
 #import <Cocoa/Cocoa.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AerialWindow : NSWindowController // <NSWindowDelegate>
+@interface AerialDesktop : NSWindowController
 - (void)awakeFromNib;
 - (void)stopScreensaver;
 - (void)openPanel;

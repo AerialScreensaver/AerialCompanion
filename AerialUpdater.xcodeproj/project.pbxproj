@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		03076A072505EF8E00CDF16C /* kofi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03076A062505EF8E00CDF16C /* kofi1@2x.png */; };
+		0316C21A2577DD6B007BAF70 /* AerialDesktop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0316C2182577DD6B007BAF70 /* AerialDesktop.m */; };
+		0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0316C2192577DD6B007BAF70 /* AerialDesktop.xib */; };
+		0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */; };
 		0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319460524CDBD2600F37B35 /* BackgroundCheck.swift */; };
+		031954C0256409EC0058467C /* SaverLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031954BF256409EC0058467C /* SaverLauncher.swift */; };
 		031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A3A6524D835B10011E738 /* InfoWindowController.swift */; };
 		031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031A3A6624D835B10011E738 /* InfoWindowController.xib */; };
 		0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBE824E005270041759E /* checkmark.circle.pdf */; };
@@ -37,12 +41,15 @@
 		033B0B7324E9749400622CA7 /* exclamationmark.bubble.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */; };
 		033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B7424E9767700622CA7 /* ThanksViewController.swift */; };
 		033B0B7724E9767700622CA7 /* ThanksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7524E9767700622CA7 /* ThanksViewController.xib */; };
+		0355004E257BD2FC00759D07 /* ModernMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0355004D257BD2FC00759D07 /* ModernMenu.swift */; };
 		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
 		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
 		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
 		03592ABC24CC821500C1AE52 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592ABB24CC821500C1AE52 /* Update.swift */; };
 		03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592ABD24CC86E900C1AE52 /* CachedManifest.swift */; };
 		035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */; };
+		036899942522608200136AE5 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036899962522608200136AE5 /* MenuView.xib */; };
+		036899A925235C5A00136AE5 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036899A825235C5A00136AE5 /* Consts.swift */; };
 		03889BFA24FA5EE4007C6B9B /* WindowMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 03889BF924FA5EE4007C6B9B /* WindowMode.m */; };
 		03ADA8EC24E034A40093D0A2 /* LaunchAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADA8EB24E034A40093D0A2 /* LaunchAgent.swift */; };
 		03BA141824FA8FE800BAAE1D /* AerialWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BA141624FA8FE800BAAE1D /* AerialWindow.m */; };
@@ -54,12 +61,18 @@
 		03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03CE4F5E24CB0CA900494D32 /* Main.storyboard */; };
 		03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7D24CB43FE00494D32 /* Manifest.swift */; };
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
-		03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03D50E6A24CC35F600D391D1 /* MenuView.xib */; };
+		03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1462575360600BF4F45 /* icon-512@2x.png */; };
+		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03076A062505EF8E00CDF16C /* kofi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kofi1@2x.png"; sourceTree = "<group>"; };
+		0316C2172577DD6A007BAF70 /* AerialDesktop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AerialDesktop.h; sourceTree = "<group>"; };
+		0316C2182577DD6B007BAF70 /* AerialDesktop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AerialDesktop.m; sourceTree = "<group>"; };
+		0316C2192577DD6B007BAF70 /* AerialDesktop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AerialDesktop.xib; sourceTree = "<group>"; };
+		0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopLauncher.swift; sourceTree = "<group>"; };
 		0319460524CDBD2600F37B35 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
+		031954BF256409EC0058467C /* SaverLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverLauncher.swift; sourceTree = "<group>"; };
 		031A3A6524D835B10011E738 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		031A3A6624D835B10011E738 /* InfoWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindowController.xib; sourceTree = "<group>"; };
 		0323BBE824E005270041759E /* checkmark.circle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = checkmark.circle.pdf; sourceTree = "<group>"; };
@@ -88,12 +101,16 @@
 		033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.bubble.pdf; sourceTree = "<group>"; };
 		033B0B7424E9767700622CA7 /* ThanksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksViewController.swift; sourceTree = "<group>"; };
 		033B0B7524E9767700622CA7 /* ThanksViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThanksViewController.xib; sourceTree = "<group>"; };
+		0355004D257BD2FC00759D07 /* ModernMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernMenu.swift; sourceTree = "<group>"; };
 		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
 		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		03592ABB24CC821500C1AE52 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		03592ABD24CC86E900C1AE52 /* CachedManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedManifest.swift; sourceTree = "<group>"; };
 		035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLog.swift; sourceTree = "<group>"; };
+		036899952522608200136AE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MenuView.xib; sourceTree = "<group>"; };
+		036899982522608900136AE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MenuView.xib; sourceTree = "<group>"; };
+		036899A825235C5A00136AE5 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		03889BF724FA5EE4007C6B9B /* Aerial-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aerial-Bridging-Header.h"; sourceTree = "<group>"; };
 		03889BF824FA5EE4007C6B9B /* WindowMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowMode.h; sourceTree = "<group>"; };
 		03889BF924FA5EE4007C6B9B /* WindowMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WindowMode.m; sourceTree = "<group>"; };
@@ -103,7 +120,7 @@
 		03BA141724FA8FE800BAAE1D /* AerialWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AerialWindow.xib; sourceTree = "<group>"; };
 		03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalReadmeWindowController.swift; sourceTree = "<group>"; };
 		03C491B524FBBDA00041D71C /* ExperimentalReadmeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExperimentalReadmeWindowController.xib; sourceTree = "<group>"; };
-		03CE4F5524CB0CA700494D32 /* Aerial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aerial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03CE4F5524CB0CA700494D32 /* Aerial Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aerial Companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03CE4F5824CB0CA700494D32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03CE4F5C24CB0CA900494D32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03CE4F5F24CB0CA900494D32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,7 +128,8 @@
 		03CE4F6224CB0CA900494D32 /* AerialUpdater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AerialUpdater.entitlements; sourceTree = "<group>"; };
 		03CE4F7D24CB43FE00494D32 /* Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manifest.swift; sourceTree = "<group>"; };
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
-		03D50E6A24CC35F600D391D1 /* MenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
+		03F5E1462575360600BF4F45 /* icon-512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512@2x.png"; sourceTree = "<group>"; };
+		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +150,8 @@
 				0323BBE824E005270041759E /* checkmark.circle.pdf */,
 				0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */,
 				0333115124D8369700E4622D /* btn_donate.png */,
-				03D50E6A24CC35F600D391D1 /* MenuView.xib */,
+				036899962522608200136AE5 /* MenuView.xib */,
+				0355004D257BD2FC00759D07 /* ModernMenu.swift */,
 				0333115424D8448E00E4622D /* MenuViewController.swift */,
 				031A3A6624D835B10011E738 /* InfoWindowController.xib */,
 				031A3A6524D835B10011E738 /* InfoWindowController.swift */,
@@ -166,6 +185,8 @@
 		033B0B6724E96CD100622CA7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */,
+				03F5E1462575360600BF4F45 /* icon-512@2x.png */,
 				033B0B6B24E96D4C00622CA7 /* cloud.sun.rain.pdf */,
 				033B0B6A24E96D4C00622CA7 /* sun.max.pdf */,
 				033B0B6824E96CE200622CA7 /* ant.pdf */,
@@ -179,6 +200,7 @@
 		03592AB624CC80A600C1AE52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				036899A825235C5A00136AE5 /* Consts.swift */,
 				035F6F1924CC8774002E4EEE /* Manifest */,
 				035F6F1A24CC8842002E4EEE /* Helpers */,
 				03592AB124CC765500C1AE52 /* Preferences.swift */,
@@ -187,6 +209,8 @@
 				03592ABB24CC821500C1AE52 /* Update.swift */,
 				0319460524CDBD2600F37B35 /* BackgroundCheck.swift */,
 				03ADA8EB24E034A40093D0A2 /* LaunchAgent.swift */,
+				031954BF256409EC0058467C /* SaverLauncher.swift */,
+				0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,6 +243,9 @@
 				03BA141524FA8FE800BAAE1D /* AerialWindow.h */,
 				03BA141624FA8FE800BAAE1D /* AerialWindow.m */,
 				03BA141724FA8FE800BAAE1D /* AerialWindow.xib */,
+				0316C2172577DD6A007BAF70 /* AerialDesktop.h */,
+				0316C2182577DD6B007BAF70 /* AerialDesktop.m */,
+				0316C2192577DD6B007BAF70 /* AerialDesktop.xib */,
 				03889BF724FA5EE4007C6B9B /* Aerial-Bridging-Header.h */,
 			);
 			path = ObjC;
@@ -235,7 +262,7 @@
 		03CE4F5624CB0CA700494D32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03CE4F5524CB0CA700494D32 /* Aerial.app */,
+				03CE4F5524CB0CA700494D32 /* Aerial Companion.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,9 +287,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03CE4F5424CB0CA700494D32 /* Aerial */ = {
+		03CE4F5424CB0CA700494D32 /* Aerial Companion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial" */;
+			buildConfigurationList = 03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial Companion" */;
 			buildPhases = (
 				03CE4F5124CB0CA700494D32 /* Sources */,
 				03CE4F5224CB0CA700494D32 /* Frameworks */,
@@ -272,9 +299,9 @@
 			);
 			dependencies = (
 			);
-			name = Aerial;
+			name = "Aerial Companion";
 			productName = AerialUpdater;
-			productReference = 03CE4F5524CB0CA700494D32 /* Aerial.app */;
+			productReference = 03CE4F5524CB0CA700494D32 /* Aerial Companion.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -305,7 +332,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03CE4F5424CB0CA700494D32 /* Aerial */,
+				03CE4F5424CB0CA700494D32 /* Aerial Companion */,
 			);
 		};
 /* End PBXProject section */
@@ -317,12 +344,13 @@
 			files = (
 				0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */,
 				033B0B7224E9749400622CA7 /* moon.zzz.pdf in Resources */,
+				03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */,
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
 				033B0B5E24E9655E00622CA7 /* ReleaseViewController.xib in Resources */,
 				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
 				0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */,
 				033B0B6624E967C600622CA7 /* NextViewController.xib in Resources */,
-				03D50E6B24CC35F600D391D1 /* MenuView.xib in Resources */,
+				036899942522608200136AE5 /* MenuView.xib in Resources */,
 				033B0B7324E9749400622CA7 /* exclamationmark.bubble.pdf in Resources */,
 				03BA141924FA8FE800BAAE1D /* AerialWindow.xib in Resources */,
 				033B0B7724E9767700622CA7 /* ThanksViewController.xib in Resources */,
@@ -331,6 +359,8 @@
 				0333115224D8369700E4622D /* btn_donate.png in Resources */,
 				033B0B6224E9658D00622CA7 /* MenuModeViewController.xib in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
+				03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */,
+				0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */,
 				033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */,
 				033B0B6924E96CE200622CA7 /* ant.pdf in Resources */,
 				03076A072505EF8E00CDF16C /* kofi1@2x.png in Resources */,
@@ -350,16 +380,21 @@
 			files = (
 				0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */,
 				033B0B6524E967C600622CA7 /* NextViewController.swift in Sources */,
+				0316C21A2577DD6B007BAF70 /* AerialDesktop.m in Sources */,
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
 				031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */,
 				0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */,
 				0333115924D85CCA00E4622D /* String+version.swift in Sources */,
 				03889BFA24FA5EE4007C6B9B /* WindowMode.m in Sources */,
+				036899A925235C5A00136AE5 /* Consts.swift in Sources */,
 				03BA141824FA8FE800BAAE1D /* AerialWindow.m in Sources */,
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
+				0355004E257BD2FC00759D07 /* ModernMenu.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
+				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
 				033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */,
+				0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */,
 				033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */,
 				033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */,
 				033B0B5924E9644D00622CA7 /* WelcomeViewController.swift in Sources */,
@@ -379,6 +414,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		036899962522608200136AE5 /* MenuView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				036899952522608200136AE5 /* en */,
+				036899982522608900136AE5 /* Base */,
+			);
+			name = MenuView.xib;
+			sourceTree = "<group>";
+		};
 		03CE4F5E24CB0CA900494D32 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -522,7 +566,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.1beta1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -548,7 +592,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.1beta1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -568,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial" */ = {
+		03CE4F6524CB0CA900494D32 /* Build configuration list for PBXNativeTarget "Aerial Companion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03CE4F6624CB0CA900494D32 /* Debug */,

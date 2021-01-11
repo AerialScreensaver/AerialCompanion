@@ -69,7 +69,7 @@ class UpdateCheckWindowController:
         // Make sure we don't need to update, or redirect you there
         if UpdaterVersion.needsUpdating() {
             setProgress(to: .warning)
-            progressLabel.stringValue = "A new version of AerialUpdater is required"
+            progressLabel.stringValue = "A new version of Aerial Companion is required"
             actionButton.title = "Show me"
             actionButton.isHidden = false
         } else {

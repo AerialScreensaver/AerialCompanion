@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17700" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17700"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="WelcomeViewController" customModule="Aerial" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="WelcomeViewController" customModule="Aerial_Companion" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -36,7 +36,7 @@
                                     <constraint firstAttribute="width" constant="300" id="ODv-gr-By4"/>
                                     <constraint firstAttribute="height" constant="300" id="fSv-If-eIT"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Updater512" id="Aqt-Wo-nvG"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-512" id="Aqt-Wo-nvG"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V3K-4i-9FC">
                                 <rect key="frame" x="298" y="213" width="384" height="32"/>
@@ -72,6 +72,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="Updater512" width="512" height="512"/>
+        <image name="icon-512" width="512" height="512"/>
     </resources>
 </document>

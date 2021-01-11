@@ -13,7 +13,7 @@ enum IconMode {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
     lazy var firstTimeSetupWindowController = FirstTimeSetupWindowController()
 
@@ -32,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // This is imperative, breaks everything
         ensureNotInstalledForAllUsers()
         
+        removeOldAerialApp()
+        
         if arguments.contains("--silent") {
             debugLog("Background mode")
 
@@ -49,10 +51,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Menu mode, we may fall down here from silent mode too in notify mode,
         // or if we must update
         
-        // Set the icon
-        setIcon(mode: .normal)
         
         createMenu()
+
+        // Set the icon
+        setIcon(mode: .normal)
+
+    }
+    
+    func removeOldAerialApp() {
+        if FileManager.default.fileExists(atPath: "/Applications/Aerial.app") {
+            debugLog("Removing old version of Aerial.app")
+            
+            do {
+                try FileManager().removeItem(at: URL(fileURLWithPath: "/Applications/Aerial.app"))
+            } catch {
+                // ERROR
+                errorLog("Cannot delete old Aerial.app in /Applications directory")
+            }
+        }
     }
     
     func ensureNotInBundle() {
@@ -140,6 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // Change the icon based on status
     func setIcon(mode: IconMode) {
+        
         DispatchQueue.main.async {
             print("setIcon \(mode)")
             switch mode {
@@ -150,9 +168,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             case .notification:
                 self.statusItem.image = NSImage(named: "Status48Attention")
             }
-
-            self.statusItem.image?.size.width = 22
-            self.statusItem.image?.size.height = 22
+            
+            self.statusItem.image?.size.width = 17
+            self.statusItem.image?.size.height = 17
         }
     }
     

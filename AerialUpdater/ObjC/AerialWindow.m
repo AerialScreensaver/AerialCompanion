@@ -5,6 +5,7 @@
 //  Created by Guillaume Louel on 29/08/2020.
 //
 
+#import "Aerial_Companion-Swift.h"
 #import "AerialWindow.h"
 #include <dlfcn.h>
 #import <Cocoa/Cocoa.h>
@@ -15,18 +16,61 @@
 @property (strong) IBOutlet NSView *childView;
 
 @property ScreenSaverView *ssv;
+
+@property void *handle;
 @end
 
 @implementation AerialWindow
 - (void)awakeFromNib {
     // Load Aerial's bundle
-    void *handle = dlopen("/Users/glouel/Aerial.saver/Contents/MacOS/Aerial", RTLD_LAZY);
+    [self loadBundle];
     
     [super awakeFromNib];
     NSLog(@"awoken");
-
-    [self.window setDelegate:self];
+  
+    //[self.window setDelegate:self];
     [self.window.contentView setAutoresizesSubviews:YES];
+}
+
+- (void) loadBundle {
+    if (_handle == nil) {
+        NSString *path = [NSString stringWithFormat: @"%@/Contents/MacOS/Aerial", [Constant aerialPath]];
+        NSLog(@"WOOO %@", path);
+        const char* st = [path UTF8String];
+        _handle = dlopen(st, RTLD_LAZY);
+
+        NSLog(@"Bundle loaded");
+    } else {
+        NSLog(@"Bundle previously loaded");
+    }
+}
+
+- (void)openPanel {
+    [self loadBundle];
+
+    NSLog(@"av : %@", NSClassFromString(@"AerialView"));
+    // We pass true for isPreview when we want AerialView to not setup itself.
+    // This is a bit of a weird workaround that requires at least Aerial 2.2.6 ;)
+    // Aerial checks for isPreview and if its running under Companion to prevent the
+    // window setup, which saves it from instantiating a view (since for a screensaver
+    // you just alloc init the window and that loads the whole thing, which we *don't* want here)
+    _ssv = [[NSClassFromString(@"AerialView") alloc]
+            initWithFrame:
+            CGRectMake(0, 0,
+                       self.window.frame.size.width,
+                       self.window.frame.size.height)
+            isPreview:true];
+    //[_ssv stopAnimation];
+    
+    NSWindow* settings = [_ssv configureSheet];
+    settings.styleMask |= NSWindowStyleMaskClosable;
+    [settings orderFront:nil];
+    
+    //NSClassFromString(@"PanelWindowController");
+    
+    //_pwc = [[NSClassFromString(@"PanelWindowController") alloc] init];
+    //[_pwc showWindow:self];
+    
 }
 
 - (void)windowWillLoad {
@@ -35,7 +79,7 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-
+    
     // Create a new AerialView of the window's inner size
     _ssv = [[NSClassFromString(@"AerialView") alloc]
             initWithFrame:
@@ -43,8 +87,11 @@
                        self.window.frame.size.width,
                        self.window.frame.size.height)
             isPreview:false];
+  
+    [self.window setContentView: _ssv];
     
-    [self.window setContentView:_ssv];
+    
+
     
     //[self.window setLevel:NSFullScreenModeWindowLevel];
     /*
@@ -58,9 +105,10 @@
     //  [self setCollectionBehavior:(NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorStationary | NSWindowCollectionBehaviorIgnoresCycle)];
 }
 
-- (void)windowWillClose:(NSNotification *)notification {
+- (void)stopScreensaver {
     [_ssv stopAnimation];
-    NSLog(@"willclose");
+    dlclose(_handle);
+    NSLog(@"Window closed");
 }
 
 @end
