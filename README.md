@@ -1,6 +1,6 @@
 # Aerial Companion
 
-<img width="400" alt="About Aerial Companion" src="https://user-images.githubusercontent.com/18543749/90840244-7a1a6000-e327-11ea-8e3e-2cddda38cbe4.png"> <img width="300" alt="Aerial Companion in Action!" src="https://user-images.githubusercontent.com/18543749/90840214-65d66300-e327-11ea-937c-6885f1ff1b4c.png">
+<img width="400" alt="About Aerial Companion" src="https://user-images.githubusercontent.com/18543749/101047674-0441a980-3550-11eb-93d2-816aea42e209.jpg"> <img width="300" alt="Aerial Companion in Action!" src="https://user-images.githubusercontent.com/18543749/90840214-65d66300-e327-11ea-937c-6885f1ff1b4c.png">
 
 The official companion app for the [Aerial screen saver](https://github.com/JohnCoates/Aerial/) for macOS. It takes care of install, automatic updates and more.
 
