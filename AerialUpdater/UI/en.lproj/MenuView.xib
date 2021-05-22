@@ -210,7 +210,7 @@
                                     <outlet property="view" destination="q3W-Uo-5Ky" id="UD0-Ev-ihu"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy Settings..." enabled="NO" id="IS2-3c-0wU">
+                            <menuItem title="Copy Settings..." hidden="YES" enabled="NO" id="IS2-3c-0wU">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="readMeFirst:" target="-2" id="yIc-NX-Cnk"/>
