@@ -24,6 +24,9 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
                 errorLog("Could not load nib for AerialDesktop, please report")
             }
             
+            // Must be called before windowDidLoad so the created window has the correct size
+            //aerialDesktopController.window!.setFrameOrigin(NSScreen.getScreenByID(459084583)!.visibleFrame.origin)
+            
             aerialDesktopController.windowDidLoad()
             aerialDesktopController.showWindow(self)
             aerialDesktopController.window!.delegate = self

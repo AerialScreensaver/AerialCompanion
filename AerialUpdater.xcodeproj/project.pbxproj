@@ -63,6 +63,7 @@
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
 		03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1462575360600BF4F45 /* icon-512@2x.png */; };
 		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
+		73309F322685AFEA00B8FAB0 /* NSScreen+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		03F5E1462575360600BF4F45 /* icon-512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512@2x.png"; sourceTree = "<group>"; };
 		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
+		73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Id.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */,
 				035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */,
 				0333115824D85CCA00E4622D /* String+version.swift */,
+				73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			files = (
 				0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */,
 				033B0B6524E967C600622CA7 /* NextViewController.swift in Sources */,
+				73309F322685AFEA00B8FAB0 /* NSScreen+Id.swift in Sources */,
 				0316C21A2577DD6B007BAF70 /* AerialDesktop.m in Sources */,
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
 				031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */,
@@ -558,7 +562,7 @@
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3L54M5L5KK;
+				DEVELOPMENT_TEAM = VN7N8U22B8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -584,7 +588,7 @@
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3L54M5L5KK;
+				DEVELOPMENT_TEAM = VN7N8U22B8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
