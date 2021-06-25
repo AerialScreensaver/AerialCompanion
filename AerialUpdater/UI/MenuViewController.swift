@@ -41,7 +41,9 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBOutlet var menuLaunchInBackground: NSMenuItem!
 
     @IBOutlet var menuDebugMode: NSMenuItem!
-
+    
+    // Experimental
+    @IBOutlet var launchAsWallpaperMenu: NSMenu!
     
     
     // The menu itself
@@ -159,6 +161,16 @@ class MenuViewController: NSViewController, UpdateCallback {
                 self.versionImageView.isHidden = false
                 self.versionInstallNow.isHidden = true
             }
+            
+            for screen in NSScreen.screens {
+                let screenItem = NSMenuItem()
+                screenItem.title = screen.displayName
+                screenItem.action = #selector(self.wallpaperScreenChange)
+                screenItem.target = self
+                screenItem.representedObject = screen.screenId
+
+                self.launchAsWallpaperMenu.addItem(screenItem)
+            }
         }
     }
     
@@ -188,6 +200,12 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     
     // MARK: - Custom UI Actions
+    
+    // Handle the wallpaper screen selector
+    @objc func wallpaperScreenChange(sender: NSMenuItem) {
+        DesktopLauncher.instance.toggleLauncher(screen: NSScreen.getScreenByID(sender.representedObject as! CGDirectDisplayID)!)
+    }
+    
     
     // Installation Button
     @IBAction func versionInstallNowClick(_ sender: Any) {

@@ -15,7 +15,7 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
     var isRunning = false
 
     
-    func toggleLauncher() {
+    func toggleLauncher(screen targetScreen: NSScreen = NSScreen.main!) {
         if !isRunning {
             var topLevelObjects: NSArray? = NSArray()
             if !Bundle.main.loadNibNamed(NSNib.Name("AerialDesktop"),
@@ -25,7 +25,7 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
             }
             
             // Must be called before windowDidLoad so the created window has the correct size
-            //aerialDesktopController.window!.setFrameOrigin(NSScreen.getScreenByID(459084583)!.visibleFrame.origin)
+            aerialDesktopController.window!.setFrameOrigin(targetScreen.visibleFrame.origin)
             
             aerialDesktopController.windowDidLoad()
             aerialDesktopController.showWindow(self)
