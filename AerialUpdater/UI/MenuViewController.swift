@@ -209,7 +209,7 @@ class MenuViewController: NSViewController, UpdateCallback {
         appDelegate?.setIcon(mode: mode)
     }
     
-    func toggleDesktopLauncher(for screenUuid: String) {
+    func toggleDesktopLauncher(for screenUuid: String) -> Bool {
         var isRunning = false
         
         if let desktopLauncher = desktopLauncherInstances[screenUuid] {
@@ -230,6 +230,8 @@ class MenuViewController: NSViewController, UpdateCallback {
         else {
             Preferences.enabledWallpaperScreenUuids = Preferences.enabledWallpaperScreenUuids.filter {$0 != screenUuid}
         }
+        
+        return isRunning
     }
     
     
@@ -238,8 +240,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     // Handle the wallpaper screen selector
     @objc func wallpaperScreenChange(sender: NSMenuItem) {
         if let screen = NSScreen.getScreenByUuid(sender.representedObject as! String) {
-            sender.state = .on
-            self.toggleDesktopLauncher(for: screen.screenUuid)
+            sender.state = self.toggleDesktopLauncher(for: screen.screenUuid) ? .on : .off
         }
         else {
             sender.isEnabled = false
