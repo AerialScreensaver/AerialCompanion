@@ -8,14 +8,16 @@
 import Foundation
 
 class DesktopLauncher : NSObject, NSWindowDelegate {
-    static let instance: DesktopLauncher = DesktopLauncher()
-    
-    
+    let targetScreen: NSScreen
     let aerialDesktopController = AerialDesktop()
     var isRunning = false
+    
+    init(screen: NSScreen = NSScreen.main!) {
+        self.targetScreen = screen
+    }
 
     
-    func toggleLauncher(screen targetScreen: NSScreen = NSScreen.main!) {
+    func toggleLauncher() {
         if !isRunning {
             var topLevelObjects: NSArray? = NSArray()
             if !Bundle.main.loadNibNamed(NSNib.Name("AerialDesktop"),
@@ -25,7 +27,7 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
             }
             
             // Must be called before windowDidLoad so the created window has the correct size
-            aerialDesktopController.window!.setFrameOrigin(targetScreen.visibleFrame.origin)
+            aerialDesktopController.window!.setFrameOrigin(self.targetScreen.visibleFrame.origin)
             
             aerialDesktopController.windowDidLoad()
             aerialDesktopController.showWindow(self)

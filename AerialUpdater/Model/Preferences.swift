@@ -91,6 +91,9 @@ struct Preferences {
     @SimpleStorage(key: "firstTimeSetup", defaultValue: false)
     static var firstTimeSetup: Bool
 
+    // Check frequency
+    @SimpleStorage(key: "enabledWallpaperScreenUuids", defaultValue: [])
+    static var enabledWallpaperScreenUuids: [String]
 }
 
 

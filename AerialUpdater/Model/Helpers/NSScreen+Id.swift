@@ -8,15 +8,17 @@
 // From https://gist.github.com/salexkidd/bcbea2372e92c6e5b04cbd7f48d9b204
 extension NSScreen {
     
-    public var screenId: CGDirectDisplayID {
+    public var screenUuid: String {
         get {
-            return deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID
+            return CFUUIDCreateString(nil, CGDisplayCreateUUIDFromDisplayID(deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! CGDirectDisplayID).takeRetainedValue()) as String
         }
     }
 
 
     public var displayName: String {
         get {
+            let screenId = CGDisplayGetDisplayIDFromUUID(CFUUIDCreateFromString(nil, screenUuid as CFString))
+            
             var name = "Unknown"
             var object : io_object_t
             var serialPortIterator = io_iterator_t()
@@ -45,9 +47,9 @@ extension NSScreen {
         }
     }
 
-    static public func getScreenByID(_ screenId: CGDirectDisplayID) -> NSScreen? {
+    static public func getScreenByUuid(_ screenUuid: String) -> NSScreen? {
         for screen in NSScreen.screens {
-            if screen.screenId == screenId {
+            if screen.screenUuid == screenUuid {
                 return screen
             }
         }
