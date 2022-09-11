@@ -35,8 +35,27 @@ class SaverLauncher : NSObject, NSWindowDelegate {
         aerialWindowController.stopScreensaver()
     }
     
+    func stopScreensaver() {
+        aerialWindowController.stopScreensaver()
+    }
+    
     func openSettings() {
-        debugLog("open hosted settings")
+        debugLog("open hosted settings WN")
         aerialWindowController.openPanel()
+    }
+    
+    func togglePause() {
+        debugLog("toggle pause")
+        aerialWindowController.togglePause()
+    }
+    
+    func nextVideo() {
+        debugLog("next video")
+        aerialWindowController.nextVideo()        
+    }
+    
+    func skipAndHide() {
+        debugLog("skip and hide")
+        aerialWindowController.skipAndHide()
     }
 }

@@ -19,6 +19,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     lazy var menuViewController = MenuViewController()
     
+    lazy var popoverViewController = ModernPopoverViewController()
+
+    let popover = NSPopover()
+
+    
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         debugLog("Version \(Helpers.version) launched on  \(ProcessInfo.processInfo.operatingSystemVersionString)")
@@ -52,11 +57,61 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // or if we must update
         
         
-        createMenu()
+        //createMenu()
 
         // Set the icon
         setIcon(mode: .normal)
 
+        // Load popover
+        var topLevelObjects: NSArray? = NSArray()
+        Bundle.main.loadNibNamed(NSNib.Name("ModernPopoverViewController"),
+                            owner: popoverViewController,
+                            topLevelObjects: &topLevelObjects)
+        popoverViewController.setDelegate(self)
+        popoverViewController.viewDidLoad()
+
+        // Make it a real popover
+        popover.contentViewController = popoverViewController
+        popover.behavior = .transient
+        
+        // Action button
+        if let button = statusItem.button {
+            button.action = #selector(togglePopover(_:))
+        }
+        
+        DistributedNotificationCenter.default.addObserver(self,
+            selector: #selector(self.test2(_:)),
+            name: Notification.Name("com.glouel.aerial.nextvideo"), object: nil)
+    }
+    
+    
+    @objc func test2(_ aNotification: Notification) {
+        debugLog("############ test2")
+        print("receiveed")
+        print(aNotification.debugDescription)
+    }
+    
+    
+    // Popover handling
+    @objc func togglePopover(_ sender: Any?) {
+        if popover.isShown {
+            closePopover(sender: sender)
+        } else {
+            showPopover(sender: sender)
+        }
+    }
+
+    func showPopover(sender: Any?) {
+        if let button = statusItem.button {
+            (popover.contentViewController! as! ModernPopoverViewController).update()
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            popover.contentViewController?.view.window?.makeKey()
+            NSApp.activate(ignoringOtherApps: true)
+        }
+    }
+
+    func closePopover(sender: Any?) {
+        popover.performClose(sender)
     }
     
     func removeOldAerialApp() {

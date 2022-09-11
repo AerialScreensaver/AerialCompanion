@@ -282,7 +282,7 @@ class MenuViewController: NSViewController, UpdateCallback {
                             topLevelObjects: &topLevelObjects) {
             errorLog("Could not load nib for InfoWindow, please report")
         }
-        updateCheckWindowController.setCallback(self)
+        //updateCheckWindowController.setCallback(self)
         updateCheckWindowController.windowDidLoad()
         updateCheckWindowController.showWindow(self)
         updateCheckWindowController.window!.makeKeyAndOrderFront(nil)
@@ -365,6 +365,11 @@ class MenuViewController: NSViewController, UpdateCallback {
 
     @IBAction func launchAsWallpaper(_ sender: Any) {
         DesktopLauncher.instance.toggleLauncher()
+    }
+    
+    
+    @IBAction func testPause(_ sender: Any) {
+        DesktopLauncher.instance.togglePause()
     }
     
     // Bye

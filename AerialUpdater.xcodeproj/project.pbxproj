@@ -11,10 +11,14 @@
 		0316C21A2577DD6B007BAF70 /* AerialDesktop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0316C2182577DD6B007BAF70 /* AerialDesktop.m */; };
 		0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0316C2192577DD6B007BAF70 /* AerialDesktop.xib */; };
 		0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */; };
+		0319375527B06FB40089A063 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319375327B06FB40089A063 /* SettingsWindowController.swift */; };
+		0319375627B06FB40089A063 /* SettingsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0319375427B06FB40089A063 /* SettingsWindowController.xib */; };
 		0319460624CDBD2600F37B35 /* BackgroundCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319460524CDBD2600F37B35 /* BackgroundCheck.swift */; };
 		031954C0256409EC0058467C /* SaverLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031954BF256409EC0058467C /* SaverLauncher.swift */; };
 		031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A3A6524D835B10011E738 /* InfoWindowController.swift */; };
 		031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031A3A6624D835B10011E738 /* InfoWindowController.xib */; };
+		031D3E5F27B0110200FC4115 /* ModernPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */; };
+		031D3E6027B0110200FC4115 /* ModernPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */; };
 		0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBE824E005270041759E /* checkmark.circle.pdf */; };
 		0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */; };
 		0333115224D8369700E4622D /* btn_donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0333115124D8369700E4622D /* btn_donate.png */; };
@@ -41,7 +45,6 @@
 		033B0B7324E9749400622CA7 /* exclamationmark.bubble.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */; };
 		033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0B7424E9767700622CA7 /* ThanksViewController.swift */; };
 		033B0B7724E9767700622CA7 /* ThanksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 033B0B7524E9767700622CA7 /* ThanksViewController.xib */; };
-		0355004E257BD2FC00759D07 /* ModernMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0355004D257BD2FC00759D07 /* ModernMenu.swift */; };
 		03592AB224CC765500C1AE52 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB124CC765500C1AE52 /* Preferences.swift */; };
 		03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB424CC809F00C1AE52 /* LocalVersion.swift */; };
 		03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03592AB724CC80FD00C1AE52 /* Helpers.swift */; };
@@ -63,7 +66,22 @@
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
 		03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1462575360600BF4F45 /* icon-512@2x.png */; };
 		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
+		F054CD84280C733E004C6404 /* Modern.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F054CD83280C733E004C6404 /* Modern.storyboard */; };
+		F0A3E09928845B8D005E8D8D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3E09828845B8D005E8D8D /* main.swift */; };
+		F0A3E0A028845C1D005E8D8D /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A3E09F28845C1D005E8D8D /* MusicKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F0A3E09428845B8D005E8D8D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		03076A062505EF8E00CDF16C /* kofi1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kofi1@2x.png"; sourceTree = "<group>"; };
@@ -71,10 +89,15 @@
 		0316C2182577DD6B007BAF70 /* AerialDesktop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AerialDesktop.m; sourceTree = "<group>"; };
 		0316C2192577DD6B007BAF70 /* AerialDesktop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AerialDesktop.xib; sourceTree = "<group>"; };
 		0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopLauncher.swift; sourceTree = "<group>"; };
+		0319375327B06FB40089A063 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		0319375427B06FB40089A063 /* SettingsWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsWindowController.xib; sourceTree = "<group>"; };
 		0319460524CDBD2600F37B35 /* BackgroundCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCheck.swift; sourceTree = "<group>"; };
 		031954BF256409EC0058467C /* SaverLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaverLauncher.swift; sourceTree = "<group>"; };
 		031A3A6524D835B10011E738 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		031A3A6624D835B10011E738 /* InfoWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindowController.xib; sourceTree = "<group>"; };
+		031D3E5C27B0006A00FC4115 /* AerialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AerialView.h; sourceTree = "<group>"; };
+		031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernPopoverViewController.swift; sourceTree = "<group>"; };
+		031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModernPopoverViewController.xib; sourceTree = "<group>"; };
 		0323BBE824E005270041759E /* checkmark.circle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = checkmark.circle.pdf; sourceTree = "<group>"; };
 		0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.triangle.pdf; sourceTree = "<group>"; };
 		0333115124D8369700E4622D /* btn_donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate.png; sourceTree = "<group>"; };
@@ -101,7 +124,6 @@
 		033B0B7024E9749400622CA7 /* exclamationmark.bubble.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.bubble.pdf; sourceTree = "<group>"; };
 		033B0B7424E9767700622CA7 /* ThanksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksViewController.swift; sourceTree = "<group>"; };
 		033B0B7524E9767700622CA7 /* ThanksViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThanksViewController.xib; sourceTree = "<group>"; };
-		0355004D257BD2FC00759D07 /* ModernMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernMenu.swift; sourceTree = "<group>"; };
 		03592AB124CC765500C1AE52 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		03592AB424CC809F00C1AE52 /* LocalVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVersion.swift; sourceTree = "<group>"; };
 		03592AB724CC80FD00C1AE52 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -130,6 +152,11 @@
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		03F5E1462575360600BF4F45 /* icon-512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512@2x.png"; sourceTree = "<group>"; };
 		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
+		F054CD83280C733E004C6404 /* Modern.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Modern.storyboard; sourceTree = "<group>"; };
+		F0A3E09628845B8D005E8D8D /* AerialMusicHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AerialMusicHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0A3E09828845B8D005E8D8D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F0A3E09D28845BD4005E8D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0A3E09F28845C1D005E8D8D /* MusicKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MusicKit.framework; path = System/Library/Frameworks/MusicKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +164,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0A3E09328845B8D005E8D8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0A3E0A028845C1D005E8D8D /* MusicKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,14 +186,18 @@
 				0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */,
 				0333115124D8369700E4622D /* btn_donate.png */,
 				036899962522608200136AE5 /* MenuView.xib */,
-				0355004D257BD2FC00759D07 /* ModernMenu.swift */,
 				0333115424D8448E00E4622D /* MenuViewController.swift */,
 				031A3A6624D835B10011E738 /* InfoWindowController.xib */,
+				0319375327B06FB40089A063 /* SettingsWindowController.swift */,
+				0319375427B06FB40089A063 /* SettingsWindowController.xib */,
 				031A3A6524D835B10011E738 /* InfoWindowController.swift */,
 				0333115D24D8796F00E4622D /* UpdateCheckWindowController.xib */,
 				0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */,
 				03C491B524FBBDA00041D71C /* ExperimentalReadmeWindowController.xib */,
 				03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */,
+				031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */,
+				031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */,
+				F054CD83280C733E004C6404 /* Modern.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -247,6 +286,7 @@
 				0316C2182577DD6B007BAF70 /* AerialDesktop.m */,
 				0316C2192577DD6B007BAF70 /* AerialDesktop.xib */,
 				03889BF724FA5EE4007C6B9B /* Aerial-Bridging-Header.h */,
+				031D3E5C27B0006A00FC4115 /* AerialView.h */,
 			);
 			path = ObjC;
 			sourceTree = "<group>";
@@ -255,7 +295,9 @@
 			isa = PBXGroup;
 			children = (
 				03CE4F5724CB0CA700494D32 /* AerialUpdater */,
+				F0A3E09728845B8D005E8D8D /* AerialMusicHelper */,
 				03CE4F5624CB0CA700494D32 /* Products */,
+				F0A3E09E28845C1D005E8D8D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				03CE4F5524CB0CA700494D32 /* Aerial Companion.app */,
+				F0A3E09628845B8D005E8D8D /* AerialMusicHelper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,6 +325,23 @@
 				03592AB624CC80A600C1AE52 /* Model */,
 			);
 			path = AerialUpdater;
+			sourceTree = "<group>";
+		};
+		F0A3E09728845B8D005E8D8D /* AerialMusicHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F0A3E09828845B8D005E8D8D /* main.swift */,
+				F0A3E09D28845BD4005E8D8D /* Info.plist */,
+			);
+			path = AerialMusicHelper;
+			sourceTree = "<group>";
+		};
+		F0A3E09E28845C1D005E8D8D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0A3E09F28845C1D005E8D8D /* MusicKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,18 +364,38 @@
 			productReference = 03CE4F5524CB0CA700494D32 /* Aerial Companion.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F0A3E09528845B8D005E8D8D /* AerialMusicHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0A3E09A28845B8D005E8D8D /* Build configuration list for PBXNativeTarget "AerialMusicHelper" */;
+			buildPhases = (
+				F0A3E09228845B8D005E8D8D /* Sources */,
+				F0A3E09328845B8D005E8D8D /* Frameworks */,
+				F0A3E09428845B8D005E8D8D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AerialMusicHelper;
+			productName = AerialMusicHelper;
+			productReference = F0A3E09628845B8D005E8D8D /* AerialMusicHelper */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		03CE4F4D24CB0CA700494D32 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					03CE4F5424CB0CA700494D32 = {
 						CreatedOnToolsVersion = 12.0;
 						LastSwiftMigration = 1200;
+					};
+					F0A3E09528845B8D005E8D8D = {
+						CreatedOnToolsVersion = 14.0;
 					};
 				};
 			};
@@ -333,6 +413,7 @@
 			projectRoot = "";
 			targets = (
 				03CE4F5424CB0CA700494D32 /* Aerial Companion */,
+				F0A3E09528845B8D005E8D8D /* AerialMusicHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -346,6 +427,7 @@
 				033B0B7224E9749400622CA7 /* moon.zzz.pdf in Resources */,
 				03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */,
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
+				F054CD84280C733E004C6404 /* Modern.storyboard in Resources */,
 				033B0B5E24E9655E00622CA7 /* ReleaseViewController.xib in Resources */,
 				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
 				0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */,
@@ -360,6 +442,7 @@
 				033B0B6224E9658D00622CA7 /* MenuModeViewController.xib in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
 				03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */,
+				0319375627B06FB40089A063 /* SettingsWindowController.xib in Resources */,
 				0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */,
 				033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */,
 				033B0B6924E96CE200622CA7 /* ant.pdf in Resources */,
@@ -367,6 +450,7 @@
 				033B0B6D24E96D4C00622CA7 /* cloud.sun.rain.pdf in Resources */,
 				0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */,
 				033B0B6C24E96D4C00622CA7 /* sun.max.pdf in Resources */,
+				031D3E6027B0110200FC4115 /* ModernPopoverViewController.xib in Resources */,
 				03C491B724FBBDA00041D71C /* ExperimentalReadmeWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,14 +473,15 @@
 				036899A925235C5A00136AE5 /* Consts.swift in Sources */,
 				03BA141824FA8FE800BAAE1D /* AerialWindow.m in Sources */,
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
-				0355004E257BD2FC00759D07 /* ModernMenu.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
 				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
 				033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */,
+				031D3E5F27B0110200FC4115 /* ModernPopoverViewController.swift in Sources */,
 				0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */,
 				033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */,
 				033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */,
+				0319375527B06FB40089A063 /* SettingsWindowController.swift in Sources */,
 				033B0B5924E9644D00622CA7 /* WelcomeViewController.swift in Sources */,
 				033B0B5D24E9655E00622CA7 /* ReleaseViewController.swift in Sources */,
 				0333115624D8448E00E4622D /* MenuViewController.swift in Sources */,
@@ -408,6 +493,14 @@
 				03ADA8EC24E034A40093D0A2 /* LaunchAgent.swift in Sources */,
 				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
 				035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0A3E09228845B8D005E8D8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0A3E09928845B8D005E8D8D /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +649,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3L54M5L5KK;
@@ -566,7 +660,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.4.0b2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -582,6 +676,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3L54M5L5KK;
@@ -592,10 +687,45 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.4.0b2;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F0A3E09B28845B8D005E8D8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
+				INFOPLIST_FILE = "$(SRCROOT)/AerialMusicHelper/AerialMusicHelper.plist";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialMusicHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F0A3E09C28845B8D005E8D8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
+				INFOPLIST_FILE = "$(SRCROOT)/AerialMusicHelper/AerialMusicHelper.plist";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialMusicHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -617,6 +747,15 @@
 			buildConfigurations = (
 				03CE4F6624CB0CA900494D32 /* Debug */,
 				03CE4F6724CB0CA900494D32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0A3E09A28845B8D005E8D8D /* Build configuration list for PBXNativeTarget "AerialMusicHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0A3E09B28845B8D005E8D8D /* Debug */,
+				F0A3E09C28845B8D005E8D8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

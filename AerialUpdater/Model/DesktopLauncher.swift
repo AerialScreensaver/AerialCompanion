@@ -29,7 +29,7 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
             aerialDesktopController.window!.delegate = self
             aerialDesktopController.window!.toggleFullScreen(nil)
             aerialDesktopController.window!.makeKeyAndOrderFront(nil)
-            
+            aerialDesktopController.window!.level = NSWindow.Level.init(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1) 
             NSApp.activate(ignoringOtherApps: true)
             
             isRunning = true
@@ -45,7 +45,22 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
     }
     
     func openSettings() {
-        debugLog("open hosted settings")
+        debugLog("open hosted settings DT")
         aerialDesktopController.openPanel()
+    }
+    
+    func togglePause() {
+        debugLog("toggle pause")
+        aerialDesktopController.togglePause()
+    }
+    
+    func nextVideo() {
+        debugLog("next video")
+        aerialDesktopController.nextVideo()
+    }
+    
+    func skipAndHide() {
+        debugLog("skip and hide")
+        aerialDesktopController.skipAndHide()
     }
 }

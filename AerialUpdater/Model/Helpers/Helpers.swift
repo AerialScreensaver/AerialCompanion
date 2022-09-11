@@ -57,7 +57,7 @@ struct Helpers {
             let fileManager = FileManager.default
             do {
                 try fileManager.createDirectory(atPath: appSupportDirectory,
-                                                withIntermediateDirectories: false, attributes: nil)
+                                                withIntermediateDirectories: true, attributes: nil)
                 return appSupportDirectory
             } catch let error {
                 errorLog("FATAL : Couldn't create app support directory in User directory: \(error)")

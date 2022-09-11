@@ -9,13 +9,13 @@
 #import "AerialWindow.h"
 #include <dlfcn.h>
 #import <Cocoa/Cocoa.h>
-#import <ScreenSaver/ScreenSaver.h>
+#import "AerialView.h"
 
 @interface AerialWindow ()
 @property (strong) IBOutlet NSView *mainView;
 @property (strong) IBOutlet NSView *childView;
 
-@property ScreenSaverView *ssv;
+@property AerialView *ssv;
 
 @property void *handle;
 @end
@@ -63,9 +63,11 @@
     //[_ssv stopAnimation];
     
     NSWindow* settings = [_ssv configureSheet];
+    [settings setTitle: @"Settings for wallpaper and full screen mode"];
+
     settings.styleMask |= NSWindowStyleMaskClosable;
-    [settings orderFront:nil];
-    
+    [settings makeKeyAndOrderFront:nil];
+
     //NSClassFromString(@"PanelWindowController");
     
     //_pwc = [[NSClassFromString(@"PanelWindowController") alloc] init];
@@ -107,8 +109,22 @@
 
 - (void)stopScreensaver {
     [_ssv stopAnimation];
-    dlclose(_handle);
-    NSLog(@"Window closed");
+    _ssv = nil;
+    
+    int i = dlclose(_handle);
+    NSLog(@"Window closed %d",i);
+}
+
+- (void)togglePause {
+    [_ssv togglePause];
+}
+
+- (void)nextVideo {
+    [_ssv nextVideo];
+}
+
+- (void)skipAndHide {
+    [_ssv skipAndHide];
 }
 
 @end
