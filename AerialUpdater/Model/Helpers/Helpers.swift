@@ -82,6 +82,7 @@ struct Helpers {
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)
         task.waitUntilExit()
+        
         print(output)
         return output
     }

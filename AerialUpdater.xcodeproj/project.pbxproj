@@ -66,7 +66,10 @@
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
 		03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1462575360600BF4F45 /* icon-512@2x.png */; };
 		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
-		F054CD84280C733E004C6404 /* Modern.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F054CD83280C733E004C6404 /* Modern.storyboard */; };
+		F05C63B228F1D9D50068B545 /* CompanionPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */; };
+		F05C63B328F1D9D50068B545 /* CompanionPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */; };
+		F05C63B528F21A390068B545 /* menubar.dock.rectangle.svg in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */; };
+		F05C63B728F326300068B545 /* SystemPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B628F326300068B545 /* SystemPrefs.swift */; };
 		F0A3E09928845B8D005E8D8D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3E09828845B8D005E8D8D /* main.swift */; };
 		F0A3E0A028845C1D005E8D8D /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A3E09F28845C1D005E8D8D /* MusicKit.framework */; };
 /* End PBXBuildFile section */
@@ -152,7 +155,10 @@
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		03F5E1462575360600BF4F45 /* icon-512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512@2x.png"; sourceTree = "<group>"; };
 		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
-		F054CD83280C733E004C6404 /* Modern.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Modern.storyboard; sourceTree = "<group>"; };
+		F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionPopoverViewController.swift; sourceTree = "<group>"; };
+		F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanionPopoverViewController.xib; sourceTree = "<group>"; };
+		F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menubar.dock.rectangle.svg; sourceTree = "<group>"; };
+		F05C63B628F326300068B545 /* SystemPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPrefs.swift; sourceTree = "<group>"; };
 		F0A3E09628845B8D005E8D8D /* AerialMusicHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AerialMusicHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0A3E09828845B8D005E8D8D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F0A3E09D28845BD4005E8D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -197,7 +203,8 @@
 				03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */,
 				031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */,
 				031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */,
-				F054CD83280C733E004C6404 /* Modern.storyboard */,
+				F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */,
+				F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -224,6 +231,7 @@
 		033B0B6724E96CD100622CA7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */,
 				03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */,
 				03F5E1462575360600BF4F45 /* icon-512@2x.png */,
 				033B0B6B24E96D4C00622CA7 /* cloud.sun.rain.pdf */,
@@ -250,6 +258,7 @@
 				03ADA8EB24E034A40093D0A2 /* LaunchAgent.swift */,
 				031954BF256409EC0058467C /* SaverLauncher.swift */,
 				0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */,
+				F05C63B628F326300068B545 /* SystemPrefs.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -427,7 +436,6 @@
 				033B0B7224E9749400622CA7 /* moon.zzz.pdf in Resources */,
 				03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */,
 				03CE4F5D24CB0CA900494D32 /* Assets.xcassets in Resources */,
-				F054CD84280C733E004C6404 /* Modern.storyboard in Resources */,
 				033B0B5E24E9655E00622CA7 /* ReleaseViewController.xib in Resources */,
 				031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */,
 				0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */,
@@ -442,7 +450,9 @@
 				033B0B6224E9658D00622CA7 /* MenuModeViewController.xib in Resources */,
 				03CE4F6024CB0CA900494D32 /* Main.storyboard in Resources */,
 				03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */,
+				F05C63B328F1D9D50068B545 /* CompanionPopoverViewController.xib in Resources */,
 				0319375627B06FB40089A063 /* SettingsWindowController.xib in Resources */,
+				F05C63B528F21A390068B545 /* menubar.dock.rectangle.svg in Resources */,
 				0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */,
 				033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */,
 				033B0B6924E96CE200622CA7 /* ant.pdf in Resources */,
@@ -491,8 +501,10 @@
 				03C491B624FBBDA00041D71C /* ExperimentalReadmeWindowController.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
 				03ADA8EC24E034A40093D0A2 /* LaunchAgent.swift in Sources */,
+				F05C63B228F1D9D50068B545 /* CompanionPopoverViewController.swift in Sources */,
 				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
 				035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */,
+				F05C63B728F326300068B545 /* SystemPrefs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +672,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.4.0b2;
+				MARKETING_VERSION = 1.5.0b1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -687,7 +699,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.4.0b2;
+				MARKETING_VERSION = 1.5.0b1;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";

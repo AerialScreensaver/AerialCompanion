@@ -19,7 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     lazy var menuViewController = MenuViewController()
     
-    lazy var popoverViewController = ModernPopoverViewController()
+    //lazy var popoverViewController = ModernPopoverViewController()
+    lazy var popoverViewController = CompanionPopoverViewController()
 
     let popover = NSPopover()
 
@@ -64,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Load popover
         var topLevelObjects: NSArray? = NSArray()
-        Bundle.main.loadNibNamed(NSNib.Name("ModernPopoverViewController"),
+        Bundle.main.loadNibNamed(NSNib.Name("CompanionPopoverViewController"),
                             owner: popoverViewController,
                             topLevelObjects: &topLevelObjects)
         popoverViewController.setDelegate(self)
@@ -103,7 +104,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func showPopover(sender: Any?) {
         if let button = statusItem.button {
-            (popover.contentViewController! as! ModernPopoverViewController).update()
+            (popover.contentViewController! as! CompanionPopoverViewController).update()
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             popover.contentViewController?.view.window?.makeKey()
             NSApp.activate(ignoringOtherApps: true)
