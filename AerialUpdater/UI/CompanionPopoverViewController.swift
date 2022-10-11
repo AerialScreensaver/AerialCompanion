@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import IOKit.ps
 
 class CompanionPopoverViewController: NSViewController, UpdateCallback {
     lazy var infoWindowController = InfoWindowController()
@@ -174,12 +175,13 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
             _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [
             "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
         } else {
-            _ = Helpers.shell(launchPath: "/usr/bin/osascript", arguments: [
-            "-e", "tell application \"System Preferences\"",
-            //"-e","set the current pane to pane id \"com.apple.preference.desktopscreeneffect\"",
-            //"-e","reveal anchor \"ScreenSaverPref\" of pane id \"com.apple.preference.desktopscreeneffect\"",
-            "-e","activate",
-            "-e","end tell"])
+            let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
+            let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
+            if(sources.count > 0){
+                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Battery.prefpane"))
+            } else {
+                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaverPref.prefpane"))
+            }
         }
         
         // eh...
