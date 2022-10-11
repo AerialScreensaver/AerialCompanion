@@ -171,10 +171,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBAction func openEnergySettings(_ sender: Any) {
         if #available(macOS 13, *) {
-            _ = Helpers.shell(launchPath: "/usr/bin/osascript", arguments: [
-            "-e", "tell application \"System Settings\"",
-            "-e","activate",
-            "-e","end tell"])
+            _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [
+            "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
         } else {
             _ = Helpers.shell(launchPath: "/usr/bin/osascript", arguments: [
             "-e", "tell application \"System Preferences\"",
