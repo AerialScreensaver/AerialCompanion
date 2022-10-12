@@ -203,8 +203,8 @@
 				03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */,
 				031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */,
 				031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */,
-				F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */,
 				F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */,
+				F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";

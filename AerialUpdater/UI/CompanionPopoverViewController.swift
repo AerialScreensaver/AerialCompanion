@@ -227,14 +227,17 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     // Main bar action
     @IBAction func startScreenSaverClick(_ sender: Any) {
+        _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: ["-a","ScreenSaverEngine"])
+        
         // Seriously, **this** is a private API...
-        if let libHandle = dlopen("/System/Library/PrivateFrameworks/login.framework/Versions/Current/login", RTLD_LAZY) {
+        
+        /*if let libHandle = dlopen("/System/Library/PrivateFrameworks/login.framework/Versions/Current/login", RTLD_LAZY) {
             let sym = dlsym(libHandle, "SACScreenSaverStartNow")
             typealias myFunction = @convention(c) () -> Void
             let SACLockScreenImmediate = unsafeBitCast(sym, to: myFunction.self)
             SACLockScreenImmediate()
             dlclose(libHandle)
-        }
+        }*/
     }
     
     @IBAction func startWallpaperClick(_ sender: Any) {
