@@ -130,7 +130,12 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     func setSleepTimeLabel() {
-        sleepTimeButton.title = "\(SystemPrefs.getDisplaySleep() ?? 0) minutes"
+        var sleepTime = SystemPrefs.getDisplaySleep() ?? 0
+        if(sleepTime != 0){
+            sleepTimeButton.title = "(SystemPrefs.getDisplaySleep() ?? 0) minutes"
+        } else {
+            sleepTimeButton.title = "Never (Disabled)"
+        }
     }
     
     func validateSleepSettings() {
@@ -172,16 +177,17 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBAction func openEnergySettings(_ sender: Any) {
         if #available(macOS 13, *) {
-            _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [
-            "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
+           _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [                  "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
+        } else if #available(macOS 11, *)  {
+           let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
+           let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
+           if(sources.count > 0){
+               NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Battery.prefpane"))
+           } else {
+               NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
+           }
         } else {
-            let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
-            let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
-            if(sources.count > 0){
-                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Battery.prefpane"))
-            } else {
-                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaverPref.prefpane"))
-            }
+           NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
         }
         
         // eh...
