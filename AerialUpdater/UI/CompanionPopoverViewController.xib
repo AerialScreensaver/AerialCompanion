@@ -15,6 +15,7 @@
                 <outlet property="playbackBarBox" destination="sPO-cI-OsB" id="wav-MN-erZ"/>
                 <outlet property="sleepTimeButton" destination="NqC-jX-SSD" id="WZ7-K7-Uaa"/>
                 <outlet property="updateBarBox" destination="D7N-Kl-WsU" id="c1Y-nc-abw"/>
+                <outlet property="updateButton" destination="e8E-71-xHS" id="szX-VI-mWY"/>
                 <outlet property="updateLabel" destination="he5-wE-Bg5" id="XzS-po-cmd"/>
                 <outlet property="versionLabel" destination="06K-xe-End" id="b2T-ln-Peg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -498,10 +499,10 @@
         <image name="stop.circle" catalog="system" width="15" height="15"/>
         <image name="xmark.circle" catalog="system" width="15" height="15"/>
         <namedColor name="hero color">
-            <color red="0.10376247458061351" green="0.60864929942484813" blue="0.8099428157216495" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.10400000214576721" green="0.60900002717971802" blue="0.81000000238418579" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="orange color">
-            <color red="0.92183472938144329" green="0.46494501461294419" blue="0.21076408723433196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.92199999094009399" green="0.46500000357627869" blue="0.210999995470047" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

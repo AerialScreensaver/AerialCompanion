@@ -32,6 +32,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBOutlet weak var warningDisabledBox: NSBox!
     
+    @IBOutlet weak var updateButton: NSButton!
 
     @IBOutlet weak var updateLabel: NSTextField!
     
@@ -130,9 +131,10 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     func setSleepTimeLabel() {
-        var sleepTime = SystemPrefs.getDisplaySleep() ?? 0
+        let sleepTime = SystemPrefs.getDisplaySleep() ?? 0
+        
         if(sleepTime != 0){
-            sleepTimeButton.title = "(SystemPrefs.getDisplaySleep() ?? 0) minutes"
+            sleepTimeButton.title = "\(sleepTime) minutes"
         } else {
             sleepTimeButton.title = "Never (Disabled)"
         }
@@ -300,7 +302,21 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     // Update bar
      
     @IBAction func updateNowClick(_ sender: Any) {
+        if UpdaterVersion.needsUpdating() {
+            let workspace = NSWorkspace.shared
+            let url = URL(string: "https://github.com/glouel/AerialCompanion/releases")!
+            workspace.open(url)
+            return
+        }
+        
+        updateLabel.stringValue = "Hold on..."
+        updateButton.isEnabled = false
+        
+        // Launch the update
+        Update.instance.perform(self)
     }
+    
+    
     // Bottom bar action
     
     @IBAction func openInfoClick(_ sender: Any) {
