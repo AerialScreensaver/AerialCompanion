@@ -5,3 +5,4 @@
 #import "WindowMode.h"
 #import "AerialWindow.h"
 #import "AerialDesktop.h"
+#import "AerialView.h"

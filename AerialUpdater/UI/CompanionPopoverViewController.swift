@@ -227,6 +227,11 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         validateSleepSettings()
     }
     
+    public func updatePlaybackMode(mode: PlaybackMode) {
+        currentMode = mode
+        update()
+    }
+
     // Main bar action
     @IBAction func startScreenSaverClick(_ sender: Any) {
         _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: ["-a","ScreenSaverEngine"])
@@ -251,6 +256,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBAction func startFullscreenClick(_ sender: Any) {
         currentMode = .monitor
+        SaverLauncher.instance.setController(self)
         SaverLauncher.instance.windowMode()
         update()
         appDelegate?.closePopover(sender: nil)

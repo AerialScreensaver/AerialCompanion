@@ -12,6 +12,7 @@ class SaverLauncher : NSObject, NSWindowDelegate {
     static let instance: SaverLauncher = SaverLauncher()
     
     let aerialWindowController = AerialWindow()
+    var uiController: CompanionPopoverViewController?
     
     func windowMode() {
         var topLevelObjects: NSArray? = NSArray()
@@ -30,9 +31,13 @@ class SaverLauncher : NSObject, NSWindowDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
     
+    func setController(_ controller: CompanionPopoverViewController) {
+        uiController = controller
+    }
     func windowWillClose(_ notification: Notification) {
         debugLog("windowWillClose")
         aerialWindowController.stopScreensaver()
+        uiController?.updatePlaybackMode(mode: .none)
     }
     
     func stopScreensaver() {

@@ -106,6 +106,10 @@
     
     //  [self setCollectionBehavior:(NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorStationary | NSWindowCollectionBehaviorIgnoresCycle)];
 }
+/*
+- (void)windowWillClose:(NSNotification *)notification {
+    [self stopScreensaver];
+}*/
 
 - (void)stopScreensaver {
     [_ssv stopAnimation];
@@ -126,5 +130,6 @@
 - (void)skipAndHide {
     [_ssv skipAndHide];
 }
+
 
 @end
