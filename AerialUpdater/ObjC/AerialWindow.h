@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AerialWindow : NSWindowController //<NSWindowDelegate>
 - (void)awakeFromNib;
 - (void)stopScreensaver;
-- (void)openPanel;
+- (NSWindow*)openPanel;
 - (void)togglePause;
 - (void)nextVideo;
 - (void)skipAndHide;

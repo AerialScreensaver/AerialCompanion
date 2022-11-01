@@ -152,6 +152,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     @IBAction func activationTimeChange(_ sender: NSPopUpButton) {
+        print("test")
         switch(sender.indexOfSelectedItem) {
         case 0:
             SystemPrefs.setSaverActivationTime(time: 1)
@@ -177,21 +178,26 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     
-    @IBAction func openEnergySettings(_ sender: Any) {
+    @IBAction func openEnergySettings( sender: Any) {
         if #available(macOS 13, *) {
-           _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [                  "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
+            _ = Helpers.shell(launchPath: "/usr/bin/open", arguments: [
+            "x-apple.systempreferences:com.apple.Lock-Screen-Settings.extension"])
         } else if #available(macOS 11, *)  {
-           let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
-           let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
-           if(sources.count > 0){
-               NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Battery.prefpane"))
-           } else {
-               NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
-           }
+            let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
+            let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as Array
+            if(sources.count > 0){
+                NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Battery.prefpane"))
+            } else {
+                if #available(macOS 12, *) {
+                    NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaverPref.prefpane"))
+                } else {
+                    NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
+                }
+            }
         } else {
-           NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
+            NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/EnergySaver.prefpane"))
         }
-        
+
         // eh...
         validateSleepSettings()
     }
@@ -231,6 +237,20 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         currentMode = mode
         update()
     }
+    
+    public func shouldRefreshPlaybackMode() {
+        switch currentMode {
+        case .none:
+            return
+        case .desktop:
+            DesktopLauncher.instance.toggleLauncher()
+            //
+            DesktopLauncher.instance.toggleLauncher()
+        case .monitor:
+            SaverLauncher.instance.stopScreensaver()
+            SaverLauncher.instance.windowMode()
+        }
+    }
 
     // Main bar action
     @IBAction func startScreenSaverClick(_ sender: Any) {
@@ -263,6 +283,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     @IBAction func openSaverSettings(_ sender: Any) {
+        SaverLauncher.instance.setController(self)
         SaverLauncher.instance.openSettings()
         update()
         appDelegate?.closePopover(sender: nil)

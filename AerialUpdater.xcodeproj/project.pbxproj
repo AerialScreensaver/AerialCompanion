@@ -66,6 +66,7 @@
 		03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */; };
 		03F5E1472575360600BF4F45 /* icon-512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1462575360600BF4F45 /* icon-512@2x.png */; };
 		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
+		F003C15429116AE1003FCB17 /* HostedSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003C15329116AE1003FCB17 /* HostedSettingsWindowController.swift */; };
 		F05C63B228F1D9D50068B545 /* CompanionPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */; };
 		F05C63B328F1D9D50068B545 /* CompanionPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */; };
 		F05C63B528F21A390068B545 /* menubar.dock.rectangle.svg in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */; };
@@ -155,6 +156,7 @@
 		03CE4F7F24CB4CFB00494D32 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		03F5E1462575360600BF4F45 /* icon-512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512@2x.png"; sourceTree = "<group>"; };
 		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
+		F003C15329116AE1003FCB17 /* HostedSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedSettingsWindowController.swift; sourceTree = "<group>"; };
 		F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionPopoverViewController.swift; sourceTree = "<group>"; };
 		F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanionPopoverViewController.xib; sourceTree = "<group>"; };
 		F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menubar.dock.rectangle.svg; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				031954BF256409EC0058467C /* SaverLauncher.swift */,
 				0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */,
 				F05C63B628F326300068B545 /* SystemPrefs.swift */,
+				F003C15329116AE1003FCB17 /* HostedSettingsWindowController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				036899A925235C5A00136AE5 /* Consts.swift in Sources */,
 				03BA141824FA8FE800BAAE1D /* AerialWindow.m in Sources */,
 				03592AB524CC809F00C1AE52 /* LocalVersion.swift in Sources */,
+				F003C15429116AE1003FCB17 /* HostedSettingsWindowController.swift in Sources */,
 				03592ABE24CC86E900C1AE52 /* CachedManifest.swift in Sources */,
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
 				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
@@ -672,7 +676,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b2;
+				MARKETING_VERSION = 1.5.0b3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -699,7 +703,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b2;
+				MARKETING_VERSION = 1.5.0b3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
