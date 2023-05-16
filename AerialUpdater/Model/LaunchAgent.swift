@@ -154,7 +154,6 @@ struct LaunchAgent {
     <array>
         <string>/usr/bin/open</string>
 """
-
         let bundleLine = "<string>" + Bundle.main.bundlePath + "</string>"
         
         let bottom =

@@ -20,7 +20,7 @@ struct SystemPrefs {
         let lines = result.split(whereSeparator: \.isNewline)
         
         for line in lines {
-            if line.contains("Magic Window Air") {
+            if line.contains("Aerial") {
                 return true
             }
         }

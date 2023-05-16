@@ -16,7 +16,7 @@
 @property (strong) IBOutlet NSView *childView;
 
 @property AerialView *ssv;
-@property AerialView *stsv;
+//@property AerialView *stsv;
 
 @property void *handle;
 @end
@@ -55,21 +55,17 @@
     // Aerial checks for isPreview and if its running under Companion to prevent the
     // window setup, which saves it from instantiating a view (since for a screensaver
     // you just alloc init the window and that loads the whole thing, which we *don't* want here)
-    _stsv = [[NSClassFromString(@"AerialView") alloc]
+    AerialView *_stsv = [[NSClassFromString(@"AerialView") alloc]
             initWithFrame:
             CGRectMake(0, 0,
                        self.window.frame.size.width,
                        self.window.frame.size.height)
             isPreview:true];
     
-    NSWindow* settings = [_stsv configureSheet];
-    [settings setTitle: @"Settings for wallpaper and full screen mode"];
-
-    settings.styleMask |= NSWindowStyleMaskClosable;
-    [settings makeKeyAndOrderFront:nil];
-
-    return settings;
+    return [_stsv configureSheet];
 }
+
+
 
 - (void)windowWillLoad {
     [super windowWillLoad];

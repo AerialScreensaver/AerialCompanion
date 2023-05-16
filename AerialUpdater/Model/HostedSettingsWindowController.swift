@@ -17,10 +17,9 @@ class HostedSettingsWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
     }
-
+    
     func windowWillClose(_ notification: Notification) {
         print("Hosted Settings Will close")
-        
         uiController?.shouldRefreshPlaybackMode()
     }
 }

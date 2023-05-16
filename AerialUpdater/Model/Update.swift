@@ -144,7 +144,7 @@ class Update {
 
         let destinationUrl = supportUrl.appendingPathComponent("Aerial.saver.zip")
         let destinationSaverUrl = supportUrl.appendingPathComponent("Aerial.saver")
-
+        
         // Make sure to delete a zip if exists
         if FileManager().fileExists(atPath: destinationUrl.path)
         {
@@ -227,7 +227,7 @@ class Update {
                         if install(saverPath) {
                             // Pfew...
                             debugLog("Installed ! Setting up as default")
-                            setAsDefault()
+                            //setAsDefault()
                             report(string: "OK", done: true)
                         } else {
                             errorLog("Cannot copy .saver")
@@ -253,7 +253,7 @@ class Update {
         
     }
     
-    private func setAsDefault() {
+    public func setAsDefault() {
         // defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName Flurry path /System/Library/Screen\ Savers/Flurry.saver/ type 0
         
         _ = Helpers.shell(launchPath: "/usr/bin/defaults", arguments: ["-currentHost","write","com.apple.screensaver","moduleDict","-dict","moduleName","Aerial","path",LocalVersion.aerialPath,"type","0"])

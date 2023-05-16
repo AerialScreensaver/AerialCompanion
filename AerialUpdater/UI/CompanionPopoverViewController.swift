@@ -30,6 +30,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBOutlet weak var updateBarBox: NSBox!
     
+    @IBOutlet weak var notDefaultBox: NSBox!
+    
     @IBOutlet weak var warningDisabledBox: NSBox!
     
     @IBOutlet weak var updateButton: NSButton!
@@ -105,50 +107,65 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
 
     func setActivationTimePopup() {
-        let minutes = SystemPrefs.getSaverActivationTime()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let minutes = SystemPrefs.getSaverActivationTime()
 
-        switch minutes {
-        case 1:
-            activationTimePopup.selectItem(at: 0)
-        case 2:
-            activationTimePopup.selectItem(at: 1)
-        case 5:
-            activationTimePopup.selectItem(at: 2)
-        case 10:
-            activationTimePopup.selectItem(at: 3)
-        case 20:
-            activationTimePopup.selectItem(at: 4)
-        case 30:
-            activationTimePopup.selectItem(at: 5)
-        case 60:
-            activationTimePopup.selectItem(at: 6)
-        case 0:
-            activationTimePopup.selectItem(at: 7)
-        default:
-            activationTimePopup.selectItem(at: 8)
-            activationTimePopup.selectedItem?.title = "Custom (" + String(minutes ?? 0) + " minutes)..."
+            DispatchQueue.main.async { [self] in
+                switch minutes {
+                case 1:
+                    activationTimePopup.selectItem(at: 0)
+                case 2:
+                    activationTimePopup.selectItem(at: 1)
+                case 5:
+                    activationTimePopup.selectItem(at: 2)
+                case 10:
+                    activationTimePopup.selectItem(at: 3)
+                case 20:
+                    activationTimePopup.selectItem(at: 4)
+                case 30:
+                    activationTimePopup.selectItem(at: 5)
+                case 60:
+                    activationTimePopup.selectItem(at: 6)
+                case 0:
+                    activationTimePopup.selectItem(at: 7)
+                default:
+                    activationTimePopup.selectItem(at: 8)
+                    activationTimePopup.selectedItem?.title = "Custom (" + String(minutes ?? 0) + " minutes)..."
+                }
+            }
         }
     }
     
     func setSleepTimeLabel() {
-        let sleepTime = SystemPrefs.getDisplaySleep() ?? 0
-        
-        if(sleepTime != 0){
-            sleepTimeButton.title = "\(sleepTime) minutes"
-        } else {
-            sleepTimeButton.title = "Never (Disabled)"
+        DispatchQueue.global(qos: .userInitiated).async {
+            let sleepTime = SystemPrefs.getDisplaySleep() ?? 0
+
+            DispatchQueue.main.async { [self] in
+                if(sleepTime != 0){
+                    sleepTimeButton.title = "\(sleepTime) minutes"
+                } else {
+                    sleepTimeButton.title = "Never (Disabled)"
+                }
+            }
         }
+        
+        
     }
     
     func validateSleepSettings() {
-        let saverTime = SystemPrefs.getSaverActivationTime()!
-        let displayTime = SystemPrefs.getDisplaySleep()!
-        
-        if (saverTime == 0 || saverTime >= displayTime) {
-            warningDisabledBox.isHidden = false
-        } else {
-            warningDisabledBox.isHidden = true
+        DispatchQueue.global(qos: .userInitiated).async {
+            let saverTime = SystemPrefs.getSaverActivationTime()!
+            let displayTime = SystemPrefs.getDisplaySleep()!
+
+            DispatchQueue.main.async { [self] in
+                if (saverTime == 0 || saverTime >= displayTime) {
+                    warningDisabledBox.isHidden = false
+                } else {
+                    warningDisabledBox.isHidden = true
+                }
+            }
         }
+        
     }
     
     @IBAction func activationTimeChange(_ sender: NSPopUpButton) {
@@ -202,6 +219,13 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         validateSleepSettings()
     }
     
+    @IBAction func setAsDefaultButton(_ sender: NSButton) {
+        Update.instance.setAsDefault()
+        notDefaultBox.isHidden = true
+    }
+    
+    
+    
     func setDelegate(_ delegate: AppDelegate) {
         appDelegate = delegate
     }
@@ -209,6 +233,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     // Update
     func update() {
+        print("update")
+        debugLog("update")
         if hasUpdate {
             updateBarBox.isHidden = false
         } else {
@@ -225,6 +251,14 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         case .monitor:
             playbackBarBox.isHidden = false
             mainBarBox.isHidden = true
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let isDefault = SystemPrefs.getSaverSelectedStatus()
+            
+            DispatchQueue.main.async { [self] in
+                notDefaultBox.isHidden = isDefault
+            }
         }
         
         setActivationTimePopup()

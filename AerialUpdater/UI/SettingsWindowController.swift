@@ -46,6 +46,8 @@ class SettingsWindowController: NSWindowController {
 
     @IBAction func launchCompanionPopupChange(_ sender: NSPopUpButton) {
         Preferences.launchMode = LaunchMode(rawValue: sender.indexOfSelectedItem)!
+        
+        LaunchAgent.update()
     }
     
     @IBAction func checkNowClick(_ sender: Any) {

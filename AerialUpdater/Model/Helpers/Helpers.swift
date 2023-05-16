@@ -83,7 +83,6 @@ struct Helpers {
         let output = String(data: data, encoding: .utf8)
         task.waitUntilExit()
         
-        print(output)
         return output
     }
     

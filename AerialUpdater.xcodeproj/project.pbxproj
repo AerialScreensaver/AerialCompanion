@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -73,6 +73,7 @@
 		F05C63B728F326300068B545 /* SystemPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B628F326300068B545 /* SystemPrefs.swift */; };
 		F0A3E09928845B8D005E8D8D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3E09828845B8D005E8D8D /* main.swift */; };
 		F0A3E0A028845C1D005E8D8D /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A3E09F28845C1D005E8D8D /* MusicKit.framework */; };
+		F0C227872A12A5410053D5DA /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F0C227862A12A5410053D5DA /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -172,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0C227872A12A5410053D5DA /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +374,9 @@
 			dependencies = (
 			);
 			name = "Aerial Companion";
+			packageProductDependencies = (
+				F0C227862A12A5410053D5DA /* Sparkle */,
+			);
 			productName = AerialUpdater;
 			productReference = 03CE4F5524CB0CA700494D32 /* Aerial Companion.app */;
 			productType = "com.apple.product-type.application";
@@ -420,6 +425,9 @@
 				Base,
 			);
 			mainGroup = 03CE4F4C24CB0CA700494D32;
+			packageReferences = (
+				F0C227852A12A5410053D5DA /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = 03CE4F5624CB0CA700494D32 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -671,12 +679,14 @@
 				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Aerial Companion";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
@@ -698,12 +708,14 @@
 				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Aerial Companion";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b3;
+				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -777,6 +789,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F0C227852A12A5410053D5DA /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F0C227862A12A5410053D5DA /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C227852A12A5410053D5DA /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 03CE4F4D24CB0CA700494D32 /* Project object */;
 }

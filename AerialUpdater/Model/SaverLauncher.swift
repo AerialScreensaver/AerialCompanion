@@ -13,7 +13,7 @@ class SaverLauncher : NSObject, NSWindowDelegate {
     
     let aerialWindowController = AerialWindow()
     var uiController: CompanionPopoverViewController?
-   
+
     lazy var hostedSettingsWindowController = HostedSettingsWindowController()
     
     func windowMode() {
@@ -49,14 +49,18 @@ class SaverLauncher : NSObject, NSWindowDelegate {
     
     func openSettings() {
         debugLog("open hosted settings WN")
-        let settings = aerialWindowController.openPanel()
+        let hostedSettingsWindow = aerialWindowController.openPanel()
         
         // Make sure to pass our main controller for callbacks
         hostedSettingsWindowController.setController(uiController!)
 
         // We need to monitor the settings window, we do it here
-        settings.windowController = hostedSettingsWindowController
-        settings.delegate = hostedSettingsWindowController
+        hostedSettingsWindow.isReleasedWhenClosed = true
+        hostedSettingsWindow.styleMask = [.closable, .titled, .resizable]
+        hostedSettingsWindow.title = "Test title"
+        hostedSettingsWindow.windowController = hostedSettingsWindowController
+        hostedSettingsWindow.delegate = hostedSettingsWindowController
+        hostedSettingsWindow.makeKeyAndOrderFront(uiController)
     }
     
     func togglePause() {
