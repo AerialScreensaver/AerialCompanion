@@ -14,6 +14,8 @@ class SettingsWindowController: NSWindowController {
     @IBOutlet var checkEveryPopup: NSPopUpButton!
     @IBOutlet var launchCompanionPopup: NSPopUpButton!
 
+    @IBOutlet weak var restartAtLaunchCheckbox: NSButton!
+    
     lazy var updateCheckWindowController = UpdateCheckWindowController()
 
     override func windowDidLoad() {
@@ -25,6 +27,8 @@ class SettingsWindowController: NSWindowController {
         updateModePopup.selectItem(at: Preferences.updateMode.rawValue)
         checkEveryPopup.selectItem(at: Preferences.checkEvery.rawValue)
         launchCompanionPopup.selectItem(at: Preferences.launchMode.rawValue)
+        
+        restartAtLaunchCheckbox.state = Preferences.restartBackground ? .on : .off
     }
     
     public func setHostController(_controller: NSViewController) {
@@ -66,4 +70,7 @@ class SettingsWindowController: NSWindowController {
         updateCheckWindowController.startCheck()
     }
     
+    @IBAction func restartAtLaunchChange(_ sender: NSButton) {
+        Preferences.restartBackground = sender.state == .on ? true : false
+    }
 }

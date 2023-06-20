@@ -91,6 +91,11 @@ struct Preferences {
     @SimpleStorage(key: "firstTimeSetup", defaultValue: false)
     static var firstTimeSetup: Bool
 
+    @SimpleStorage(key: "restartBackground", defaultValue: true)
+    static var restartBackground: Bool
+
+    @SimpleStorage(key: "wasRunningBackground", defaultValue: false)
+    static var wasRunningBackground: Bool
 }
 
 

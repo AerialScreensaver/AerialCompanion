@@ -44,6 +44,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBOutlet weak var versionLabel: NSTextField!
     
+    @IBOutlet weak var globalSpeedSlider: NSSlider!
     
     // UpdateCallback protocol
     
@@ -225,7 +226,6 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     
-    
     func setDelegate(_ delegate: AppDelegate) {
         appDelegate = delegate
     }
@@ -359,6 +359,19 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
             SaverLauncher.instance.skipAndHide()
         }
     }
+    
+    @IBAction func globalSpeedSliderChange(_ sender: NSSlider) {
+        print("change " + String(sender.intValue))
+        
+        if currentMode == .desktop {
+            DesktopLauncher.instance.changeSpeed(Int(sender.intValue))
+        } else {
+            //debugLog("not here")
+            SaverLauncher.instance.changeSpeed(Int(sender.intValue))
+        }
+    }
+    
+
     
     // Update bar
      

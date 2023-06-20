@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import Sparkle
 
 enum IconMode {
     case normal, updating, notification
@@ -24,6 +25,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let popover = NSPopover()
 
+    // Sparkle
+    var sparkleController : SPUStandardUpdaterController
+    
+    override init() {
+        sparkleController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+    }
     
     // MARK: - Lifecycle
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -83,6 +90,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         DistributedNotificationCenter.default.addObserver(self,
             selector: #selector(self.test2(_:)),
             name: Notification.Name("com.glouel.aerial.nextvideo"), object: nil)
+
+        // We may auto start the background based on user pref
+        if Preferences.restartBackground {
+            // Only if it was running previously
+            if Preferences.wasRunningBackground {
+                popoverViewController.startWallpaperClick(self)
+            }
+        }
     }
     
     
@@ -209,6 +224,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        if popoverViewController.currentMode == .desktop {
+            Preferences.wasRunningBackground = true
+        } else {
+            Preferences.wasRunningBackground = false
+        }
     }
     
     // Change the icon based on status

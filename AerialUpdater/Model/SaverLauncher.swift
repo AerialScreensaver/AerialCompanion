@@ -77,4 +77,23 @@ class SaverLauncher : NSObject, NSWindowDelegate {
         debugLog("skip and hide")
         aerialWindowController.skipAndHide()
     }
+    
+    func changeSpeed(_ speed: Int) {
+        debugLog("Change speed")
+        var fSpeed: Float  = 1.0
+        if speed == 80 {
+            fSpeed = 2/3
+        } else if speed == 60 {
+            fSpeed = 1/2
+        } else if speed == 40 {
+            fSpeed = 1/3
+        } else if speed == 20 {
+            fSpeed = 1/4
+        } else if speed == 0 {
+            fSpeed = 1/8
+        }
+        
+        aerialWindowController.changeSpeed(fSpeed)
+    }
+
 }

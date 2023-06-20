@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22113.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.1"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                 <rect key="frame" x="1" y="1" width="358" height="38"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Co5-9f-See">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Co5-9f-See">
                                         <rect key="frame" x="8" y="11" width="142" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="An update is available" id="8qh-Hg-hTI">
                                             <font key="font" metaFont="systemSemibold" size="13"/>
@@ -81,18 +81,18 @@
                                 <subviews>
                                     <button toolTip="Stop" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nCy-N4-lKV">
                                         <rect key="frame" x="7" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="eFA-Qn-8lq"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="stop.fill" catalog="system" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="HoX-ni-39L">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="eFA-Qn-8lq"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="playbackStop:" target="-2" id="HFZ-Im-MLk"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gig-lC-XuU">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gig-lC-XuU">
                                         <rect key="frame" x="8" y="48" width="136" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Desktop background" id="pOP-Hh-p8y">
                                             <font key="font" metaFont="systemSemibold" size="13"/>
@@ -102,58 +102,58 @@
                                     </textField>
                                     <button toolTip="Skip video and hide it so it won't play again" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QB9-HH-M11">
                                         <rect key="frame" x="157" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="nXW-bb-bSE"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="Uh9-jj-eCD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="eye.slash" catalog="system" symbolScale="large"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="nXW-bb-bSE"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="playbackHide:" target="-2" id="jZC-9G-St9"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Skip video" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YYa-Lj-DnF">
                                         <rect key="frame" x="107" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="wfc-hB-KSL"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="eTk-Sl-28J">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="forward.fill" catalog="system" symbolScale="large"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="wfc-hB-KSL"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="playbackSkip:" target="-2" id="G1a-W2-EiD"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Destkop background/This monitor only Preferences" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aJX-ft-8NS">
                                         <rect key="frame" x="305" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="731-MS-m1h"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="lk0-bD-L2b">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="731-MS-m1h"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="playbackSettings:" target="-2" id="7kh-rq-oRU"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Pause/Unpause" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XDN-QG-hbm">
                                         <rect key="frame" x="57" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="aDz-X9-RwY"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="ify-N9-V8B">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="pause.fill" catalog="system" symbolScale="large"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="aDz-X9-RwY"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="playbackPause:" target="-2" id="lkF-KA-fd6"/>
                                         </connections>
@@ -183,7 +183,7 @@
                                 <rect key="frame" x="1" y="1" width="358" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p6I-aX-JJu">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p6I-aX-JJu">
                                         <rect key="frame" x="8" y="48" width="86" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Screen saver" id="2Vd-ma-36g">
                                             <font key="font" metaFont="systemSemibold" size="13"/>
@@ -193,28 +193,28 @@
                                     </textField>
                                     <button toolTip="Launch screen saver now" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sY4-mU-gSz">
                                         <rect key="frame" x="7" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="Vky-dF-rZq"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="WtK-10-OJY">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Vky-dF-rZq"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="screenSaverLaunch:" target="-2" id="6iw-b4-Cbg"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Screen saver settings" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a1o-eQ-X2E">
                                         <rect key="frame" x="305" y="6" width="46" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="mJN-nD-UnD"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="TUb-e9-gez">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                         </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="mJN-nD-UnD"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="screenSaverSettings:" target="-2" id="32m-cM-KDu"/>
                                         </connections>
@@ -254,7 +254,7 @@
                                         <rect key="frame" x="1" y="1" width="173" height="70"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RH2-pE-6aV">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RH2-pE-6aV">
                                                 <rect key="frame" x="8" y="48" width="136" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Desktop background" id="b4r-fm-wOt">
                                                     <font key="font" metaFont="systemSemibold" size="13"/>
@@ -264,29 +264,29 @@
                                             </textField>
                                             <button toolTip="Launch desktop background mode" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5tp-aC-HNv">
                                                 <rect key="frame" x="7" y="6" width="46" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="lc0-I3-nTa"/>
-                                                </constraints>
                                                 <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="hYA-Nw-yez">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                     <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
                                                 </buttonCell>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="lc0-I3-nTa"/>
+                                                </constraints>
                                                 <connections>
                                                     <action selector="destkopModePlay:" target="-2" id="Nx7-Dr-Iqe"/>
                                                 </connections>
                                             </button>
                                             <button toolTip="Destkop background/This monitor only Preferences" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p1f-K1-IfF">
                                                 <rect key="frame" x="120" y="6" width="46" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="amp-hd-KSb"/>
-                                                </constraints>
                                                 <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="wLb-1Q-a4Z">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                     <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                                 </buttonCell>
                                                 <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="amp-hd-KSb"/>
+                                                </constraints>
                                                 <connections>
                                                     <action selector="desktopModeSettings:" target="-2" id="JN3-8J-U5N"/>
                                                 </connections>
@@ -311,7 +311,7 @@
                                         <rect key="frame" x="1" y="1" width="173" height="70"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-Jk-uLR">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-Jk-uLR">
                                                 <rect key="frame" x="8" y="48" width="101" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Fullscreen here" id="Jax-sv-n6B">
                                                     <font key="font" metaFont="systemSemibold" size="13"/>
@@ -321,29 +321,29 @@
                                             </textField>
                                             <button toolTip="Launch this monitor only mode" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fAy-QN-cGe">
                                                 <rect key="frame" x="7" y="6" width="46" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="BEK-zQ-3g2"/>
-                                                </constraints>
                                                 <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="3en-rh-eqT">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                     <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
                                                 </buttonCell>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="BEK-zQ-3g2"/>
+                                                </constraints>
                                                 <connections>
                                                     <action selector="thisMonitorPlay:" target="-2" id="V1O-ca-gnJ"/>
                                                 </connections>
                                             </button>
                                             <button toolTip="Destkop background/This monitor only Preferences" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ggW-EN-pOn">
                                                 <rect key="frame" x="120" y="6" width="46" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="40" id="U09-kp-eUU"/>
-                                                </constraints>
                                                 <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="DHF-yh-Vbv">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                     <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                                 </buttonCell>
                                                 <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="U09-kp-eUU"/>
+                                                </constraints>
                                                 <connections>
                                                     <action selector="thisMonitorSettings:" target="-2" id="0Qj-zg-kDZ"/>
                                                 </connections>
@@ -383,7 +383,7 @@
                                         <imageReference key="image" image="info.circle" catalog="system" symbolScale="large"/>
                                     </imageCell>
                                 </imageView>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-6O-w43">
+                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="iJN-6O-w43">
                                     <rect key="frame" x="36" y="0.0" width="326" height="36"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="36" id="Ons-lH-cKm"/>
@@ -412,7 +412,7 @@ Desktop background/This monitor settings</string>
                                 <rect key="frame" x="1" y="1" width="358" height="38"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rna-eA-vIb">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rna-eA-vIb">
                                         <rect key="frame" x="8" y="11" width="116" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="Zk6-BY-3jC">
                                             <font key="font" metaFont="systemSemibold" size="13"/>
@@ -434,45 +434,45 @@ Desktop background/This monitor settings</string>
                                     </button>
                                     <button toolTip="Help and support" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tWK-WC-NQ7">
                                         <rect key="frame" x="251" y="1" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="29" id="6Dt-AI-K7B"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="RsA-Wc-wZf">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="questionmark" catalog="system" symbolScale="large"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="29" id="6Dt-AI-K7B"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="helpClick:" target="-2" id="l5R-mQ-Clp"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Aerial Companion's Preferences" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="70l-3K-TwB">
                                         <rect key="frame" x="212" y="1" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="29" id="myM-Os-BPD"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="RMv-qT-GEL">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="29" id="myM-Os-BPD"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="companionSettingsClick:" target="-2" id="PBB-ep-AP3"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Help and support" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4h6-UQ-M2c">
                                         <rect key="frame" x="173" y="1" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="29" id="eiI-WO-Dqo"/>
-                                        </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="large" state="on" borderStyle="border" inset="2" id="DjY-yn-Rxg">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                             <imageReference key="image" image="info.circle" catalog="system" symbolScale="large"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="29" id="eiI-WO-Dqo"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="companionInfoClick:" target="-2" id="r8i-i1-s17"/>
                                         </connections>
@@ -542,7 +542,7 @@ Desktop background/This monitor settings</string>
     </objects>
     <resources>
         <image name="arrow.down.circle" catalog="system" width="15" height="15"/>
-        <image name="eye.slash" catalog="system" width="26" height="19"/>
+        <image name="eye.slash" catalog="system" width="26" height="20"/>
         <image name="figure.walk" catalog="system" width="15" height="22"/>
         <image name="forward.fill" catalog="system" width="25" height="16"/>
         <image name="gear" catalog="system" width="22" height="22"/>

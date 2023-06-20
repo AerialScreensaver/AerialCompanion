@@ -13,14 +13,14 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
     
     let aerialDesktopController = AerialDesktop()
     var isRunning = false
-
+    
     
     func toggleLauncher() {
         if !isRunning {
             var topLevelObjects: NSArray? = NSArray()
             if !Bundle.main.loadNibNamed(NSNib.Name("AerialDesktop"),
-                                owner: aerialDesktopController,
-                                topLevelObjects: &topLevelObjects) {
+                                         owner: aerialDesktopController,
+                                         topLevelObjects: &topLevelObjects) {
                 errorLog("Could not load nib for AerialDesktop, please report")
             }
             
@@ -63,4 +63,23 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
         debugLog("skip and hide")
         aerialDesktopController.skipAndHide()
     }
+    
+    func changeSpeed(_ speed: Int) {
+        debugLog("Change speed")
+        var fSpeed: Float  = 1.0
+        if speed == 80 {
+            fSpeed = 2/3
+        } else if speed == 60 {
+            fSpeed = 1/2
+        } else if speed == 40 {
+            fSpeed = 1/3
+        } else if speed == 20 {
+            fSpeed = 1/4
+        } else if speed == 0 {
+            fSpeed = 1/8
+        }
+        
+        aerialDesktopController.changeSpeed(fSpeed)
+    }
+
 }

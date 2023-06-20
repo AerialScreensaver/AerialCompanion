@@ -44,7 +44,8 @@ API_UNAVAILABLE_BEGIN(ios, tvos, watchos)
 - (void)togglePause;
 - (void)nextVideo;
 - (void)skipAndHide;
-
+- (float)getGlobalSpeed;
+- (void)setGlobalSpeed:(float)speed;
 
 @property (readonly) BOOL hasConfigureSheet;
 @property (readonly, strong) NSWindow * _Nullable configureSheet;

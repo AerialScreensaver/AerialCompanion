@@ -20,7 +20,7 @@ class Update {
     var uiCallback: UpdateCallback?
     var shouldReport = false
     var commandLine = false
-
+   
     func setCallback(_ cb: UpdateCallback) {
         uiCallback = cb
     }

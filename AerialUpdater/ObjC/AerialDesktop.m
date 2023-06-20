@@ -50,6 +50,14 @@
     [_ssv skipAndHide];
 }
 
+- (float)getSpeed {
+    return [_ssv getGlobalSpeed];
+}
+
+- (void)changeSpeed:(float) fSpeed {
+    [_ssv setGlobalSpeed:fSpeed];
+}
+
 
 - (void)windowWillLoad {
     [super windowWillLoad];

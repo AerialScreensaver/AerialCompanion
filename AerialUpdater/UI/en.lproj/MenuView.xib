@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22113.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -257,7 +257,7 @@
             <rect key="frame" x="0.0" y="0.0" width="250" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-Go-jS8">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-Go-jS8">
                     <rect key="frame" x="12" y="8" width="116" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="9on-HL-otU">
                         <font key="font" metaFont="systemSemibold" size="13"/>
@@ -284,7 +284,7 @@
             <rect key="frame" x="0.0" y="0.0" width="250" height="28"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lRz-SV-1wN">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lRz-SV-1wN">
                     <rect key="frame" x="12" y="6" width="128" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Version 2.0.0alpha3 " id="qfL-ev-gur">
                         <font key="font" usesAppearanceFont="YES"/>
@@ -322,7 +322,7 @@
             <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PoV-Ry-EFG">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PoV-Ry-EFG">
                     <rect key="frame" x="12" y="1" width="78" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Screen Saver" id="gSc-Tv-V84">
                         <font key="font" metaFont="smallSystemBold"/>
@@ -342,7 +342,7 @@
             <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-UG-diV">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-UG-diV">
                     <rect key="frame" x="12" y="1" width="51" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Updates" id="37D-xG-QRh">
                         <font key="font" metaFont="smallSystemBold"/>
@@ -362,7 +362,7 @@
             <rect key="frame" x="0.0" y="0.0" width="172" height="15"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfm-k4-eV3">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfm-k4-eV3">
                     <rect key="frame" x="12" y="1" width="68" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Companion" id="KfQ-0M-KR9">
                         <font key="font" metaFont="smallSystemBold"/>
@@ -382,7 +382,7 @@
             <rect key="frame" x="0.0" y="0.0" width="213" height="15"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="snF-kM-dNr">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="snF-kM-dNr">
                     <rect key="frame" x="12" y="1" width="175" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="This is still under development" id="WqL-aU-mkj">
                         <font key="font" metaFont="smallSystemBold"/>

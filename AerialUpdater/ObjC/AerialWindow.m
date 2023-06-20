@@ -65,6 +65,13 @@
     return [_stsv configureSheet];
 }
 
+- (float)getSpeed {
+    return [_ssv getGlobalSpeed];
+}
+
+- (void)changeSpeed:(float) fSpeed {
+    [_ssv setGlobalSpeed:fSpeed];
+}
 
 
 - (void)windowWillLoad {
