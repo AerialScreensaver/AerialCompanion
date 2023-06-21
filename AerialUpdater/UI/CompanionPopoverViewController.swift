@@ -109,7 +109,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
 
     func setActivationTimePopup() {
         DispatchQueue.global(qos: .userInitiated).async {
-            let minutes = SystemPrefs.getSaverActivationTime()
+            let minutes = SystemPrefs.getSaverActivationTime() ?? 0
 
             DispatchQueue.main.async { [self] in
                 switch minutes {
@@ -131,7 +131,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
                     activationTimePopup.selectItem(at: 7)
                 default:
                     activationTimePopup.selectItem(at: 8)
-                    activationTimePopup.selectedItem?.title = "Custom (" + String(minutes ?? 0) + " minutes)..."
+                    activationTimePopup.selectedItem?.title = "Custom (" + String(minutes) + " minutes)..."
                 }
             }
         }
@@ -155,8 +155,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     func validateSleepSettings() {
         DispatchQueue.global(qos: .userInitiated).async {
-            let saverTime = SystemPrefs.getSaverActivationTime()!
-            let displayTime = SystemPrefs.getDisplaySleep()!
+            let saverTime = SystemPrefs.getSaverActivationTime() ?? 0
+            let displayTime = SystemPrefs.getDisplaySleep() ?? 0
 
             DispatchQueue.main.async { [self] in
                 if (saverTime == 0 || saverTime >= displayTime) {
@@ -261,6 +261,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
             }
         }
         
+        globalSpeedSlider.intValue = Int32(Preferences.globalSpeed)
         setActivationTimePopup()
         setSleepTimeLabel()
         
@@ -304,6 +305,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     @IBAction func startWallpaperClick(_ sender: Any) {
         currentMode = .desktop
         DesktopLauncher.instance.toggleLauncher()
+        DesktopLauncher.instance.changeSpeed(Preferences.globalSpeed)
         update()
         appDelegate?.closePopover(sender: nil)
     }
@@ -312,6 +314,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         currentMode = .monitor
         SaverLauncher.instance.setController(self)
         SaverLauncher.instance.windowMode()
+        SaverLauncher.instance.changeSpeed(Preferences.globalSpeed)
         update()
         appDelegate?.closePopover(sender: nil)
     }
@@ -361,8 +364,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     @IBAction func globalSpeedSliderChange(_ sender: NSSlider) {
-        print("change " + String(sender.intValue))
-        
+        Preferences.globalSpeed = Int(sender.intValue)
+
         if currentMode == .desktop {
             DesktopLauncher.instance.changeSpeed(Int(sender.intValue))
         } else {

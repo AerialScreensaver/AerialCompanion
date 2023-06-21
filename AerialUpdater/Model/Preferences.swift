@@ -27,7 +27,7 @@ struct Preferences {
     // Which version are we looking for ? Defaults to release
     @SimpleStorage(key: "intDesiredVersion", defaultValue: DesiredVersion.release.rawValue)
     static var intDesiredVersion: Int
-
+    
     // We wrap in a separate value, as we can't store an enum as a Codable in
     // macOS < 10.15
     static var desiredVersion: DesiredVersion {
@@ -42,7 +42,7 @@ struct Preferences {
     // Automatic or notifications ?
     @SimpleStorage(key: "intUpdateMode", defaultValue: UpdateMode.notifyme.rawValue)
     static var intUpdateMode: Int
-
+    
     // We wrap in a separate value, as we can't store an enum as a Codable in
     // macOS < 10.15
     static var updateMode: UpdateMode {
@@ -58,7 +58,7 @@ struct Preferences {
     // Check frequency
     @SimpleStorage(key: "intCheckEvery", defaultValue: CheckEvery.day.rawValue)
     static var intCheckEvery: Int
-
+    
     // We wrap in a separate value, as we can't store an enum as a Codable in
     // macOS < 10.15
     static var checkEvery: CheckEvery {
@@ -73,7 +73,7 @@ struct Preferences {
     // Automatic or notifications ?
     @SimpleStorage(key: "intLaunchMode", defaultValue: LaunchMode.manual.rawValue)
     static var intLaunchMode: Int
-
+    
     // We wrap in a separate value, as we can't store an enum as a Codable in
     // macOS < 10.15
     static var launchMode: LaunchMode {
@@ -87,15 +87,18 @@ struct Preferences {
     
     @SimpleStorage(key: "debugMode", defaultValue: false)
     static var debugMode: Bool
-
+    
     @SimpleStorage(key: "firstTimeSetup", defaultValue: false)
     static var firstTimeSetup: Bool
-
+    
     @SimpleStorage(key: "restartBackground", defaultValue: true)
     static var restartBackground: Bool
-
+    
     @SimpleStorage(key: "wasRunningBackground", defaultValue: false)
     static var wasRunningBackground: Bool
+    
+    @SimpleStorage(key: "globalSpeed", defaultValue: 100)
+    static var globalSpeed: Int
 }
 
 
