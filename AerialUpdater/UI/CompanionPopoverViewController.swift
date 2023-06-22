@@ -281,9 +281,12 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
             DesktopLauncher.instance.toggleLauncher()
             //
             DesktopLauncher.instance.toggleLauncher()
+            DesktopLauncher.instance.changeSpeed(Preferences.globalSpeed)
+
         case .monitor:
             SaverLauncher.instance.stopScreensaver()
             SaverLauncher.instance.windowMode()
+            SaverLauncher.instance.changeSpeed(Preferences.globalSpeed)
         }
     }
 
