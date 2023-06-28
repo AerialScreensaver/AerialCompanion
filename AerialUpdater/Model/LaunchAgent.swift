@@ -18,6 +18,17 @@ struct LaunchAgent {
             return ""
         }
     }()
+    
+    static let agentFolder: String = {
+        let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("LaunchAgents/") {
+            return pathComponent.path
+        } else {
+            return ""
+        }
+    }()
+    
 
     /// Update the Launch Agent to the current settings
     ///
@@ -56,6 +67,21 @@ struct LaunchAgent {
             agent = getStartupAgent()
         case .background:
             agent = getBackgroundAgent()
+        }
+        
+        // We may need to create the "LaunchAgents" folder in library !
+        if !FileManager.default.fileExists(atPath: agentFolder) {
+            debugLog("Creating /LaunchAgents/ in user library")
+            
+            do {
+                try FileManager.default.createDirectory(
+                    atPath:agentFolder,
+                    withIntermediateDirectories: true,
+                    attributes: nil)
+            } catch {
+                errorLog("Cannot create LaunchAgent directory in your user library")
+                print(error.localizedDescription);
+            }
         }
         
         do {
@@ -128,7 +154,6 @@ struct LaunchAgent {
     <array>
         <string>/usr/bin/open</string>
 """
-
         let bundleLine = "<string>" + Bundle.main.bundlePath + "</string>"
         
         let bottom =

@@ -20,7 +20,7 @@ class UpdateCheckWindowController:
     
     @IBOutlet var actionButton: NSButton!
     
-    var menuCallback : MenuViewController?
+    var menuCallback : UpdateCallback?
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -31,7 +31,7 @@ class UpdateCheckWindowController:
         actionButton.isHighlighted = true   // Color our button
     }
 
-    func setCallback(_ cb: MenuViewController) {
+    func setCallback(_ cb: UpdateCallback) {
         menuCallback = cb
     }
     

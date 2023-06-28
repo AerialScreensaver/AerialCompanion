@@ -13,6 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)awakeFromNib;
 - (void)stopScreensaver;
 - (void)openPanel;
+- (void)togglePause;
+- (void)nextVideo;
+- (void)skipAndHide;
+- (float)getSpeed;
+- (void)changeSpeed:(float)speed;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

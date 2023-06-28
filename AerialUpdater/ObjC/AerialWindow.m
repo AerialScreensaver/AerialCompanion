@@ -9,13 +9,14 @@
 #import "AerialWindow.h"
 #include <dlfcn.h>
 #import <Cocoa/Cocoa.h>
-#import <ScreenSaver/ScreenSaver.h>
+#import "AerialView.h"
 
 @interface AerialWindow ()
 @property (strong) IBOutlet NSView *mainView;
 @property (strong) IBOutlet NSView *childView;
 
-@property ScreenSaverView *ssv;
+@property AerialView *ssv;
+//@property AerialView *stsv;
 
 @property void *handle;
 @end
@@ -45,7 +46,7 @@
     }
 }
 
-- (void)openPanel {
+- (NSWindow*) openPanel {
     [self loadBundle];
 
     NSLog(@"av : %@", NSClassFromString(@"AerialView"));
@@ -54,24 +55,24 @@
     // Aerial checks for isPreview and if its running under Companion to prevent the
     // window setup, which saves it from instantiating a view (since for a screensaver
     // you just alloc init the window and that loads the whole thing, which we *don't* want here)
-    _ssv = [[NSClassFromString(@"AerialView") alloc]
+    AerialView *_stsv = [[NSClassFromString(@"AerialView") alloc]
             initWithFrame:
             CGRectMake(0, 0,
                        self.window.frame.size.width,
                        self.window.frame.size.height)
             isPreview:true];
-    //[_ssv stopAnimation];
     
-    NSWindow* settings = [_ssv configureSheet];
-    settings.styleMask |= NSWindowStyleMaskClosable;
-    [settings orderFront:nil];
-    
-    //NSClassFromString(@"PanelWindowController");
-    
-    //_pwc = [[NSClassFromString(@"PanelWindowController") alloc] init];
-    //[_pwc showWindow:self];
-    
+    return [_stsv configureSheet];
 }
+
+- (float)getSpeed {
+    return [_ssv getGlobalSpeed];
+}
+
+- (void)changeSpeed:(float) fSpeed {
+    [_ssv setGlobalSpeed:fSpeed];
+}
+
 
 - (void)windowWillLoad {
     [super windowWillLoad];
@@ -90,9 +91,6 @@
   
     [self.window setContentView: _ssv];
     
-    
-
-    
     //[self.window setLevel:NSFullScreenModeWindowLevel];
     /*
     [self.window  setLevel:kCGDesktopWindowLevel - 1];
@@ -107,8 +105,23 @@
 
 - (void)stopScreensaver {
     [_ssv stopAnimation];
-    dlclose(_handle);
-    NSLog(@"Window closed");
+    _ssv = nil;
+    
+    int i = dlclose(_handle);
+    NSLog(@"Window closed %d",i);
 }
+
+- (void)togglePause {
+    [_ssv togglePause];
+}
+
+- (void)nextVideo {
+    [_ssv nextVideo];
+}
+
+- (void)skipAndHide {
+    [_ssv skipAndHide];
+}
+
 
 @end

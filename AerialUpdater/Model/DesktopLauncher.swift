@@ -16,13 +16,12 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
         self.targetScreen = screen
     }
 
-    
     func toggleLauncher() {
         if !isRunning {
             var topLevelObjects: NSArray? = NSArray()
             if !Bundle.main.loadNibNamed(NSNib.Name("AerialDesktop"),
-                                owner: aerialDesktopController,
-                                topLevelObjects: &topLevelObjects) {
+                                         owner: aerialDesktopController,
+                                         topLevelObjects: &topLevelObjects) {
                 errorLog("Could not load nib for AerialDesktop, please report")
             }
             
@@ -34,7 +33,7 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
             aerialDesktopController.window!.delegate = self
             aerialDesktopController.window!.toggleFullScreen(nil)
             aerialDesktopController.window!.makeKeyAndOrderFront(nil)
-            
+            aerialDesktopController.window!.level = NSWindow.Level.init(rawValue: Int(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)) - 1) 
             NSApp.activate(ignoringOtherApps: true)
             
             isRunning = true
@@ -50,7 +49,41 @@ class DesktopLauncher : NSObject, NSWindowDelegate {
     }
     
     func openSettings() {
-        debugLog("open hosted settings")
+        debugLog("open hosted settings DT")
         aerialDesktopController.openPanel()
     }
+    
+    func togglePause() {
+        debugLog("toggle pause")
+        aerialDesktopController.togglePause()
+    }
+    
+    func nextVideo() {
+        debugLog("next video")
+        aerialDesktopController.nextVideo()
+    }
+    
+    func skipAndHide() {
+        debugLog("skip and hide")
+        aerialDesktopController.skipAndHide()
+    }
+    
+    func changeSpeed(_ speed: Int) {
+        debugLog("Change speed")
+        var fSpeed: Float  = 1.0
+        if speed == 80 {
+            fSpeed = 2/3
+        } else if speed == 60 {
+            fSpeed = 1/2
+        } else if speed == 40 {
+            fSpeed = 1/3
+        } else if speed == 20 {
+            fSpeed = 1/4
+        } else if speed == 0 {
+            fSpeed = 1/8
+        }
+        
+        aerialDesktopController.changeSpeed(fSpeed)
+    }
+
 }

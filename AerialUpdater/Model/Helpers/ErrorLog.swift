@@ -50,11 +50,12 @@ func Log(level: ErrorLevel, message: String) {
 }
 
 func logToDisk(_ message: String) {
-    //DispatchQueue.main.async {
+    DispatchQueue.main.async {
         // Prefix message with date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        let string = dateFormatter.string(from: Date()) + " : " + message + "\n"
+        //let dateFormatter = DateFormatter()
+        //dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        //let string = dateFormatter.string(from: Date()) + " : " + message + "\n"
+        let string = message + "\n"
 
         var cacheFileUrl = URL(fileURLWithPath: Helpers.supportPath as String)
         cacheFileUrl.appendPathComponent("Log.txt")
@@ -80,7 +81,7 @@ func logToDisk(_ message: String) {
                 NSLog("AerialUpdater: Can't write to Log.txt")
             }
         }
-    //}
+    }
 }
 
 func debugLog(_ message: String) {

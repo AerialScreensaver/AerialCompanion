@@ -9,10 +9,11 @@
 #import "AerialDesktop.h"
 #include <dlfcn.h>
 #import <Cocoa/Cocoa.h>
-#import <ScreenSaver/ScreenSaver.h>
+//#import <ScreenSaver/ScreenSaver.h>
+#import "AerialView.h"
 
 @interface AerialDesktop ()
-@property ScreenSaverView *ssv;
+@property AerialView *ssv;
 //@property NSWindowController *pwc;
 @property void *handle;
 @end
@@ -37,6 +38,27 @@
     //[_pwc showWindow:self];
 }
 
+- (void)togglePause {
+    [_ssv togglePause];
+}
+
+- (void)nextVideo {
+    [_ssv nextVideo];
+}
+
+- (void)skipAndHide {
+    [_ssv skipAndHide];
+}
+
+- (float)getSpeed {
+    return [_ssv getGlobalSpeed];
+}
+
+- (void)changeSpeed:(float) fSpeed {
+    [_ssv setGlobalSpeed:fSpeed];
+}
+
+
 - (void)windowWillLoad {
     [super windowWillLoad];
 }
@@ -56,8 +78,14 @@
     [self.window setContentView: _ssv];
     
     [self.window setFrame: [self.window.screen frame] display: YES animate: NO];
+
+    /*if (@available(macOS 13, *)) {
+        [self.window setLevel:kCGDesktopWindowLevel];
+    } else {*/
     
-    [self.window  setLevel:kCGDesktopWindowLevel - 1];
+    //[self.window setLevel:kCGDesktopWindowLevel - 1];
+    //}
+    
     [self.window setCollectionBehavior:
                 (NSWindowCollectionBehaviorCanJoinAllSpaces |
                  NSWindowCollectionBehaviorStationary |
