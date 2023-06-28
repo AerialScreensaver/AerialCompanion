@@ -11,6 +11,8 @@ import ScreenSaver
 class MenuViewController: NSViewController, UpdateCallback {
     lazy var infoWindowController = InfoWindowController()
     lazy var updateCheckWindowController = UpdateCheckWindowController()
+    
+    var desktopLauncherInstances: [String: DesktopLauncher] = [:]
 
     // This is for the custom views on top
     @IBOutlet var versionLabel: NSTextField!
@@ -41,7 +43,9 @@ class MenuViewController: NSViewController, UpdateCallback {
     @IBOutlet var menuLaunchInBackground: NSMenuItem!
 
     @IBOutlet var menuDebugMode: NSMenuItem!
-
+    
+    // Experimental
+    @IBOutlet var launchAsWallpaperMenu: NSMenu!
     
     
     // The menu itself
@@ -159,6 +163,25 @@ class MenuViewController: NSViewController, UpdateCallback {
                 self.versionImageView.isHidden = false
                 self.versionInstallNow.isHidden = true
             }
+            
+            for screen in NSScreen.screens {
+                let screenItem = NSMenuItem()
+                screenItem.title = screen.displayName
+                screenItem.action = #selector(self.wallpaperScreenChange)
+                screenItem.target = self
+                screenItem.representedObject = screen.screenUuid
+                
+                if Preferences.enabledWallpaperScreenUuids.contains(screen.screenUuid) {
+                    screenItem.state = .on
+                    
+                    if let screen = NSScreen.getScreenByUuid(screen.screenUuid) {
+                        self.toggleDesktopLauncher(for: screen.screenUuid)
+                    }
+                }
+                
+                
+                self.launchAsWallpaperMenu.addItem(screenItem)
+            }
         }
     }
     
@@ -186,8 +209,44 @@ class MenuViewController: NSViewController, UpdateCallback {
         appDelegate?.setIcon(mode: mode)
     }
     
+    func toggleDesktopLauncher(for screenUuid: String) -> Bool {
+        var isRunning = false
+        
+        if let desktopLauncher = desktopLauncherInstances[screenUuid] {
+            desktopLauncher.toggleLauncher()
+            isRunning = desktopLauncher.isRunning
+        }
+        else if let screen = NSScreen.getScreenByUuid(screenUuid) {
+            desktopLauncherInstances[screenUuid] = DesktopLauncher(screen: screen)
+            desktopLauncherInstances[screenUuid]?.toggleLauncher()
+            isRunning = desktopLauncherInstances[screenUuid]!.isRunning
+        }
+        
+        if isRunning {
+            if !Preferences.enabledWallpaperScreenUuids.contains(screenUuid) {
+                Preferences.enabledWallpaperScreenUuids.append(screenUuid)
+            }
+        }
+        else {
+            Preferences.enabledWallpaperScreenUuids = Preferences.enabledWallpaperScreenUuids.filter {$0 != screenUuid}
+        }
+        
+        return isRunning
+    }
+    
     
     // MARK: - Custom UI Actions
+    
+    // Handle the wallpaper screen selector
+    @objc func wallpaperScreenChange(sender: NSMenuItem) {
+        if let screen = NSScreen.getScreenByUuid(sender.representedObject as! String) {
+            sender.state = self.toggleDesktopLauncher(for: screen.screenUuid) ? .on : .off
+        }
+        else {
+            sender.isEnabled = false
+        }
+    }
+    
     
     // Installation Button
     @IBAction func versionInstallNowClick(_ sender: Any) {
@@ -361,10 +420,6 @@ class MenuViewController: NSViewController, UpdateCallback {
         //launcher.windowMode()
         
         SaverLauncher.instance.windowMode()
-    }
-
-    @IBAction func launchAsWallpaper(_ sender: Any) {
-        DesktopLauncher.instance.toggleLauncher()
     }
     
     
