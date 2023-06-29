@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +30,7 @@
                         </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="icon-512" id="66t-TY-QWq"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Jm-iv-5xn">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Jm-iv-5xn">
                         <rect key="frame" x="255" y="267" width="246" height="35"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Aerial Companion" id="TCN-xS-7eE">
                             <font key="font" metaFont="systemSemibold" size="30"/>
@@ -38,7 +38,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-4o-Bha">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rFk-4o-Bha">
                         <rect key="frame" x="255" y="148" width="304" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="qvT-gX-bqi"/>
@@ -52,7 +52,7 @@ Enjoying Aerial? </string>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-8A-N98">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-8A-N98">
                         <rect key="frame" x="255" y="244" width="118" height="15"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" title="Version 123456789" id="cgg-uu-bQR">
                             <font key="font" metaFont="systemMedium" size="12"/>
@@ -81,7 +81,7 @@ Enjoying Aerial? </string>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BIi-qp-lW6">
-                        <rect key="frame" x="433" y="34" width="192" height="40"/>
+                        <rect key="frame" x="433" y="34" width="191" height="40"/>
                         <buttonCell key="cell" type="push" title="Icon by Inferno Design" bezelStyle="rounded" image="LogoIcon-128px" imagePosition="leading" alignment="center" controlSize="large" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6xm-sl-r8K">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

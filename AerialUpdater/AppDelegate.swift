@@ -45,7 +45,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // This is imperative, breaks everything
         ensureNotInstalledForAllUsers()
         
+        // This will go away at some point
         removeOldAerialApp()
+        
+        if !Preferences.restartBackground {
+            Preferences.enabledWallpaperScreenUuids = []
+
+        }
         
         if arguments.contains("--silent") {
             debugLog("Background mode")
@@ -91,13 +97,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             selector: #selector(self.test2(_:)),
             name: Notification.Name("com.glouel.aerial.nextvideo"), object: nil)
 
-        // We may auto start the background based on user pref
+        /*// We may auto start the background based on user pref
         if Preferences.restartBackground {
             // Only if it was running previously
             if Preferences.wasRunningBackground {
                 popoverViewController.startWallpaperClick(self)
             }
-        }
+        }*/
+
     }
     
     

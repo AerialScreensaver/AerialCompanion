@@ -424,7 +424,7 @@ class MenuViewController: NSViewController, UpdateCallback {
     
     
     @IBAction func testPause(_ sender: Any) {
-        DesktopLauncher.instance.togglePause()
+        //DesktopLauncher.instance.togglePause()
     }
     
     // Bye

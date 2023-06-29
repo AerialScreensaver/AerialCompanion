@@ -13,6 +13,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     lazy var settingsWindowController = SettingsWindowController()
     lazy var updateCheckWindowController = UpdateCheckWindowController()
     
+    var desktopLauncherInstances: [String: DesktopLauncher] = [:]
+    
     enum PlaybackMode {
         case none, desktop, monitor
     }
@@ -23,6 +25,7 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     var appDelegate : AppDelegate?
 
+    @IBOutlet weak var wallpaperPickScreenButton: NSButton!
     
     @IBOutlet weak var mainBarBox: NSBox!
     
@@ -45,6 +48,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     @IBOutlet weak var versionLabel: NSTextField!
     
     @IBOutlet weak var globalSpeedSlider: NSSlider!
+    
+    let appMenu = NSMenu()
     
     // UpdateCallback protocol
     
@@ -88,13 +93,45 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("viewdidload")
         // Let's make sure our delegate is set
         Update.instance.setCallback(self)
 
         // Let's check right now the manifest status
         CachedManifest.instance.updateNow()
 
+        // Create our menu & relaunch if needed
+        for screen in NSScreen.screens {
+            let screenItem = NSMenuItem()
+            
+            if #available(macOS 10.15, *) {
+                screenItem.title = screen.localizedName
+            } else {
+                screenItem.title = screen.displayName   // This doesn't work on Sonoma?
+            }
+            
+            screenItem.action = #selector(self.wallpaperScreenChange)
+            screenItem.target = self
+            screenItem.representedObject = screen.screenUuid
+            
+            if Preferences.enabledWallpaperScreenUuids.contains(screen.screenUuid) {
+                screenItem.state = .on
+            } else {
+                screenItem.state = .off
+            }
+            
+            self.appMenu.addItem(screenItem)
+
+            // We only restart if the option is checked
+            if Preferences.restartBackground {
+                if Preferences.enabledWallpaperScreenUuids.contains(screen.screenUuid) {
+                    if let screen = NSScreen.getScreenByUuid(screen.screenUuid) {
+                        self.toggleDesktopLauncher(for: screen.screenUuid)
+                    }
+                }
+            }
+        }
+        
         // Update the UI
         update()
 
@@ -107,6 +144,18 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         versionLabel.stringValue = Consts.productName + " " + Helpers.version
     }
 
+    
+    
+    // Handle the wallpaper screen selector
+    @objc func wallpaperScreenChange(sender: NSMenuItem) {
+        if let screen = NSScreen.getScreenByUuid(sender.representedObject as! String) {
+            sender.state = self.toggleDesktopLauncher(for: screen.screenUuid) ? .on : .off
+        }
+        else {
+            sender.isEnabled = false
+        }
+    }
+    
     func setActivationTimePopup() {
         DispatchQueue.global(qos: .userInitiated).async {
             let minutes = SystemPrefs.getSaverActivationTime() ?? 0
@@ -278,10 +327,15 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         case .none:
             return
         case .desktop:
-            DesktopLauncher.instance.toggleLauncher()
+            for desktopLauncher in desktopLauncherInstances.values {
+                desktopLauncher.toggleLauncher()
+                desktopLauncher.toggleLauncher()
+                desktopLauncher.changeSpeed(Preferences.globalSpeed)
+            }
+            //DesktopLauncher.instance.toggleLauncher()
             //
-            DesktopLauncher.instance.toggleLauncher()
-            DesktopLauncher.instance.changeSpeed(Preferences.globalSpeed)
+            //DesktopLauncher.instance.toggleLauncher()
+            //DesktopLauncher.instance.changeSpeed(Preferences.globalSpeed)
 
         case .monitor:
             SaverLauncher.instance.stopScreensaver()
@@ -306,11 +360,26 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     @IBAction func startWallpaperClick(_ sender: Any) {
+        if let button = sender as? NSButton {
+            print(button.tag)
+        } else {
+            print("not button")
+        }
+
         currentMode = .desktop
-        DesktopLauncher.instance.toggleLauncher()
-        DesktopLauncher.instance.changeSpeed(Preferences.globalSpeed)
+        for screen in NSScreen.screens {
+            _ = toggleDesktopLauncher(for: screen.screenUuid)
+            if let desktopLauncher = desktopLauncherInstances[screen.screenUuid] {
+                desktopLauncher.changeSpeed(Preferences.globalSpeed)
+            }
+        }
         update()
         appDelegate?.closePopover(sender: nil)
+    }
+    
+    @IBAction func wallpaperPickScreen(_ sender: NSButton) {
+        let p = NSPoint(x: 0, y: sender.frame.height)
+        appMenu.popUp(positioning: nil, at: p, in: sender)
     }
     
     @IBAction func startFullscreenClick(_ sender: Any) {
@@ -332,7 +401,17 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     // Secondary bar action (while playing)
     @IBAction func stopSaverClick(_ sender: Any) {
         if currentMode == .desktop {
-            DesktopLauncher.instance.toggleLauncher()
+            for desktopLauncher in desktopLauncherInstances.values {
+                if desktopLauncher.isRunning {
+                    desktopLauncher.toggleLauncher()
+                }
+            }
+            Preferences.enabledWallpaperScreenUuids = [] // reset what's running in prefs
+ 
+            // Clear the menu
+            for item in appMenu.items {
+                item.state = .off
+            }
         } else {
             SaverLauncher.instance.stopScreensaver()
         }
@@ -342,7 +421,9 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBAction func pauseSaverClick(_ sender: Any) {
         if currentMode == .desktop {
-            DesktopLauncher.instance.togglePause()
+            for desktopLauncher in desktopLauncherInstances.values {
+                desktopLauncher.togglePause()
+            }
         } else {
             SaverLauncher.instance.togglePause()
         }
@@ -351,7 +432,10 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     @IBAction func skipSaverClick(_ sender: Any) {
         if currentMode == .desktop {
-            DesktopLauncher.instance.nextVideo()
+            for desktopLauncher in desktopLauncherInstances.values {
+                desktopLauncher.nextVideo()
+            }
+            //DesktopLauncher.instance.nextVideo()
         } else {
             SaverLauncher.instance.nextVideo()
         }
@@ -359,8 +443,12 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     
     
     @IBAction func hideSaverClick(_ sender: Any) {
+        // TODO : we'd need to find from which screen we clicked
         if currentMode == .desktop {
-            DesktopLauncher.instance.skipAndHide()
+            for desktopLauncher in desktopLauncherInstances.values {
+                desktopLauncher.skipAndHide()
+            }
+            //DesktopLauncher.instance.skipAndHide()
         } else {
             SaverLauncher.instance.skipAndHide()
         }
@@ -370,7 +458,10 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         Preferences.globalSpeed = Int(sender.intValue)
 
         if currentMode == .desktop {
-            DesktopLauncher.instance.changeSpeed(Int(sender.intValue))
+            for desktopLauncher in desktopLauncherInstances.values {
+                desktopLauncher.changeSpeed(Int(sender.intValue))
+            }
+            //DesktopLauncher.instance.changeSpeed(Int(sender.intValue))
         } else {
             //debugLog("not here")
             SaverLauncher.instance.changeSpeed(Int(sender.intValue))
@@ -380,7 +471,6 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
 
     
     // Update bar
-     
     @IBAction func updateNowClick(_ sender: Any) {
         if UpdaterVersion.needsUpdating() {
             let workspace = NSWorkspace.shared
@@ -394,6 +484,40 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
         
         // Launch the update
         Update.instance.perform(self)
+    }
+    
+    func toggleDesktopLauncher(for screenUuid: String) -> Bool {
+        var isRunning = false
+        
+        if let desktopLauncher = desktopLauncherInstances[screenUuid] {
+            desktopLauncher.toggleLauncher()
+            desktopLauncher.changeSpeed(Preferences.globalSpeed)
+            isRunning = desktopLauncher.isRunning
+        } else if let screen = NSScreen.getScreenByUuid(screenUuid) {
+            desktopLauncherInstances[screenUuid] = DesktopLauncher(screen: screen)
+            desktopLauncherInstances[screenUuid]?.toggleLauncher()
+            desktopLauncherInstances[screenUuid]?.changeSpeed(Preferences.globalSpeed)
+            isRunning = desktopLauncherInstances[screenUuid]!.isRunning
+        }
+        
+        // Mark what's running in prefs
+        if isRunning {
+            if !Preferences.enabledWallpaperScreenUuids.contains(screenUuid) {
+                Preferences.enabledWallpaperScreenUuids.append(screenUuid)
+            }
+        } else {
+            Preferences.enabledWallpaperScreenUuids = Preferences.enabledWallpaperScreenUuids.filter {$0 != screenUuid}
+        }
+
+        // Workaround to handle our menu modes
+        if Preferences.enabledWallpaperScreenUuids.count > 0 {
+            currentMode = .desktop
+        } else {
+            currentMode = .none
+        }
+        
+        update()
+        return isRunning    // do we need this ?
     }
     
     

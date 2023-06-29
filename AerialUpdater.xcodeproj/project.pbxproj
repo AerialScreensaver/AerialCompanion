@@ -17,8 +17,6 @@
 		031954C0256409EC0058467C /* SaverLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031954BF256409EC0058467C /* SaverLauncher.swift */; };
 		031A3A6724D835B10011E738 /* InfoWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A3A6524D835B10011E738 /* InfoWindowController.swift */; };
 		031A3A6824D835B10011E738 /* InfoWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031A3A6624D835B10011E738 /* InfoWindowController.xib */; };
-		031D3E5F27B0110200FC4115 /* ModernPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */; };
-		031D3E6027B0110200FC4115 /* ModernPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */; };
 		0323BBE924E005280041759E /* checkmark.circle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBE824E005270041759E /* checkmark.circle.pdf */; };
 		0323BBEB24E0067C0041759E /* exclamationmark.triangle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */; };
 		0333115224D8369700E4622D /* btn_donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0333115124D8369700E4622D /* btn_donate.png */; };
@@ -102,8 +100,6 @@
 		031A3A6524D835B10011E738 /* InfoWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWindowController.swift; sourceTree = "<group>"; };
 		031A3A6624D835B10011E738 /* InfoWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindowController.xib; sourceTree = "<group>"; };
 		031D3E5C27B0006A00FC4115 /* AerialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AerialView.h; sourceTree = "<group>"; };
-		031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernPopoverViewController.swift; sourceTree = "<group>"; };
-		031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModernPopoverViewController.xib; sourceTree = "<group>"; };
 		0323BBE824E005270041759E /* checkmark.circle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = checkmark.circle.pdf; sourceTree = "<group>"; };
 		0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = exclamationmark.triangle.pdf; sourceTree = "<group>"; };
 		0333115124D8369700E4622D /* btn_donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_donate.png; sourceTree = "<group>"; };
@@ -207,8 +203,6 @@
 				0333115C24D8796F00E4622D /* UpdateCheckWindowController.swift */,
 				03C491B524FBBDA00041D71C /* ExperimentalReadmeWindowController.xib */,
 				03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */,
-				031D3E5E27B0110200FC4115 /* ModernPopoverViewController.xib */,
-				031D3E5D27B0110200FC4115 /* ModernPopoverViewController.swift */,
 				F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */,
 				F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */,
 			);
@@ -474,7 +468,6 @@
 				033B0B6D24E96D4C00622CA7 /* cloud.sun.rain.pdf in Resources */,
 				0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */,
 				033B0B6C24E96D4C00622CA7 /* sun.max.pdf in Resources */,
-				031D3E6027B0110200FC4115 /* ModernPopoverViewController.xib in Resources */,
 				03C491B724FBBDA00041D71C /* ExperimentalReadmeWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,7 +496,6 @@
 				03592ABC24CC821500C1AE52 /* Update.swift in Sources */,
 				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
 				033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */,
-				031D3E5F27B0110200FC4115 /* ModernPopoverViewController.swift in Sources */,
 				0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */,
 				033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */,
 				033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */,
@@ -678,9 +670,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VN7N8U22B8;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Aerial Companion";
@@ -707,9 +700,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = VN7N8U22B8;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Aerial Companion";

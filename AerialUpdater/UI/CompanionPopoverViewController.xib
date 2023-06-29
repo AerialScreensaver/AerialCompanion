@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22113.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.3"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +21,7 @@
                 <outlet property="updateLabel" destination="he5-wE-Bg5" id="XzS-po-cmd"/>
                 <outlet property="versionLabel" destination="06K-xe-End" id="b2T-ln-Peg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="wallpaperPickScreenButton" destination="awt-Wp-Ktq" id="sZe-z1-w8o"/>
                 <outlet property="warningDisabledBox" destination="RsQ-tf-Zko" id="ax5-w2-1cU"/>
             </connections>
         </customObject>
@@ -75,22 +76,19 @@
                                             <action selector="openSaverSettings:" target="-2" id="nl3-Gj-MPc"/>
                                         </connections>
                                     </button>
-                                    <button toolTip="Start Fullscreen" translatesAutoresizingMaskIntoConstraints="NO" id="R5D-dl-axm">
-                                        <rect key="frame" x="128" y="9" width="32" height="42"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward.and.arrow.down.forward" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6jY-Tb-id1">
+                                    <button toolTip="Pick screen to launch dynamic wallpaper" translatesAutoresizingMaskIntoConstraints="NO" id="awt-Wp-Ktq">
+                                        <rect key="frame" x="114" y="12" width="16.5" height="40"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="chevron.down" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="AoL-8i-UOD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                        <symbolConfiguration key="symbolConfiguration" scale="large" weight="medium">
-                                            <nil key="locale"/>
-                                        </symbolConfiguration>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="7im-5F-ZkD"/>
-                                            <constraint firstAttribute="width" constant="32" id="apX-qA-vgt"/>
+                                            <constraint firstAttribute="width" constant="16" id="41p-cw-H2y"/>
+                                            <constraint firstAttribute="height" constant="40" id="FsB-YB-2tc"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="startFullscreenClick:" target="-2" id="MBS-nO-0my"/>
+                                            <action selector="wallpaperPickScreen:" target="-2" id="MzA-Zn-xoc"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Start Screen Saver and lock screen" translatesAutoresizingMaskIntoConstraints="NO" id="LoR-kF-Q7l">
@@ -108,13 +106,33 @@
                                             <action selector="startScreenSaverClick:" target="-2" id="dU8-aq-lKW"/>
                                         </connections>
                                     </button>
+                                    <button toolTip="Start Fullscreen" translatesAutoresizingMaskIntoConstraints="NO" id="R5D-dl-axm">
+                                        <rect key="frame" x="142" y="9" width="32" height="42"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.backward.and.arrow.down.forward" catalog="system" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6jY-Tb-id1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <symbolConfiguration key="symbolConfiguration" scale="large" weight="medium">
+                                            <nil key="locale"/>
+                                        </symbolConfiguration>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="7im-5F-ZkD"/>
+                                            <constraint firstAttribute="width" constant="32" id="apX-qA-vgt"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="startFullscreenClick:" target="-2" id="MBS-nO-0my"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="LoR-kF-Q7l" firstAttribute="leading" secondItem="2ys-TD-8Qy" secondAttribute="leading" constant="16" id="5xZ-T9-Js2"/>
                                     <constraint firstAttribute="trailing" secondItem="J0o-tj-AaB" secondAttribute="trailing" constant="16" id="Bdb-E1-foy"/>
                                     <constraint firstItem="J0o-tj-AaB" firstAttribute="top" secondItem="2ys-TD-8Qy" secondAttribute="top" constant="14" id="JVL-GH-mb0"/>
+                                    <constraint firstItem="awt-Wp-Ktq" firstAttribute="leading" secondItem="rcJ-Hj-jU0" secondAttribute="trailing" constant="2" id="Ndd-La-FO4"/>
+                                    <constraint firstItem="R5D-dl-axm" firstAttribute="leading" secondItem="awt-Wp-Ktq" secondAttribute="trailing" constant="12" id="YKP-4t-udO"/>
+                                    <constraint firstItem="awt-Wp-Ktq" firstAttribute="top" secondItem="2ys-TD-8Qy" secondAttribute="top" constant="12" id="iJ9-BL-JOM"/>
                                     <constraint firstItem="rcJ-Hj-jU0" firstAttribute="leading" secondItem="LoR-kF-Q7l" secondAttribute="trailing" constant="16" id="sQM-jz-QRH"/>
-                                    <constraint firstItem="R5D-dl-axm" firstAttribute="leading" secondItem="rcJ-Hj-jU0" secondAttribute="trailing" constant="16" id="uxf-se-zDR"/>
                                     <constraint firstItem="LoR-kF-Q7l" firstAttribute="top" secondItem="2ys-TD-8Qy" secondAttribute="top" constant="14" id="vlf-y6-viq"/>
                                     <constraint firstItem="R5D-dl-axm" firstAttribute="top" secondItem="2ys-TD-8Qy" secondAttribute="top" constant="18" id="y6k-8O-b0R"/>
                                     <constraint firstItem="rcJ-Hj-jU0" firstAttribute="top" secondItem="2ys-TD-8Qy" secondAttribute="top" constant="12" id="yhZ-n6-Udr"/>
@@ -562,10 +580,11 @@
     </objects>
     <resources>
         <image name="arrow.up.backward.and.arrow.down.forward" catalog="system" width="16" height="15"/>
+        <image name="chevron.down" catalog="system" width="15" height="9"/>
         <image name="exclamationmark.triangle" catalog="system" width="17" height="15"/>
         <image name="eye.slash.fill" catalog="system" width="21" height="16"/>
         <image name="forward.circle" catalog="system" width="15" height="15"/>
-        <image name="gear" catalog="system" width="17" height="17"/>
+        <image name="gear" catalog="system" width="17" height="16"/>
         <image name="hare" catalog="system" width="23" height="17"/>
         <image name="info.circle" catalog="system" width="15" height="15"/>
         <image name="list.bullet.circle" catalog="system" width="15" height="15"/>
