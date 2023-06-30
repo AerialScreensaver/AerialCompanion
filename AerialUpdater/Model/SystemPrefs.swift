@@ -44,13 +44,15 @@ struct SystemPrefs {
     
     
     static func setSaverActivationTime(time:Int) {
-        // defaults -currentHost write com.apple.screensaver idleTime timeInSeconds
+        // defaults -currentHost write com.apple.screensaver idleTime -int timeInSeconds
+        // Note : -int became required at some point in Ventura, if not specified it defaults to string nowadays. This parameter is available since 2003 so this is backward compatible
         _ = Helpers.shell(launchPath: "/usr/bin/defaults",
-                                   arguments: ["-currentHost",
-                                               "write",
-                                               "com.apple.screensaver",
-                                               "idleTime",
-                                                String(time*60)])
+                           arguments: ["-currentHost",
+                                       "write",
+                                       "com.apple.screensaver",
+                                       "idleTime",
+                                       "-int",
+                                        String(time*60)])
     }
     
     

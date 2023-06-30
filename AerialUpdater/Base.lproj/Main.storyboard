@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -706,7 +706,7 @@
                                     <action selector="desiredVersionPopupChange:" target="XfG-lQ-9wD" id="LAN-Gm-0mH"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHQ-kl-Gd8">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHQ-kl-Gd8">
                                 <rect key="frame" x="60" y="174" width="102" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Desired version:" id="FcP-U5-dBi">
                                     <font key="font" metaFont="system"/>
@@ -714,7 +714,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31W-lc-dSb">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="31W-lc-dSb">
                                 <rect key="frame" x="43" y="131" width="119" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Currently installed:" id="Tqc-5z-agH">
                                     <font key="font" metaFont="system"/>
@@ -722,7 +722,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ish-Ba-7Yp">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ish-Ba-7Yp">
                                 <rect key="frame" x="60" y="95" width="102" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" alignment="right" title="Latest available:" id="QGM-v8-TYZ">
                                     <font key="font" metaFont="system"/>
@@ -730,7 +730,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HaJ-0z-nGG">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HaJ-0z-nGG">
                                 <rect key="frame" x="178" y="131" width="37" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="b5F-H3-o9D">
                                     <font key="font" metaFont="system"/>
@@ -738,7 +738,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bod-Mv-xj4">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bod-Mv-xj4">
                                 <rect key="frame" x="178" y="95" width="37" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="I1U-hN-3bT">
                                     <font key="font" metaFont="system"/>
@@ -759,7 +759,7 @@
                                     <action selector="installNowButtonClick:" target="XfG-lQ-9wD" id="qil-HB-44r"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="25" verticalHuggingPriority="75" horizontalCompressionResistancePriority="75" verticalCompressionResistancePriority="75" translatesAutoresizingMaskIntoConstraints="NO" id="MI1-En-lZD">
+                            <textField focusRingType="none" horizontalHuggingPriority="25" verticalHuggingPriority="75" horizontalCompressionResistancePriority="75" verticalCompressionResistancePriority="75" translatesAutoresizingMaskIntoConstraints="NO" id="MI1-En-lZD">
                                 <rect key="frame" x="54" y="14" width="37" height="16"/>
                                 <textFieldCell key="cell" controlSize="large" lineBreakMode="clipping" title="Label" id="RPJ-eh-obu">
                                     <font key="font" metaFont="system"/>
