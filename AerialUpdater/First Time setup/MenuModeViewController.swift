@@ -41,8 +41,8 @@ class MenuModeViewController: NSViewController {
             Preferences.updateMode = .notifyme
         }
 
-        let appd = NSApp.delegate as? AppDelegate
-        appd?.updateMenu()
+        /*let appd = NSApp.delegate as? AppDelegate
+        appd?.updateMenu() */
     }
     
 }

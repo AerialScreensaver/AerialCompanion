@@ -33,8 +33,8 @@ class ReleaseViewController: NSViewController {
             Preferences.desiredVersion = .beta
         }
 
-        let appd = NSApp.delegate as? AppDelegate
-        appd?.updateMenu()
+        /*let appd = NSApp.delegate as? AppDelegate
+        appd?.updateMenu()*/
     }
     
 }

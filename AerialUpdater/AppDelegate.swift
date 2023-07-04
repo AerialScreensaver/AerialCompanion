@@ -259,6 +259,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: - Menu Content Setup and Update
     // Load the menu from MenuView.xib and attach it to our StatusItem
+    /*
     func createMenu() {
         var topLevelObjects: NSArray? = NSArray()
 
@@ -285,6 +286,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     func updateMenuContent() {
         menuViewController.updateMenuContent()
-    }
+    }*/
 }
 

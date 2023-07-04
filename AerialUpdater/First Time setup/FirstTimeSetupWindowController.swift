@@ -85,11 +85,6 @@ class FirstTimeSetupWindowController: NSWindowController, UpdateCallback {
                 Update.instance.setCallback(self)
                 Update.instance.perform(self)
             } else {
-                DispatchQueue.main.async {
-                    let appd = NSApp.delegate as? AppDelegate
-                    appd?.updateMenu()
-                    appd?.updateMenuContent()
-                }
                 LaunchAgent.update()
             }
         }
@@ -113,11 +108,6 @@ class FirstTimeSetupWindowController: NSWindowController, UpdateCallback {
     
     func updateMenuContent() {
         debugLog("donee")
-        DispatchQueue.main.async {
-            let appd = NSApp.delegate as? AppDelegate
-            appd?.updateMenu()
-            appd?.updateMenuContent()
-        }
     }
     
     func setIcon(mode: IconMode) {
