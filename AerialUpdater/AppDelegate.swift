@@ -12,6 +12,10 @@ enum IconMode {
     case normal, updating, notification
 }
 
+struct PrefTest: Decodable {
+    let title: String
+}
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -97,6 +101,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             selector: #selector(self.test2(_:)),
             name: Notification.Name("com.glouel.aerial.nextvideo"), object: nil)
 
+        
+        PluginBridge.setNotifications()
+        
         /*// We may auto start the background based on user pref
         if Preferences.restartBackground {
             // Only if it was running previously
@@ -105,6 +112,72 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }*/
 
+        //testSonoma()
+    }
+    
+    func testSonoma() {
+        print("TEST SONOMA")
+        /*
+        let defaultFile = "/Users/guillaume/Library/Application Support/com.apple.wallpaper/Store/Index_v2.plist"
+
+        let plistURL = URL(fileURLWithPath: defaultFile)
+        let data = try? Data(contentsOf: plistURL)
+        
+        
+        var plistDictionary = try? PropertyListSerialization.propertyList(from: Data(contentsOf: plistURL), options: [], format: nil) as? [String: AnyObject]
+        
+        guard var configurationPlist = try? PropertyListSerialization.propertyList(from: (plistDictionary?["AllSpacesAndDisplays"] as? NSDictionary)?["Idle"] [?? Data(), options: [], format: nil) as? [String: AnyObject] else {
+            return
+        }
+        
+        // Modify the `configurationPlist` dictionary as needed
+        configurationPlist["NewKey"] = "NewValue" as AnyObject
+        
+        // Update the `plistDictionary` with the modified `configurationPlist`
+        if var content = (plistDictionary?["AllSpacesAndDisplays"] as? NSDictionary)?["Idle"] as? NSDictionary??.content {
+            if var choices = content["Choices"] as? NSArray {
+                if var choicesDict = choices[0] as? NSDictionary {
+                    choicesDict["Configuration"] = try? PropertyListSerialization.data(fromPropertyList: configurationPlist, format: .xml, options: 0) as AnyObject
+                    choices[0] = choicesDict
+                    content["Choices"] = choices
+                    if var idle = (plistDictionary?["AllSpacesAndDisplays"] as? NSDictionary)?["Idle"] as? NSDictionary {
+                        idle["Content"] = content
+                        plistDictionary?["AllSpacesAndDisplays"] = ["Idle": idle] as AnyObject
+                    }
+                }
+            }
+        }*/
+        /*
+        // Write the modified `plistDictionary` to the plist file
+        if let data = try? PropertyListSerialization.data(fromPropertyList: plistDictionary as Any, format: .xml, options: 0) {
+            try? data.write(to: plistURL, options: .atomic)
+        }
+        
+        */
+        
+        /*
+        guard let plistDictionary = try? PropertyListSerialization.propertyList(from: data!, options: [], format: nil) as? [String: AnyObject] else {
+            return
+        }*/
+        /*
+        let allDisplays = plistDictionary["AllSpacesAndDisplays"] as! NSDictionary
+        let idle = allDisplays["Idle"] as! NSDictionary
+        let content = idle["Content"] as! NSDictionary
+        let choices = content["Choices"] as! NSArray
+        let choicesDict = choices[0] as! NSDictionary
+
+        let encodedData = choicesDict["Configuration"] // This is our data
+        //print(encodedData.debugDescription)
+        
+        guard let configurationPlist = try? PropertyListSerialization.propertyList(from: encodedData as! Data, options: [], format: nil) as? [String: AnyObject] else {
+            return
+        }
+        */
+/*
+        guard var configurationPlist = try? PropertyListSerialization.propertyList(from: (plistDictionary?["AllSpacesAndDisplays"] as? NSDictionary)?["Idle"] as? NSDictionary??.self??.content??.choices?[0]??.configuration ?? Data(), options: [], format: nil) as? [String: AnyObject] else {
+            return
+        }
+        print(configurationPlist)*/
     }
     
     

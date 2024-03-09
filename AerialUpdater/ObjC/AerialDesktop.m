@@ -12,22 +12,61 @@
 //#import <ScreenSaver/ScreenSaver.h>
 #import "AerialView.h"
 
+@interface PluginLoader : NSObject
++ (instancetype)sharedInstance;
++ (void)addView;
++ (void)removeView;
+@end
+
+@implementation PluginLoader
+
+static NSInteger _viewCount = 0;
+static void* _handle;
++ (instancetype)sharedInstance {
+    static PluginLoader *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[PluginLoader alloc] init];
+    });
+    return sharedInstance;
+}
+
++ (void)addView {
+    //
+    if (_viewCount == 0) {
+        NSString *path = [NSString stringWithFormat: @"%@/Contents/MacOS/Aerial", [Constant aerialPath]];
+        NSLog(@"PL Loading %@", path);
+
+        const char* st = [path UTF8String];
+        _handle = dlopen(st, RTLD_LAZY);
+    }
+    
+    _viewCount++;
+    NSLog(@"PL Count %ld", (long)_viewCount);
+}
+
++ (void)removeView {
+    _viewCount--;
+    
+    if (_viewCount == 0) {
+        int i = dlclose(_handle);
+        NSLog(@"PL Closed %d", i);
+    }
+}
+
+@end
+
+
 @interface AerialDesktop ()
 @property AerialView *ssv;
 //@property NSWindowController *pwc;
-@property void *handle;
 @end
 
 @implementation AerialDesktop
 - (void)awakeFromNib {
-    // Load Aerial's bundle
-    NSString *path = [NSString stringWithFormat: @"%@/Contents/MacOS/Aerial", [Constant aerialPath]];
-    NSLog(@"Desktop WOOO %@", path);
-    const char* st = [path UTF8String];
-    _handle = dlopen(st, RTLD_LAZY);
     
     [super awakeFromNib];
-    NSLog(@"Desktop Awoken");
   
     //[self.window setDelegate:self];
     [self.window.contentView setAutoresizesSubviews:YES];
@@ -66,6 +105,9 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    // Ensure our Aerial plugin is loaded and increment the count
+    [PluginLoader addView];
+    
     // Create a new AerialView of the window's inner size
     _ssv = [[NSClassFromString(@"AerialView") alloc]
             initWithFrame:
@@ -95,9 +137,7 @@
 - (void)stopScreensaver {
     [_ssv stopAnimation];
     _ssv = nil;
-    
-    int i = dlclose(_handle);
-    NSLog(@"Desktop closed %d",i);
+    [PluginLoader removeView];
 }
 
 @end

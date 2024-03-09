@@ -85,9 +85,9 @@ func logToDisk(_ message: String) {
 }
 
 func debugLog(_ message: String) {
-    if Preferences.debugMode {
-        Log(level: .debug, message: message)
-    }
+    //if Preferences.debugMode {
+    Log(level: .debug, message: message)
+    //}
 }
 
 func infoLog(_ message: String) {

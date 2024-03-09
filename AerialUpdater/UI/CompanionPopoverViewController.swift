@@ -12,7 +12,8 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     lazy var infoWindowController = InfoWindowController()
     lazy var settingsWindowController = SettingsWindowController()
     lazy var updateCheckWindowController = UpdateCheckWindowController()
-    
+    lazy var setDefaultWindowController = SetDefaultWindowController()
+
     var desktopLauncherInstances: [String: DesktopLauncher] = [:]
     
     enum PlaybackMode {
@@ -208,7 +209,9 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
             let displayTime = SystemPrefs.getDisplaySleep() ?? 0
 
             DispatchQueue.main.async { [self] in
-                if (saverTime == 0 || saverTime >= displayTime) {
+                if displayTime == 0 && saverTime > 0 {
+                    warningDisabledBox.isHidden = true
+                } else if (saverTime == 0 || saverTime >= displayTime ) {
                     warningDisabledBox.isHidden = false
                 } else {
                     warningDisabledBox.isHidden = true
@@ -270,8 +273,22 @@ class CompanionPopoverViewController: NSViewController, UpdateCallback {
     }
     
     @IBAction func setAsDefaultButton(_ sender: NSButton) {
-        Update.instance.setAsDefault()
-        notDefaultBox.isHidden = true
+        if #available(macOS 14, *) {
+            var topLevelObjects: NSArray? = NSArray()
+            if !Bundle.main.loadNibNamed(NSNib.Name("SetDefaultWindowController"),
+                                         owner: setDefaultWindowController,
+                                         topLevelObjects: &topLevelObjects) {
+                errorLog("Could not load nib for SettingsWindow, please report")
+            }
+            setDefaultWindowController.windowDidLoad()
+            setDefaultWindowController.showWindow(self)
+            setDefaultWindowController.window!.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+            appDelegate?.closePopover(sender: nil)
+        } else {
+            Update.instance.setAsDefault()
+            notDefaultBox.isHidden = true
+        }
     }
     
     

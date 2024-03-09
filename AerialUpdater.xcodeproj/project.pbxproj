@@ -66,13 +66,20 @@
 		03F5E14A2575369200BF4F45 /* LogoIcon-128px@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */; };
 		73309F322685AFEA00B8FAB0 /* NSScreen+Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */; };
 		F003C15429116AE1003FCB17 /* HostedSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003C15329116AE1003FCB17 /* HostedSettingsWindowController.swift */; };
+		F03F59F32AC312B000DB6B77 /* SetDefaultWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03F59F12AC312B000DB6B77 /* SetDefaultWindowController.swift */; };
+		F03F59F42AC312B000DB6B77 /* SetDefaultWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F03F59F22AC312B000DB6B77 /* SetDefaultWindowController.xib */; };
+		F03F59FA2AC3182800DB6B77 /* settings_numbered.png in Resources */ = {isa = PBXBuildFile; fileRef = F03F59F92AC3182800DB6B77 /* settings_numbered.png */; };
 		F05C63B228F1D9D50068B545 /* CompanionPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */; };
 		F05C63B328F1D9D50068B545 /* CompanionPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */; };
 		F05C63B528F21A390068B545 /* menubar.dock.rectangle.svg in Resources */ = {isa = PBXBuildFile; fileRef = F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */; };
 		F05C63B728F326300068B545 /* SystemPrefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C63B628F326300068B545 /* SystemPrefs.swift */; };
+		F072218C2AD437BA001F5452 /* PluginBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072218B2AD437BA001F5452 /* PluginBridge.swift */; };
+		F072218E2AD43D91001F5452 /* NightShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072218D2AD43D91001F5452 /* NightShift.swift */; };
+		F07221902AD45039001F5452 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F072218F2AD45039001F5452 /* Locations.swift */; };
 		F0A3E09928845B8D005E8D8D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3E09828845B8D005E8D8D /* main.swift */; };
 		F0A3E0A028845C1D005E8D8D /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A3E09F28845C1D005E8D8D /* MusicKit.framework */; };
 		F0C227872A12A5410053D5DA /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F0C227862A12A5410053D5DA /* Sparkle */; };
+		F0EB5B072A58412200910682 /* NSButton+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EB5B062A58412200910682 /* NSButton+Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -156,14 +163,21 @@
 		03F5E1492575369200BF4F45 /* LogoIcon-128px@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogoIcon-128px@2x.png"; sourceTree = "<group>"; };
 		73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Id.swift"; sourceTree = "<group>"; };
 		F003C15329116AE1003FCB17 /* HostedSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedSettingsWindowController.swift; sourceTree = "<group>"; };
+		F03F59F12AC312B000DB6B77 /* SetDefaultWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultWindowController.swift; sourceTree = "<group>"; };
+		F03F59F22AC312B000DB6B77 /* SetDefaultWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDefaultWindowController.xib; sourceTree = "<group>"; };
+		F03F59F92AC3182800DB6B77 /* settings_numbered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_numbered.png; sourceTree = "<group>"; };
 		F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionPopoverViewController.swift; sourceTree = "<group>"; };
 		F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompanionPopoverViewController.xib; sourceTree = "<group>"; };
 		F05C63B428F21A390068B545 /* menubar.dock.rectangle.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menubar.dock.rectangle.svg; sourceTree = "<group>"; };
 		F05C63B628F326300068B545 /* SystemPrefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemPrefs.swift; sourceTree = "<group>"; };
+		F072218B2AD437BA001F5452 /* PluginBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginBridge.swift; sourceTree = "<group>"; };
+		F072218D2AD43D91001F5452 /* NightShift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightShift.swift; sourceTree = "<group>"; };
+		F072218F2AD45039001F5452 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
 		F0A3E09628845B8D005E8D8D /* AerialMusicHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AerialMusicHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0A3E09828845B8D005E8D8D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F0A3E09D28845BD4005E8D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0A3E09F28845C1D005E8D8D /* MusicKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MusicKit.framework; path = System/Library/Frameworks/MusicKit.framework; sourceTree = SDKROOT; };
+		F0EB5B062A58412200910682 /* NSButton+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSButton+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +206,7 @@
 				03076A062505EF8E00CDF16C /* kofi1@2x.png */,
 				0323BBE824E005270041759E /* checkmark.circle.pdf */,
 				0323BBEA24E0067C0041759E /* exclamationmark.triangle.pdf */,
+				F03F59F92AC3182800DB6B77 /* settings_numbered.png */,
 				0333115124D8369700E4622D /* btn_donate.png */,
 				036899962522608200136AE5 /* MenuView.xib */,
 				0333115424D8448E00E4622D /* MenuViewController.swift */,
@@ -205,6 +220,8 @@
 				03C491B424FBBDA00041D71C /* ExperimentalReadmeWindowController.swift */,
 				F05C63B128F1D9D50068B545 /* CompanionPopoverViewController.xib */,
 				F05C63B028F1D9D50068B545 /* CompanionPopoverViewController.swift */,
+				F03F59F12AC312B000DB6B77 /* SetDefaultWindowController.swift */,
+				F03F59F22AC312B000DB6B77 /* SetDefaultWindowController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -247,6 +264,7 @@
 		03592AB624CC80A600C1AE52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F072218A2AD437AB001F5452 /* Bridge */,
 				036899A825235C5A00136AE5 /* Consts.swift */,
 				035F6F1924CC8774002E4EEE /* Manifest */,
 				035F6F1A24CC8842002E4EEE /* Helpers */,
@@ -281,6 +299,7 @@
 				035F6F1B24CC8D97002E4EEE /* ErrorLog.swift */,
 				0333115824D85CCA00E4622D /* String+version.swift */,
 				73309F312685AFEA00B8FAB0 /* NSScreen+Id.swift */,
+				F0EB5B062A58412200910682 /* NSButton+Image.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -336,6 +355,16 @@
 				03592AB624CC80A600C1AE52 /* Model */,
 			);
 			path = AerialUpdater;
+			sourceTree = "<group>";
+		};
+		F072218A2AD437AB001F5452 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				F072218B2AD437BA001F5452 /* PluginBridge.swift */,
+				F072218D2AD43D91001F5452 /* NightShift.swift */,
+				F072218F2AD45039001F5452 /* Locations.swift */,
+			);
+			path = Bridge;
 			sourceTree = "<group>";
 		};
 		F0A3E09728845B8D005E8D8D /* AerialMusicHelper */ = {
@@ -463,9 +492,11 @@
 				F05C63B528F21A390068B545 /* menubar.dock.rectangle.svg in Resources */,
 				0316C21B2577DD6B007BAF70 /* AerialDesktop.xib in Resources */,
 				033B0B5524E95DDD00622CA7 /* FirstTimeSetupWindowController.xib in Resources */,
+				F03F59FA2AC3182800DB6B77 /* settings_numbered.png in Resources */,
 				033B0B6924E96CE200622CA7 /* ant.pdf in Resources */,
 				03076A072505EF8E00CDF16C /* kofi1@2x.png in Resources */,
 				033B0B6D24E96D4C00622CA7 /* cloud.sun.rain.pdf in Resources */,
+				F03F59F42AC312B000DB6B77 /* SetDefaultWindowController.xib in Resources */,
 				0333115F24D8796F00E4622D /* UpdateCheckWindowController.xib in Resources */,
 				033B0B6C24E96D4C00622CA7 /* sun.max.pdf in Resources */,
 				03C491B724FBBDA00041D71C /* ExperimentalReadmeWindowController.xib in Resources */,
@@ -481,6 +512,7 @@
 			files = (
 				0333115B24D85D4600E4622D /* UpdaterVersion.swift in Sources */,
 				033B0B6524E967C600622CA7 /* NextViewController.swift in Sources */,
+				F0EB5B072A58412200910682 /* NSButton+Image.swift in Sources */,
 				73309F322685AFEA00B8FAB0 /* NSScreen+Id.swift in Sources */,
 				0316C21A2577DD6B007BAF70 /* AerialDesktop.m in Sources */,
 				03CE4F7E24CB43FE00494D32 /* Manifest.swift in Sources */,
@@ -497,6 +529,7 @@
 				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
 				033B0B7624E9767700622CA7 /* ThanksViewController.swift in Sources */,
 				0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */,
+				F072218C2AD437BA001F5452 /* PluginBridge.swift in Sources */,
 				033B0B6124E9658D00622CA7 /* MenuModeViewController.swift in Sources */,
 				033B0B5424E95DDD00622CA7 /* FirstTimeSetupWindowController.swift in Sources */,
 				0319375527B06FB40089A063 /* SettingsWindowController.swift in Sources */,
@@ -507,12 +540,15 @@
 				0333115E24D8796F00E4622D /* UpdateCheckWindowController.swift in Sources */,
 				03592AB224CC765500C1AE52 /* Preferences.swift in Sources */,
 				03C491B624FBBDA00041D71C /* ExperimentalReadmeWindowController.swift in Sources */,
+				F07221902AD45039001F5452 /* Locations.swift in Sources */,
 				03CE4F5924CB0CA700494D32 /* AppDelegate.swift in Sources */,
 				03ADA8EC24E034A40093D0A2 /* LaunchAgent.swift in Sources */,
 				F05C63B228F1D9D50068B545 /* CompanionPopoverViewController.swift in Sources */,
+				F03F59F32AC312B000DB6B77 /* SetDefaultWindowController.swift in Sources */,
 				03CE4F8024CB4CFB00494D32 /* FileDownloader.swift in Sources */,
 				035F6F1C24CC8D97002E4EEE /* ErrorLog.swift in Sources */,
 				F05C63B728F326300068B545 /* SystemPrefs.swift in Sources */,
+				F072218E2AD43D91001F5452 /* NightShift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,10 +706,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3L54M5L5KK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AerialUpdater/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Aerial Companion";
@@ -683,9 +718,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b8;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -700,7 +736,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AerialUpdater/AerialUpdater.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3L54M5L5KK;
@@ -713,10 +748,11 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.5.0b8;
+				MARKETING_VERSION = 1.5.2;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.glouel.AerialUpdater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "AerialUpdater/ObjC/Aerial-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

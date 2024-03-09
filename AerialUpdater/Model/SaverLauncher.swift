@@ -57,7 +57,7 @@ class SaverLauncher : NSObject, NSWindowDelegate {
         // We need to monitor the settings window, we do it here
         hostedSettingsWindow.isReleasedWhenClosed = true
         hostedSettingsWindow.styleMask = [.closable, .titled, .resizable]
-        hostedSettingsWindow.title = "Test title"
+        hostedSettingsWindow.title = "Aerial Settings"
         hostedSettingsWindow.windowController = hostedSettingsWindowController
         hostedSettingsWindow.delegate = hostedSettingsWindowController
         hostedSettingsWindow.makeKeyAndOrderFront(uiController)
