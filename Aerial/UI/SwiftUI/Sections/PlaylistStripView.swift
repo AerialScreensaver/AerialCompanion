@@ -297,8 +297,8 @@ struct PlaylistSectionView: View {
                 }
 
                 // Progress bar on the current video — 6 pt tall strip
-                // pinned to the bottom edge, fills left → right per
-                // `playbackProgress`. Faint Aerial-color track behind the
+                // pinned to the bottom edge, fills left → right per the
+                // playback fraction. Faint Aerial-color track behind the
                 // fill keeps it visible at low progress against a dark
                 // thumbnail. Driven by PlaybackManager's 1 Hz refresh:
                 // live AVPlayer position when wallpaper is running, last
@@ -306,30 +306,32 @@ struct PlaylistSectionView: View {
                 if isCurrent {
                     VStack(spacing: 0) {
                         Spacer(minLength: 0)
-                        ZStack(alignment: .leading) {
-                            Rectangle()
-                                .fill(Color.aerial.opacity(0.25))
-                                .frame(height: 6)
-                            Rectangle()
-                                .fill(Color.aerial)
-                                .frame(width: 96 * CGFloat(playbackManager.playbackProgress),
-                                       height: 6)
-                        }
+                        PlaybackProgressBar(width: 96)
                     }
                     .frame(width: 96, height: 54)
                     .allowsHitTesting(false)
                 }
 
                 // Pause/play toggle overlay on current thumbnail.
-                // Three visual states: battery-paused (battery icon),
-                // user-paused (play icon), playing (pause icon).
+                // Visual states: battery-paused (battery icon),
+                // thermal/LPM-paused (thermometer/bolt icon), camera-
+                // paused (video icon), user-paused (play icon),
+                // playing (pause icon).
                 if isCurrent && playbackManager.playbackMode != .none {
                     let isBatteryPaused = playbackManager.isBatteryPaused
+                    let thermalCause = playbackManager.thermalPauseCause
+                    let isCameraPaused = playbackManager.isCameraPaused
                     let icon: String = isBatteryPaused
                         ? "battery.25percent"
+                        : thermalCause == .thermalPressure ? "thermometer.medium"
+                        : thermalCause == .lowPowerMode ? "bolt.circle"
+                        : isCameraPaused ? "video.fill"
                         : (playbackManager.isPaused ? "play.fill" : "pause.fill")
                     let label: String = isBatteryPaused
                         ? "Resume (paused on battery)"
+                        : thermalCause == .thermalPressure ? "Resume (paused — thermal pressure)"
+                        : thermalCause == .lowPowerMode ? "Resume (paused — Low Power Mode)"
+                        : isCameraPaused ? "Resume (paused — camera in use)"
                         : (playbackManager.isPaused ? "Resume" : "Pause")
                     Button(action: { playbackManager.togglePause() }) {
                         Image(systemName: icon)
@@ -558,6 +560,31 @@ struct PlaylistSectionView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+/// Deliberately a LEAF observer: it is the only view watching
+/// `PlaybackProgressModel`'s 1 Hz publish, so a progress tick
+/// re-renders just this bar — publishing from PlaybackManager itself
+/// re-rendered every observer of the whole object, including a closed
+/// popover's still-alive hosting view.
+struct PlaybackProgressBar: View {
+    @ObservedObject private var progress = PlaybackProgressModel.shared
+    let width: CGFloat
+
+    init(width: CGFloat) {
+        self.width = width
+    }
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(Color.aerial.opacity(0.25))
+                .frame(height: 6)
+            Rectangle()
+                .fill(Color.aerial)
+                .frame(width: width * CGFloat(progress.fraction), height: 6)
         }
     }
 }

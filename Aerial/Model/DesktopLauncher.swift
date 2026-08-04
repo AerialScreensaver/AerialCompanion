@@ -164,15 +164,15 @@ class DesktopLauncher : NSObject, NSWindowDelegate, DesktopOcclusionDelegate {
             window.contentView = nil
             window.contentViewController = nil
             window.orderOut(nil)
-            // Force ARC deallocation on close. The window was created with
-            // isReleasedWhenClosed=false so it could survive the popover's
-            // stop/restart cycles; disconnect is different — the screen it
-            // was anchored to is gone, so the window has nothing to do but
-            // die. Without this flip the OS keeps the NSWindow alive in its
-            // window list, and the next display reconfig re-routes it onto a
-            // surviving screen as an invisible orphan.
-            window.isReleasedWhenClosed = true
             window.close()
+            // The screen this window was anchored to is gone, so kill the
+            // window now rather than letting the next display reconfig
+            // re-route it onto a surviving screen as an invisible orphan.
+            // Detaching it from the controller drops the last strong ref —
+            // never flip isReleasedWhenClosed on a controller-owned window:
+            // close() would over-release it and NSWindowController's dealloc
+            // then messages the freed window (unplug/replug crash).
+            aerialDesktopController.window = nil
         }
         isRunning = false
     }
@@ -353,11 +353,13 @@ class DesktopLauncher : NSObject, NSWindowDelegate, DesktopOcclusionDelegate {
             isCurrentlyOccluded = false
         }
 
-        // Clear the screensaver pause flag up-front so the player is
-        // free to run the ramp. The occlusion-pause flag, when
-        // applicable, is applied *after* the ramp so the deceleration
-        // is visible on whatever portion of the desktop isn't covered.
-        aerialDesktopController.screensaverResume()
+        // Clear the screensaver reason up-front so the player is free to
+        // run the ramp (other reasons, like a user pause, keep it paused —
+        // the ramp then drives the rate directly for the visual). The
+        // coverage reason, when applicable, is applied *after* the ramp so
+        // the deceleration is visible on whatever portion of the desktop
+        // isn't covered.
+        aerialDesktopController.resume(reason: .screensaver)
 
         // Ease the rate from 1.0 (what the extension was playing at)
         // down to the user's target. Target is the user's configured
@@ -368,12 +370,13 @@ class DesktopLauncher : NSObject, NSWindowDelegate, DesktopOcclusionDelegate {
         let needsPausedLanding = aerialDesktopController.isUserPaused() || isCurrentlyOccluded
         let targetRate: Float = needsPausedLanding ? 0.0 : aerialDesktopController.getSpeed()
         aerialDesktopController.rampRate(from: 1.0, to: targetRate, duration: Self.screensaverRampDuration) { [weak self] in
-            // After the ramp, restore the occlusion-paused bookkeeping
-            // when applicable so subsequent monitor events see the
-            // correct state. (User-paused needs no post-ramp action —
-            // `isPaused` was already true from before the screensaver.)
+            // After the ramp, restore the coverage reason when applicable
+            // so subsequent monitor events see the correct state.
+            // (User-paused needs no post-ramp action — `.user` was already
+            // held from before the screensaver; rampRate's completion
+            // reassert converges the player back onto it.)
             if isCurrentlyOccluded {
-                self?.aerialDesktopController.occlusionPause()
+                self?.aerialDesktopController.pause(reason: .coverage)
             }
         }
         if isCurrentlyOccluded {
@@ -467,18 +470,18 @@ class DesktopLauncher : NSObject, NSWindowDelegate, DesktopOcclusionDelegate {
         aerialDesktopController.resumeAndRampUp(duration: rampDuration)
     }
 
-    /// Battery-driven pause. Direct (no ramp) because battery state
-    /// changes are user-initiated events (plug/unplug, threshold cross)
-    /// where an immediate state change reads as "Aerial noticed and
-    /// reacted" rather than abrupt.
-    func applyBatteryPause() {
-        debugLog("🔋 Desktop battery pause — pausing playback")
-        aerialDesktopController.batteryPause()
+    /// Direct (no ramp) pause/resume for a single reason. Battery, thermal
+    /// and camera changes are user-legible events (plug/unplug, threshold
+    /// cross, videoconference start) where an immediate state change reads
+    /// as "Aerial noticed and reacted" rather than abrupt.
+    func pause(reason: PauseReasons) {
+        debugLog("🖥️ Desktop pause +\(reason.summary)")
+        aerialDesktopController.pause(reason: reason)
     }
 
-    func applyBatteryResume() {
-        debugLog("🔋 Desktop battery resume — resuming playback")
-        aerialDesktopController.batteryResume()
+    func resume(reason: PauseReasons) {
+        debugLog("🖥️ Desktop resume -\(reason.summary)")
+        aerialDesktopController.resume(reason: reason)
     }
 
 }

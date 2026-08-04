@@ -41,6 +41,7 @@ enum AutoInstallMode: String, CaseIterable {
 struct AutoUpdatesPanel: View {
     @State private var checkFrequency: UpdateCheckFrequency = .daily
     @State private var autoInstallMode: AutoInstallMode = .off
+    @State private var betaUpdates: Bool = BetaChannel.isEnabled
     @State private var canCheckForUpdates: Bool = false
     @State private var lastCheckDate: Date?
 
@@ -96,6 +97,23 @@ struct AutoUpdatesPanel: View {
                             sparkleController?.updater.automaticallyDownloadsUpdates = newValue != .off
                             UserDefaults.standard.set(newValue.rawValue, forKey: "autoInstallMode")
                         }
+
+                        Divider()
+
+                        Toggle("Receive beta updates", isOn: $betaUpdates)
+                            .font(.system(size: 14))
+                            .onChange(of: betaUpdates) { newValue in
+                                BetaChannel.isEnabled = newValue
+                                if newValue {
+                                    // Show the result right away.
+                                    sparkleController?.updater.checkForUpdates()
+                                }
+                            }
+
+                        Text("Include pre-releases which will contain new features, latest bugfixes, and the occasional new bugs.")
+                            .font(.system(size: 12))
+                            .foregroundColor(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
 
                         if let date = lastCheckDate {
                             Text("Last checked: \(date, style: .relative) ago")

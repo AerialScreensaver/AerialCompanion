@@ -103,6 +103,7 @@
 		F0D637642EA6A62700366EAB /* ScreensaverSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D637612EA6A62700366EAB /* ScreensaverSettingsManager.swift */; };
 		F0D637652EA6A62700366EAB /* ScreensaverSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D637602EA6A62700366EAB /* ScreensaverSettings.swift */; };
 		F0DOK0012F30000000000001 /* DockInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DOK0002F30000000000001 /* DockInfo.swift */; };
+		F0CAM0022F30000000000001 /* CameraUsageMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CAM0012F30000000000001 /* CameraUsageMonitor.swift */; };
 		F0DOM0012F30000000000001 /* DesktopOcclusionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DOM0002F30000000000001 /* DesktopOcclusionMonitor.swift */; };
 		F0DRM0022F30000000000001 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DRM0012F30000000000001 /* DirectoryMonitor.swift */; };
 		F0DSK0012F30000000000001 /* DesktopSettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DSK0002F30000000000001 /* DesktopSettingsPanel.swift */; };
@@ -442,6 +443,7 @@
 		F0D637602EA6A62700366EAB /* ScreensaverSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverSettings.swift; sourceTree = "<group>"; };
 		F0D637612EA6A62700366EAB /* ScreensaverSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverSettingsManager.swift; sourceTree = "<group>"; };
 		F0DOK0002F30000000000001 /* DockInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockInfo.swift; sourceTree = "<group>"; };
+		F0CAM0012F30000000000001 /* CameraUsageMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUsageMonitor.swift; sourceTree = "<group>"; };
 		F0DOM0002F30000000000001 /* DesktopOcclusionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopOcclusionMonitor.swift; sourceTree = "<group>"; };
 		F0DRM0012F30000000000001 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		F0DSK0002F30000000000001 /* DesktopSettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopSettingsPanel.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				031954BF256409EC0058467C /* SaverLauncher.swift */,
 				0316C21E2577EBF6007BAF70 /* DesktopLauncher.swift */,
 				F0DOM0002F30000000000001 /* DesktopOcclusionMonitor.swift */,
+				F0CAM0012F30000000000001 /* CameraUsageMonitor.swift */,
 				F05C63B628F326300068B545 /* SystemPrefs.swift */,
 				F0D6375C2EA6830100366EAB /* CompanionSettings.swift */,
 				F0D6375D2EA6830100366EAB /* CompanionSettingsManager.swift */,
@@ -1413,6 +1416,7 @@
 				031954C0256409EC0058467C /* SaverLauncher.swift in Sources */,
 				0316C21F2577EBF6007BAF70 /* DesktopLauncher.swift in Sources */,
 				F0DOM0012F30000000000001 /* DesktopOcclusionMonitor.swift in Sources */,
+				F0CAM0022F30000000000001 /* CameraUsageMonitor.swift in Sources */,
 				F0C5B4302E8EDA9F00AEC15C /* AerialPluginManager.swift in Sources */,
 				F0D637572EA0239900366EAB /* PathMigrationView.swift in Sources */,
 				03592AB824CC80FD00C1AE52 /* Helpers.swift in Sources */,
@@ -1866,7 +1870,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 4.0.10;
+				MARKETING_VERSION = 4.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glouel.Aerial-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1897,7 +1901,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 4.0.10;
+				MARKETING_VERSION = 4.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glouel.Aerial-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1938,7 +1942,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.0.10;
+				MARKETING_VERSION = 4.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glouel.Aerial-App.AerialScreenSaverExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1980,7 +1984,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.0.10;
+				MARKETING_VERSION = 4.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glouel.Aerial-App.AerialScreenSaverExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

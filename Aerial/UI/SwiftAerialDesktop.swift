@@ -172,26 +172,24 @@ class SwiftAerialDesktop: NSWindowController {
         aerialView?.setUserPaused(paused)
     }
 
+    func pause(reason: PauseReasons) {
+        aerialView?.pause(reason: reason)
+    }
+
+    func resume(reason: PauseReasons) {
+        aerialView?.resume(reason: reason)
+    }
+
+    /// Screensaver pause also cancels any in-flight transition ramp so
+    /// the handoff choreography can't fight the landing.
     func screensaverPause() {
         rampTimer?.invalidate()
         rampTimer = nil
-        aerialView?.screensaverPause()
+        aerialView?.pause(reason: .screensaver)
     }
 
-    func screensaverResume() {
-        aerialView?.screensaverResume()
-    }
-
-    func occlusionPause() {
-        aerialView?.occlusionPause()
-    }
-
-    func batteryPause() {
-        aerialView?.batteryPause()
-    }
-
-    func batteryResume() {
-        aerialView?.batteryResume()
+    func isEffectivelyPaused() -> Bool {
+        aerialView?.isEffectivelyPaused() ?? false
     }
 
     func skipTo(playlistIndex: Int) {
@@ -284,6 +282,7 @@ class SwiftAerialDesktop: NSWindowController {
         if reduceMotion {
             aerialView?.setPlaybackRate(max(target, 0.0))
             completion()
+            aerialView?.reassertPlaybackState()
             return
         }
 
@@ -302,6 +301,9 @@ class SwiftAerialDesktop: NSWindowController {
                 self.rampTimer = nil
                 self.aerialView?.setPlaybackRate(max(target, 0.0))
                 completion()
+                // Converge to the reason set so a ramp landing on rate 0
+                // (user-paused saver exit) can never strand a stale rate.
+                self.aerialView?.reassertPlaybackState()
             } else {
                 self.aerialView?.setPlaybackRate(max(rate, 0.0))
             }
@@ -312,7 +314,7 @@ class SwiftAerialDesktop: NSWindowController {
         rampTimer?.invalidate()
 
         if reduceMotion {
-            aerialView?.occlusionPause()
+            aerialView?.pause(reason: .coverage)
             return
         }
 
@@ -329,7 +331,7 @@ class SwiftAerialDesktop: NSWindowController {
             if t >= 1.0 {
                 timer.invalidate()
                 self.rampTimer = nil
-                self.aerialView?.occlusionPause()
+                self.aerialView?.pause(reason: .coverage)
             } else {
                 self.aerialView?.setPlaybackRate(max(rate, 0.01))
             }
@@ -339,15 +341,20 @@ class SwiftAerialDesktop: NSWindowController {
     func resumeAndRampUp(duration: TimeInterval) {
         rampTimer?.invalidate()
 
+        aerialView?.resume(reason: .coverage)
+
+        // Clearing coverage may not have resumed anything — another reason
+        // (user, battery, thermal…) can still hold the pause. Driving the
+        // rate ramp in that state would visibly un-pause the player.
+        guard aerialView?.isEffectivelyPaused() == false else { return }
+
+        let targetSpeed = getSpeed()
+
         if reduceMotion {
-            let targetSpeed = getSpeed()
-            aerialView?.occlusionResume()
             aerialView?.setGlobalSpeed(targetSpeed)
             return
         }
 
-        let targetSpeed = getSpeed()
-        aerialView?.occlusionResume()
         aerialView?.setPlaybackRate(0.01)
         let startTime = CACurrentMediaTime()
 

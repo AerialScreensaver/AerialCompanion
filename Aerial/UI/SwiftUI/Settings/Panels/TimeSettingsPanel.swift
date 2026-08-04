@@ -13,11 +13,13 @@ struct TimeSettingsPanel: View {
     @State private var selectedMode: Int = PrefsTime.timeMode.rawValue
     @State private var manualSunriseDate: Date = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm"
         return formatter.date(from: PrefsTime.manualSunrise) ?? Date()
     }()
     @State private var manualSunsetDate: Date = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm"
         return formatter.date(from: PrefsTime.manualSunset) ?? Date()
     }()
@@ -40,6 +42,11 @@ struct TimeSettingsPanel: View {
 
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        // POSIX locale so the stored pref is always a 24-hour "HH:mm"
+        // string — with the system 12-hour override active, an unlocaled
+        // formatter would write "5:12 PM"-style values the readers can't
+        // parse back.
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
@@ -363,48 +370,62 @@ struct TimeBarView: View {
 
     private let barHeight: CGFloat = 32
 
-    private var segments: [(label: String, fraction: CGFloat, color: Color)] {
+    private var segments: [(fraction: CGFloat, color: Color)] {
         let cal = Calendar.current
-        let sunriseMin = CGFloat(cal.component(.hour, from: sunrise) * 60 + cal.component(.minute, from: sunrise))
-        let sunsetMin = CGFloat(cal.component(.hour, from: sunset) * 60 + cal.component(.minute, from: sunset))
-        let windowMin = CGFloat(windowSeconds) / 60.0
-        let total: CGFloat = 1440.0
+        let sunriseMin = cal.component(.hour, from: sunrise) * 60 + cal.component(.minute, from: sunrise)
+        var sunsetMin = cal.component(.hour, from: sunset) * 60 + cal.component(.minute, from: sunset)
+        // A sunset past midnight (astronomical dusk at high latitudes in
+        // summer) lands "before" sunrise on the 0-24h axis — unwrap it
+        // onto the following day so the day band wraps around the bar
+        // edges instead of collapsing to zero.
+        if sunsetMin <= sunriseMin { sunsetMin += 1440 }
+        let windowMin = windowSeconds / 60
+        let sunriseEnd = min(sunriseMin + windowMin, sunsetMin)
+        let sunsetStart = max(sunsetMin - windowMin, sunriseEnd)
 
-        let night1 = max(sunriseMin, 0)
-        let sunriseWindow = min(windowMin, sunsetMin - sunriseMin)
-        let dayStart = sunriseMin + sunriseWindow
-        let dayEnd = max(sunsetMin - windowMin, dayStart)
-        let day = dayEnd - dayStart
-        let sunsetWindow = min(windowMin, total - dayEnd)
-        let night2 = max(total - sunsetMin, 0)
+        // Classify one clock-minute the same way getTimeSlice() slices
+        // the day: a minute earlier than sunrise may belong to the
+        // unwrapped (past-midnight) end of the previous sun-day.
+        func color(atMinute m: Int) -> Color {
+            let t = m >= sunriseMin ? m : m + 1440
+            if t >= sunsetMin { return .gray }        // night
+            if t < sunriseEnd { return .purple }      // sunrise window
+            if t >= sunsetStart { return .orange }    // sunset window
+            return .teal                              // day
+        }
 
-        return [
-            ("", night1 / total, Color.gray),
-            ("", sunriseWindow / total, Color.purple),
-            ("", day / total, Color.teal),
-            ("", sunsetWindow / total, Color.orange),
-            ("", night2 / total, Color.gray),
-        ]
+        // Walk the 24h and merge consecutive same-colored minutes.
+        var runs: [(fraction: CGFloat, color: Color)] = []
+        var runStart = 0
+        var runColor = color(atMinute: 0)
+        for m in 1..<1440 where color(atMinute: m) != runColor {
+            runs.append((CGFloat(m - runStart) / 1440.0, runColor))
+            runStart = m
+            runColor = color(atMinute: m)
+        }
+        runs.append((CGFloat(1440 - runStart) / 1440.0, runColor))
+        return runs
     }
 
     private var timeLabels: [(time: String, fraction: CGFloat)] {
         let cal = Calendar.current
-        let sunriseMin = CGFloat(cal.component(.hour, from: sunrise) * 60 + cal.component(.minute, from: sunrise))
-        let sunsetMin = CGFloat(cal.component(.hour, from: sunset) * 60 + cal.component(.minute, from: sunset))
-        let windowMin = CGFloat(windowSeconds) / 60.0
-        let total: CGFloat = 1440.0
 
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm"
 
         let eSunrise = sunrise.addingTimeInterval(TimeInterval(windowSeconds))
         let pSunset = sunset.addingTimeInterval(TimeInterval(-windowSeconds))
 
+        func fraction(of date: Date) -> CGFloat {
+            CGFloat(cal.component(.hour, from: date) * 60 + cal.component(.minute, from: date)) / 1440.0
+        }
+
         return [
-            (formatter.string(from: sunrise), sunriseMin / total),
-            (formatter.string(from: eSunrise), (sunriseMin + windowMin) / total),
-            (formatter.string(from: pSunset), (sunsetMin - windowMin) / total),
-            (formatter.string(from: sunset), sunsetMin / total),
+            (formatter.string(from: sunrise), fraction(of: sunrise)),
+            (formatter.string(from: eSunrise), fraction(of: eSunrise)),
+            (formatter.string(from: pSunset), fraction(of: pSunset)),
+            (formatter.string(from: sunset), fraction(of: sunset)),
         ]
     }
 

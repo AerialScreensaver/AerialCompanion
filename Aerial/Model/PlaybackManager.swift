@@ -48,6 +48,36 @@ class PlaybackManager: ObservableObject {
     /// normal. Single-cycle scope, not persisted.
     private var batteryOverrideForThisCycle = false
 
+    /// Why the thermal monitor is holding playback, nil when it isn't.
+    /// Both causes ride the single `.thermal` reason; the split only
+    /// exists so the UI can say WHICH condition paused it.
+    enum ThermalPauseCause {
+        case thermalPressure
+        case lowPowerMode
+    }
+
+    /// Non-nil while playback is paused because of thermal pressure
+    /// (`.serious`+) or macOS Low Power Mode, per the corresponding
+    /// prefs. Same composition rules as `isBatteryPaused`. Driven by
+    /// `setupThermalMonitor` + `evaluateThermalState`.
+    @Published private(set) var thermalPauseCause: ThermalPauseCause?
+
+    /// Whether the thermal/LPM rule is holding playback right now.
+    var isThermalPaused: Bool { thermalPauseCause != nil }
+
+    /// User "resume" override while thermal-paused — mirrors
+    /// `batteryOverrideForThisCycle`; cleared when the thermal/LPM
+    /// condition itself clears.
+    private var thermalOverrideForThisCycle = false
+
+    /// Whether playback is paused because a camera is in use, per the
+    /// `desktopPauseOnCamera` pref. Driven by `CameraUsageMonitor`.
+    @Published private(set) var isCameraPaused: Bool = false
+
+    /// User "resume" override while camera-paused — cleared when the
+    /// camera stops.
+    private var cameraOverrideForThisCycle = false
+
     /// Global playback speed (0-100, maps to slider values)
     @Published var globalSpeed: Int {
         didSet {
@@ -58,9 +88,6 @@ class PlaybackManager: ObservableObject {
 
     /// Set of screen UUIDs that have active desktop wallpaper
     @Published private(set) var activeScreenUuids: Set<String> = []
-
-    /// Playback progress (0.0 to 1.0) for current video
-    @Published private(set) var playbackProgress: Double = 0.0
 
     /// Available screens with their UUIDs and names
     @Published private(set) var availableScreens: [ScreenInfo] = []
@@ -91,13 +118,17 @@ class PlaybackManager: ObservableObject {
     /// launcher's `DesktopOcclusionMonitor` callback (and by the
     /// screensaver-handoff seed). The aggregate over running launchers
     /// drives the actual pause/resume call in shared viewing modes.
-    private var perScreenOcclusion: [String: Bool] = [:]
+    /// @Published so the popover's `pauseMention` line refreshes live on
+    /// a coverage flip — mutations are rare (boolean transitions plus
+    /// launcher start/stop), so the publish cost is negligible.
+    @Published private var perScreenOcclusion: [String: Bool] = [:]
 
-    /// 1 Hz timer that refreshes `playbackProgress` for the popover's
-    /// thumbnail progress bar. Sourced from the desktop AVPlayer when
-    /// the wallpaper is running, from `PlaylistManager`'s persisted
-    /// timestamp otherwise. Trivial cost — one CMTime read + one
-    /// dictionary lookup per tick — so we leave it running always.
+    /// 1 Hz timer that refreshes `PlaybackProgressModel` for the
+    /// popover's thumbnail progress bar. Sourced from the desktop
+    /// AVPlayer when the wallpaper is running, from `PlaylistManager`'s
+    /// persisted timestamp otherwise. The timer always ticks, but
+    /// `refreshPlaybackProgress` self-gates on popover visibility so a
+    /// closed popover costs nothing.
     private var progressTimer: DispatchSourceTimer?
 
     // MARK: - Initialization
@@ -139,6 +170,11 @@ class PlaybackManager: ObservableObject {
         // initial state so a launch-on-battery doesn't play for a few
         // seconds before the first transition.
         setupBatteryMonitor()
+
+        // Thermal / Low Power Mode and camera-aware pause, mirroring the
+        // battery monitor's evaluate-on-event + initial-check shape.
+        setupThermalMonitor()
+        setupCameraMonitor()
 
         // Restore active screens on launch if preference is enabled
         if Preferences.restartBackground {
@@ -236,12 +272,13 @@ class PlaybackManager: ObservableObject {
         // auto-resume after viewing-mode flips or stop/start cycles.
         if isRunning {
             perScreenOcclusion[screenUuid] = false
-            // A freshly-(re)created launcher's coordinator starts un-paused.
-            // evaluateBatteryState() can't fix this — its `shouldPause !=
-            // isBatteryPaused` guard no-ops when we're already battery-paused —
-            // so re-assert the current decision directly onto the new launcher.
-            if isBatteryPaused {
-                desktopLauncherInstances[screenUuid]?.applyBatteryPause()
+            // A freshly-(re)created launcher's coordinator starts with an
+            // empty reason set. The evaluators can't fix this — their
+            // `shouldPause != isXPaused` guards no-op when the manager state
+            // is already correct — so re-assert the current decisions
+            // directly onto the new launcher.
+            if let launcher = desktopLauncherInstances[screenUuid] {
+                reassertPauseReasons { launcher.pause(reason: $0) }
             }
         } else {
             perScreenOcclusion.removeValue(forKey: screenUuid)
@@ -275,6 +312,9 @@ class PlaybackManager: ObservableObject {
         SaverLauncher.instance.changeSpeed(globalSpeed)
         isPlaying = true
         isPaused = false
+        // Fresh window-mode start clears any user pause, but system
+        // reasons (battery, thermal, camera) must carry over.
+        reassertPauseReasons { SaverLauncher.instance.pause(reason: $0) }
     }
 
     // MARK: - Playback Controls
@@ -319,8 +359,39 @@ class PlaybackManager: ObservableObject {
             return
         }
 
+        // Same deal for a thermal/Low Power Mode pause: hitting play
+        // means "play despite the condition" for this episode.
+        if isThermalPaused {
+            debugLog("🌡️ User overrode thermal-pause via popover button")
+            thermalOverrideForThisCycle = true
+            isPaused = false
+            applyThermalStateChange(cause: nil)
+            broadcastUserPause(false)
+            return
+        }
+
+        // And for a camera pause: play despite the running camera.
+        if isCameraPaused {
+            debugLog("📷 User overrode camera-pause via popover button")
+            cameraOverrideForThisCycle = true
+            isPaused = false
+            applyCameraStateChange(paused: false)
+            broadcastUserPause(false)
+            return
+        }
+
         isPaused.toggle()
         broadcastUserPause(isPaused)
+    }
+
+    /// Re-assert the manager's current pause decisions onto a freshly
+    /// (re)created launcher, whose coordinator starts with an empty
+    /// reason set. Caller supplies the target's `pause(reason:)`.
+    private func reassertPauseReasons(via pause: (PauseReasons) -> Void) {
+        if isPaused { pause(.user) }
+        if isBatteryPaused { pause(.battery) }
+        if isThermalPaused { pause(.thermal) }
+        if isCameraPaused { pause(.camera) }
     }
 
     /// Broadcast a user-pause state to whichever launchers are active.
@@ -422,10 +493,157 @@ class PlaybackManager: ObservableObject {
         switch playbackMode {
         case .desktop:
             for launcher in desktopLauncherInstances.values where launcher.isRunning {
-                paused ? launcher.applyBatteryPause() : launcher.applyBatteryResume()
+                paused ? launcher.pause(reason: .battery) : launcher.resume(reason: .battery)
             }
         case .monitor:
-            paused ? SaverLauncher.instance.applyBatteryPause() : SaverLauncher.instance.applyBatteryResume()
+            paused ? SaverLauncher.instance.pause(reason: .battery) : SaverLauncher.instance.resume(reason: .battery)
+        case .none:
+            break
+        }
+    }
+
+    // MARK: - Thermal / Low Power Mode pause
+
+    /// Wired up once during init, mirroring `setupBatteryMonitor`. Both
+    /// notifications arrive on arbitrary threads — hop to main.
+    private func setupThermalMonitor() {
+        #if COMPANION_APP
+        NotificationCenter.default.addObserver(
+            forName: ProcessInfo.thermalStateDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.evaluateThermalState() }
+        }
+        NotificationCenter.default.addObserver(
+            forName: .NSProcessInfoPowerStateDidChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.evaluateThermalState() }
+        }
+        // Wake can land with a different thermal/LPM state than we
+        // slept with (e.g. LPM toggled from the lock screen).
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.evaluateThermalState() }
+        }
+        evaluateThermalState()
+        #endif
+    }
+
+    /// Re-read thermal/LPM state + prefs and apply the resulting
+    /// pause/resume. Called on both ProcessInfo notifications, on wake,
+    /// at startup, and when the user toggles either pref in Settings.
+    func evaluateThermalState() {
+        let thermalState = ProcessInfo.processInfo.thermalState
+        let thermalHot = Preferences.desktopPauseOnThermal
+            && (thermalState == .serious || thermalState == .critical)
+        let lowPower = Preferences.desktopPauseOnLowPower
+            && ProcessInfo.processInfo.isLowPowerModeEnabled
+        // Thermal pressure reported first — it's the more urgent story
+        // if both hold.
+        let cause: ThermalPauseCause? = thermalHot ? .thermalPressure
+            : (lowPower ? .lowPowerMode : nil)
+
+        // Condition cleared → drop the session override so the next
+        // episode re-engages normally.
+        if cause == nil && thermalOverrideForThisCycle {
+            thermalOverrideForThisCycle = false
+            debugLog("🌡️ Thermal override cleared (condition ended)")
+        }
+
+        // Honor the user's session override.
+        if cause != nil && thermalOverrideForThisCycle {
+            return
+        }
+
+        if cause != thermalPauseCause {
+            if let cause {
+                debugLog("🌡️ Pausing playback: \(cause == .thermalPressure ? "thermal state \(thermalState.rawValue)" : "Low Power Mode")")
+            }
+            applyThermalStateChange(cause: cause)
+        }
+    }
+
+    /// Toggle the thermal-paused state across all active launchers.
+    private func applyThermalStateChange(cause: ThermalPauseCause?) {
+        thermalPauseCause = cause
+        debugLog("🌡️ PlaybackManager: isThermalPaused = \(cause != nil)")
+
+        switch playbackMode {
+        case .desktop:
+            for launcher in desktopLauncherInstances.values where launcher.isRunning {
+                cause != nil ? launcher.pause(reason: .thermal) : launcher.resume(reason: .thermal)
+            }
+        case .monitor:
+            cause != nil ? SaverLauncher.instance.pause(reason: .thermal) : SaverLauncher.instance.resume(reason: .thermal)
+        case .none:
+            break
+        }
+    }
+
+    // MARK: - Camera-aware pause
+
+    /// Wired up once during init. The CMIO listeners only run while the
+    /// pref is on — `evaluateCameraState` starts/stops the monitor.
+    private func setupCameraMonitor() {
+        #if COMPANION_APP
+        CameraUsageMonitor.shared.onChange = { [weak self] in
+            Task { @MainActor in self?.evaluateCameraState() }
+        }
+        evaluateCameraState()
+        #endif
+    }
+
+    /// Re-read camera state + pref and apply the resulting pause/resume.
+    /// Called on every CMIO running-state change, at startup, and when
+    /// the user toggles the pref in Settings.
+    func evaluateCameraState() {
+        guard Preferences.desktopPauseOnCamera else {
+            CameraUsageMonitor.shared.stop()
+            if isCameraPaused {
+                applyCameraStateChange(paused: false)
+            }
+            cameraOverrideForThisCycle = false
+            return
+        }
+        CameraUsageMonitor.shared.start()
+
+        let shouldPause = CameraUsageMonitor.shared.anyCameraInUse
+
+        // Camera stopped → drop the session override so the next call
+        // re-engages normally.
+        if !shouldPause && cameraOverrideForThisCycle {
+            cameraOverrideForThisCycle = false
+            debugLog("📷 Camera override cleared (camera off)")
+        }
+
+        // Honor the user's session override.
+        if shouldPause && cameraOverrideForThisCycle {
+            return
+        }
+
+        if shouldPause != isCameraPaused {
+            applyCameraStateChange(paused: shouldPause)
+        }
+    }
+
+    /// Toggle the camera-paused state across all active launchers.
+    private func applyCameraStateChange(paused: Bool) {
+        isCameraPaused = paused
+        debugLog("📷 PlaybackManager: isCameraPaused = \(paused)")
+
+        switch playbackMode {
+        case .desktop:
+            for launcher in desktopLauncherInstances.values where launcher.isRunning {
+                paused ? launcher.pause(reason: .camera) : launcher.resume(reason: .camera)
+            }
+        case .monitor:
+            paused ? SaverLauncher.instance.pause(reason: .camera) : SaverLauncher.instance.resume(reason: .camera)
         case .none:
             break
         }
@@ -517,8 +735,8 @@ class PlaybackManager: ObservableObject {
 
     // MARK: - Playback Progress
 
-    /// Start the 1 Hz timer that pushes `playbackProgress` updates into
-    /// the popover's thumbnail progress bar. Called from `init` and runs
+    /// Start the 1 Hz timer that pushes progress updates into the
+    /// popover's thumbnail progress bar. Called from `init` and runs
     /// for the lifetime of the singleton.
     private func startProgressTimer() {
         let source = DispatchSource.makeTimerSource(queue: .main)
@@ -541,12 +759,21 @@ class PlaybackManager: ObservableObject {
     /// + AVAsset probe). When duration is unknown or zero (e.g. live
     /// streams), progress is reported as 0 — the bar then hides.
     ///
-    /// Only assigns `playbackProgress` when the new value differs by
+    /// Only publishes into `PlaybackProgressModel` when the value differs by
     /// more than ~0.5 %. At a 1 Hz tick that's enough resolution for
     /// a 96 pt wide bar (≈0.5 pt of motion per tick) while avoiding
     /// pointless SwiftUI re-renders.
     @MainActor
     private func refreshPlaybackProgress() {
+        // Visibility gate: the progress bars live only in the popover,
+        // and a CLOSED popover's hosting view stays alive — publishing
+        // into it re-rendered the whole invisible tree every second.
+        // On reopen the next 1 Hz tick heals the bar.
+        guard AppDelegate.shared?.popover.isShown == true else { return }
+
+        // Nothing playing → nothing to recompute (the bar hides).
+        guard playbackMode != .none else { return }
+
         let screenUUID = effectiveScreenUUID
         let progress: Double = {
             guard let video = PlaylistManager.shared.currentVideo(for: screenUUID),
@@ -563,8 +790,8 @@ class PlaybackManager: ObservableObject {
             }
             return max(0, min(1, position / video.duration))
         }()
-        if abs(progress - playbackProgress) > 0.005 {
-            playbackProgress = progress
+        if abs(progress - PlaybackProgressModel.shared.fraction) > 0.005 {
+            PlaybackProgressModel.shared.fraction = progress
         }
     }
 
@@ -633,6 +860,32 @@ class PlaybackManager: ObservableObject {
         desktopLauncherInstances.contains { (uuid, launcher) in
             launcher.isRunning && (perScreenOcclusion[uuid] == true)
         }
+    }
+
+    /// The system pause reason to surface in UI (icon + text), nil when
+    /// nothing holds playback or the user paused deliberately. Battery
+    /// wins over thermal/camera/coverage (it's the stickier story).
+    /// `screenUUID` scopes the coverage check (nil = shared surface).
+    func pauseMention(for screenUUID: String?) -> (icon: String, text: String)? {
+        guard isPlaying, !isPaused else { return nil }
+        if isBatteryPaused {
+            return ("battery.25percent", "Paused — on battery")
+        }
+        switch thermalPauseCause {
+        case .thermalPressure:
+            return ("thermometer.medium", "Paused — thermal pressure")
+        case .lowPowerMode:
+            return ("bolt.circle", "Paused — Low Power Mode")
+        case nil:
+            break
+        }
+        if isCameraPaused {
+            return ("video.fill", "Paused — camera in use")
+        }
+        if effectiveOcclusionState(for: screenUUID ?? "") {
+            return ("macwindow", "Paused — display covered")
+        }
+        return nil
     }
 
     // MARK: - State Updates (called from external sources)
@@ -781,11 +1034,14 @@ class PlaybackManager: ObservableObject {
         if activeScreenUuids.isEmpty {
             playbackMode = .none
             isPlaying = false
+            // Only a full stop clears the user pause. Resetting it on every
+            // call silently dropped a held pause whenever a screen was
+            // toggled, reconnected, or reconciled.
+            isPaused = false
         } else {
             playbackMode = .desktop
             isPlaying = true
         }
-        isPaused = false
     }
 
     private func updatePlaybackSpeed() {
@@ -810,4 +1066,19 @@ class PlaybackManager: ObservableObject {
             }
         }
     }
+}
+
+/// The 1 Hz playback-progress fraction, isolated from PlaybackManager.
+/// As a @Published on the manager, every per-second progress tick
+/// re-rendered EVERY observer of the whole object — including a closed
+/// popover's still-alive hosting view (~5% CPU while playing). Only the
+/// leaf progress bars (`PlaybackProgressBar`) observe this model.
+@MainActor
+final class PlaybackProgressModel: ObservableObject {
+    static let shared = PlaybackProgressModel()
+
+    /// Playback progress (0.0 to 1.0) for the current video.
+    @Published fileprivate(set) var fraction: Double = 0.0
+
+    private init() {}
 }

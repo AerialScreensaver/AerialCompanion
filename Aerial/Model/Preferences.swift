@@ -171,6 +171,26 @@ struct Preferences {
         set { manager.setValue(newValue, forKeyPath: \.desktopPauseOnBatteryMode) }
     }
 
+    // MARK: - Thermal / Low Power Mode pause
+
+    /// Pause the wallpaper while thermal pressure is serious/critical.
+    static var desktopPauseOnThermal: Bool {
+        get { manager.getValue(forKeyPath: \.desktopPauseOnThermal) }
+        set { manager.setValue(newValue, forKeyPath: \.desktopPauseOnThermal) }
+    }
+
+    /// Pause the wallpaper while macOS Low Power Mode is enabled.
+    static var desktopPauseOnLowPower: Bool {
+        get { manager.getValue(forKeyPath: \.desktopPauseOnLowPower) }
+        set { manager.setValue(newValue, forKeyPath: \.desktopPauseOnLowPower) }
+    }
+
+    /// Pause the wallpaper while any camera is in use.
+    static var desktopPauseOnCamera: Bool {
+        get { manager.getValue(forKeyPath: \.desktopPauseOnCamera) }
+        set { manager.setValue(newValue, forKeyPath: \.desktopPauseOnCamera) }
+    }
+
 }
 
 extension Notification.Name {

@@ -72,6 +72,7 @@ struct NightShift {
 
         if tmp.count > 1 {
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
 
             if let dateObj = dateFormatter.date(from: String(tmp[1])) {

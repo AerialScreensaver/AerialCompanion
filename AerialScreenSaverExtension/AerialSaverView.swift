@@ -27,12 +27,13 @@ final class AerialSaverView: ScreenSaverView {
     /// .appex (which never calls `setGlobalSpeed`), so behavior is unchanged there.
     private var lastRequestedGlobalSpeed: Float?
 
-    /// Whether Companion currently wants this view battery-paused (desktop
-    /// mode). Same deferred-bind problem as `lastRequestedGlobalSpeed`: the
-    /// pause pushed when a launcher is (re)created lands before `coordinator`
-    /// exists, so we memoize it and re-assert at bind. Stays false in the
-    /// .appex (which drives battery via `shouldPlayOnBattery()` instead).
-    private var pendingBatteryPaused = false
+    /// Pause reasons Companion currently wants on this view (desktop mode).
+    /// Same deferred-bind problem as `lastRequestedGlobalSpeed`: reasons
+    /// pushed when a launcher is (re)created land before `coordinator`
+    /// exists, so we memoize the full set and re-assert it at bind. Stays
+    /// empty in the .appex (which drives battery via `shouldPlayOnBattery()`
+    /// instead).
+    private var pendingPauseReasons: PauseReasons = []
 
     /// The AVPlayerLayer that displays the video
     private var playerLayer: AVPlayerLayer?
@@ -410,14 +411,13 @@ final class AerialSaverView: ScreenSaverView {
             coord.setPlaybackSpeed(speed)
         }
 
-        // Likewise re-assert battery pause: a launcher (re)created while on
-        // battery pushes the pause before this coordinator existed. Apply it
-        // before playNextVideo() so the first frame loads paused (isSystemPaused
-        // makes playAtDesiredSpeed self-suppress). Direct coord call avoids a
-        // premature continuity capture via self.batteryPause().
-        if pendingBatteryPaused {
-            coord.batteryPause()
-        }
+        // Likewise re-assert pause reasons: a launcher (re)created while
+        // paused (user, battery, thermal…) pushes reasons before this
+        // coordinator existed. Seed them before playNextVideo() so the first
+        // frame loads paused (a non-empty reason set makes playAtDesiredSpeed
+        // self-suppress). Direct coord call avoids a premature continuity
+        // capture via self.pause(reason:).
+        coord.syncPauseReasons(pendingPauseReasons)
 
         let amLeader = coord.isLeader(self)
         debugLog("Coordinator mode: leader=\(amLeader)")
@@ -732,22 +732,38 @@ final class AerialSaverView: ScreenSaverView {
         let winFrameDesc = self.window.map { "\($0.frame)" } ?? "nil"
         debugLog("[\(ptr)] w: \(self.window) wf:\(winFrameDesc) s:\(self.window?.screen)");
 
-        // 1. Match window.frame.origin to a display's CGDisplayBounds origin.
-        //    Empirically on macOS 15+ the legacyScreenSaver/AppExtension
-        //    framework positions each screensaver window at its target
-        //    display's CG top-left (top-left origin, y-down) — not the
-        //    NSScreen bottom-left origin Apple's NSWindow.frame docs
-        //    describe. So the window frame origin is a reliable per-window
-        //    identifier of the target display, even when the windows are
-        //    sized to the main display's frame (which they always are —
-        //    AerialViewController.loadView() uses NSScreen.main?.frame for
-        //    every view).
-        //
-        //    Note that this also handles a separate failure mode: window.screen
-        //    is reported as the main display for every view at initial
-        //    viewDidMoveToWindow and is nil during the
-        //    NSWindow.didChangeScreenNotification — neither point lets us
-        //    disambiguate windows by NSScreen lookup.
+        // 0. Trust window.screen. Detection runs at settled-setup time
+        //    (windowDidChangeScreen or the 250 ms fallback), by which point
+        //    AppKit has assigned the window to its real target screen —
+        //    field logs (portrait-secondary spanned bug) show window.screen
+        //    correct at every settle even while window.frame still carries
+        //    the main display's stale size. The old "window.screen reports
+        //    main for every view" problem was observed at
+        //    viewDidMoveToWindow, before the settle gate existed. The
+        //    heuristics below remain for a nil window.screen; if it's ever
+        //    stale at settle, the late windowDidChangeScreen re-detect
+        //    corrects it — same recovery path the heuristics rely on.
+        if let nsScreen = self.window?.screen,
+           let screenID = nsScreen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
+           let screen = displayDetection.findScreenWith(id: screenID) {
+            foundScreen = screen
+            displayDetection.markScreenAsUsed(id: screen.id)
+            debugLog("📺 Screen detected via window.screen → \(screen.description)")
+            return
+        }
+
+        // 1. Match window.frame.origin to a display origin. The host
+        //    positions each screensaver window at its target display's
+        //    origin while the size can lag behind (every view starts sized
+        //    to the main display — AerialViewController.loadView() uses
+        //    NSScreen.main?.frame — and the resize lands after the move).
+        //    The origin convention varies by arrangement: same-height
+        //    side-by-side setups matched CGDisplayBounds (CG top-left,
+        //    y-down; numerically identical to the Cocoa origin there),
+        //    while a portrait secondary settled at the screen's Cocoa
+        //    bottom-left origin. Try CG across all screens first
+        //    (longstanding behavior), then Cocoa. The origin is the only
+        //    part of window.frame that's reliable while the size is stale.
         if let win = self.window {
             let winOrigin = win.frame.origin
             for screen in displayDetection.screens {
@@ -759,12 +775,37 @@ final class AerialSaverView: ScreenSaverView {
                     return
                 }
             }
+            for screen in displayDetection.screens {
+                let cocoaOrigin = screen.bottomLeftFrame.origin
+                if abs(cocoaOrigin.x - winOrigin.x) < 0.5 && abs(cocoaOrigin.y - winOrigin.y) < 0.5 {
+                    foundScreen = screen
+                    displayDetection.markScreenAsUsed(id: screen.id)
+                    debugLog("📺 Screen detected via window.frame Cocoa-origin \(winOrigin) → \(screen.description)")
+                    return
+                }
+            }
         }
 
-        // 2. Match by the window's global midpoint. `window.frame` is in
+        // 2. Probe just inside the window's origin corner. Stays valid when
+        //    the window still has the main display's stale size — the
+        //    origin corner sits on the target screen, whereas the midpoint
+        //    of an oversized window can overshoot a narrow (portrait)
+        //    display entirely.
+        if let win = self.window {
+            let corner = CGPoint(x: win.frame.origin.x + 1, y: win.frame.origin.y + 1)
+            if let screen = displayDetection.findScreenContaining(globalPoint: corner) {
+                foundScreen = screen
+                displayDetection.markScreenAsUsed(id: screen.id)
+                debugLog("📺 Screen detected via window.frame origin-corner \(corner): \(screen.description)")
+                return
+            }
+        }
+
+        // 3. Match by the window's global midpoint. `window.frame` is in
         //    global coordinates, so the midpoint usually lands inside
         //    exactly one screen. Kept as a fallback for single-display
-        //    setups or arrangements where CG origins don't disambiguate.
+        //    setups or arrangements where the origin probes don't
+        //    disambiguate.
         if let win = self.window {
             let probe = CGPoint(x: win.frame.midX, y: win.frame.midY)
             if let screen = displayDetection.findScreenContaining(globalPoint: probe) {
@@ -775,7 +816,7 @@ final class AerialSaverView: ScreenSaverView {
             }
         }
 
-        // 3. Companion-mode UUID. When the view runs under the Companion app
+        // 4. Companion-mode UUID. When the view runs under the Companion app
         //    (desktop wallpaper mode), the screen UUID is passed in at init
         //    and we can resolve it directly. This branch never fires in the
         //    extension — it only has effect when companionDisplayUUID is set.
@@ -805,13 +846,13 @@ final class AerialSaverView: ScreenSaverView {
             }
         }
 
-        // 4. Fallback: FIFO depletion by size. Helps when window.frame is
+        // 5. Fallback: FIFO depletion by size. Helps when window.frame is
         //    nil (rare) and we have no other signal.
         if let screen = displayDetection.alternateFindScreenWith(frame: self.frame) {
             foundScreen = screen
             debugLog("📺 Screen detected (FIFO fallback): \(screen.description)")
         } else if let screen = displayDetection.findScreenWith(frame: self.frame) {
-            // 5. Last-resort: exact frame match. Known-broken on multi-display
+            // 6. Last-resort: exact frame match. Known-broken on multi-display
             //    setups (matches only screens at origin (0,0)), kept solely so
             //    single-display users keep working if everything above missed.
             foundScreen = screen
@@ -1152,39 +1193,28 @@ final class AerialSaverView: ScreenSaverView {
 
     // MARK: - Companion Control API
 
-    func setUserPaused(_ paused: Bool) {
-        coordinator?.setUserPaused(paused)
+    func pause(reason: PauseReasons) {
+        pendingPauseReasons.insert(reason)
+        coordinator?.pause(reason: reason)
         #if COMPANION_APP
-        if paused, isUnderCompanion {
+        // Refresh the static continuity snapshot so a paused wallpaper shows
+        // the frame we stopped on. The screensaver handoff never captured
+        // one (the saver covers the desktop anyway), so keep that parity.
+        if isUnderCompanion, reason != .screensaver {
             WallpaperContinuity.shared.refreshDesktopWallpaper(view: self)
         }
         #endif
     }
-    func isUserPaused() -> Bool        { coordinator?.isPaused ?? false }
-    func screensaverPause()            { coordinator?.screensaverPause() }
-    func screensaverResume()           { coordinator?.screensaverResume() }
-    func occlusionPause() {
-        coordinator?.occlusionPause()
-        #if COMPANION_APP
-        if isUnderCompanion {
-            WallpaperContinuity.shared.refreshDesktopWallpaper(view: self)
-        }
-        #endif
+    func resume(reason: PauseReasons) {
+        pendingPauseReasons.remove(reason)
+        coordinator?.resume(reason: reason)
     }
-    func occlusionResume()             { coordinator?.occlusionResume() }
-    func batteryPause() {
-        pendingBatteryPaused = true
-        coordinator?.batteryPause()
-        #if COMPANION_APP
-        if isUnderCompanion {
-            WallpaperContinuity.shared.refreshDesktopWallpaper(view: self)
-        }
-        #endif
-    }
-    func batteryResume() {
-        pendingBatteryPaused = false
-        coordinator?.batteryResume()
-    }
+    func setUserPaused(_ paused: Bool) { paused ? pause(reason: .user) : resume(reason: .user) }
+    func isUserPaused() -> Bool        { coordinator?.isPaused ?? pendingPauseReasons.contains(.user) }
+    func isEffectivelyPaused() -> Bool { coordinator?.isEffectivelyPaused ?? !pendingPauseReasons.isEmpty }
+    /// Converge the player to the current reason set — rate ramps call this
+    /// when they land so they can never strand a stale rate.
+    func reassertPlaybackState()       { coordinator?.reassertPlaybackState(context: "ramp-end") }
 
     func skipTo(playlistIndex: Int) {
         ExtensionVideoLoader.shared.seekPlaylist(to: playlistIndex, screenUUID: coordinator?.screenUUID)

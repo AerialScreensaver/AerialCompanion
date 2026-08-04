@@ -26,6 +26,41 @@ protocol PlayerCoordinatorDelegate: AnyObject {
     func coordinatorDidFailToFindVideo()
 }
 
+// MARK: - Pause Reasons
+
+/// Why playback is paused. Pause intent is the UNION of independent
+/// sources; the coordinator converges the physical player state to the
+/// intent in `reassertPlaybackState()` — the single choke point for every
+/// pause/resume decision. Replaces the old four-boolean set whose resume
+/// paths each re-checked the other three by hand.
+struct PauseReasons: OptionSet, Equatable {
+    let rawValue: Int
+    /// The user's explicit pause (popover button / hotkey).
+    static let user = PauseReasons(rawValue: 1 << 0)
+    /// Battery rule (`desktopPauseOnBattery` / `desktopPauseOnBatteryMode`).
+    static let battery = PauseReasons(rawValue: 1 << 1)
+    /// Window-coverage auto-pause for this screen.
+    static let coverage = PauseReasons(rawValue: 1 << 2)
+    /// The real screensaver (the appex) is presenting over the desktop.
+    static let screensaver = PauseReasons(rawValue: 1 << 3)
+    /// Thermal pressure / Low Power Mode rule.
+    static let thermal = PauseReasons(rawValue: 1 << 4)
+    /// Camera-in-use rule — pause during videoconferences without
+    /// coverage-threshold tuning.
+    static let camera = PauseReasons(rawValue: 1 << 5)
+
+    var summary: String {
+        var parts: [String] = []
+        if contains(.user) { parts.append("user") }
+        if contains(.battery) { parts.append("battery") }
+        if contains(.coverage) { parts.append("coverage") }
+        if contains(.screensaver) { parts.append("screensaver") }
+        if contains(.thermal) { parts.append("thermal") }
+        if contains(.camera) { parts.append("camera") }
+        return parts.isEmpty ? "none" : parts.joined(separator: "+")
+    }
+}
+
 // MARK: - PlayerCoordinator
 
 final class PlayerCoordinator {
@@ -325,80 +360,56 @@ final class PlayerCoordinator {
 
     // MARK: - Pause / Resume / Speed
 
+    /// The union of every active pause source. Playback runs iff empty —
+    /// the set itself is the arbitration, so clearing one reason can never
+    /// override another (a battery resume can't un-pause a user pause).
+    private(set) var pauseReasons: PauseReasons = []
+
+    /// Whether any pause reason is active.
+    var isEffectivelyPaused: Bool { !pauseReasons.isEmpty }
+
     /// Whether playback is currently paused by the user.
-    private(set) var isPaused = false
+    var isPaused: Bool { pauseReasons.contains(.user) }
 
-    /// Whether playback has been paused because the screensaver started over the desktop.
-    private var isScreensaverPaused = false
-
-    /// Whether playback has been paused because the desktop is occluded by other windows.
-    private var isOcclusionPaused = false
-
-    /// Whether playback has been paused because the system is on battery
-    /// (or low battery, depending on the user's `desktopPauseOnBatteryMode`).
-    /// Distinct from `isPaused` (user) and `isOcclusionPaused` (occlusion)
-    /// so the three signals compose without overwriting each other.
-    private var isBatteryPaused = false
-
-    /// Composite: any system-level pause is active.
-    private var isSystemPaused: Bool { isScreensaverPaused || isOcclusionPaused || isBatteryPaused }
-
-    func screensaverPause() {
-        guard !isScreensaverPaused else { return }
-        isScreensaverPaused = true
-        player.pause()
-        debugLog("PlayerCoordinator: screensaver pause")
+    func pause(reason: PauseReasons) {
+        guard !pauseReasons.contains(reason) else { return }
+        pauseReasons.insert(reason)
+        reassertPlaybackState(context: "+\(reason.summary)")
     }
 
-    func screensaverResume() {
-        guard isScreensaverPaused else { return }
-        isScreensaverPaused = false
-        if !isPaused && !isOcclusionPaused {
-            playAtDesiredSpeed()
-        }
-        debugLog("PlayerCoordinator: screensaver resume (playing=\(!isPaused && !isOcclusionPaused))")
+    func resume(reason: PauseReasons) {
+        guard pauseReasons.contains(reason) else { return }
+        pauseReasons.remove(reason)
+        reassertPlaybackState(context: "-\(reason.summary)")
     }
 
-    func occlusionPause() {
-        guard !isOcclusionPaused else { return }
-        isOcclusionPaused = true
-        player.pause()
-        debugLog("PlayerCoordinator: occlusion pause")
-    }
-
-    func occlusionResume() {
-        guard isOcclusionPaused else { return }
-        isOcclusionPaused = false
-        if !isPaused && !isScreensaverPaused && !isBatteryPaused {
-            playAtDesiredSpeed()
-        }
-        debugLog("PlayerCoordinator: occlusion resume (playing=\(!isPaused && !isScreensaverPaused && !isBatteryPaused))")
-    }
-
-    func batteryPause() {
-        guard !isBatteryPaused else { return }
-        isBatteryPaused = true
-        player.pause()
-        debugLog("🔋 PlayerCoordinator: battery pause")
-    }
-
-    func batteryResume() {
-        guard isBatteryPaused else { return }
-        isBatteryPaused = false
-        if !isPaused && !isScreensaverPaused && !isOcclusionPaused {
-            playAtDesiredSpeed()
-        }
-        debugLog("🔋 PlayerCoordinator: battery resume (playing=\(!isPaused && !isScreensaverPaused && !isOcclusionPaused))")
+    /// Bulk-seed the reason set — used when a view binds a fresh
+    /// coordinator to re-assert reasons memoized before the bind.
+    func syncPauseReasons(_ reasons: PauseReasons) {
+        guard reasons != pauseReasons else { return }
+        pauseReasons = reasons
+        reassertPlaybackState(context: "seed")
     }
 
     func setUserPaused(_ paused: Bool) {
-        isPaused = paused
-        if isPaused {
+        paused ? pause(reason: .user) : resume(reason: .user)
+    }
+
+    /// THE pause/rate choke point: converge the physical player state to
+    /// the current reason set. Called after every reason mutation so
+    /// nothing can strand a stale rate or a dropped pause. Public so rate
+    /// ramps (SwiftAerialDesktop, the handoff ramp) can land back on a
+    /// converged state when they finish.
+    func reassertPlaybackState(context: String = "") {
+        if isEffectivelyPaused {
             player.pause()
-        } else if !isSystemPaused {
-            playAtDesiredSpeed()
+        } else {
+            player.play()
+            if desiredSpeed != 1.0 {
+                player.rate = desiredSpeed
+            }
         }
-        debugLog("PlayerCoordinator: setUserPaused → paused=\(isPaused)")
+        debugLog("PlayerCoordinator: reassert [\(pauseReasons.summary)] \(context)")
     }
 
     /// Current playback position in seconds, or nil if nothing is playing.
@@ -417,7 +428,7 @@ final class PlayerCoordinator {
         // Don't override pause states. If we're paused for any reason, just
         // remember the desired speed — `playAtDesiredSpeed()` will apply it
         // when the system resumes naturally.
-        let canApply = !isPaused && !isSystemPaused
+        let canApply = !isEffectivelyPaused
         if canApply {
             player.rate = speed
         }
@@ -425,14 +436,16 @@ final class PlayerCoordinator {
     }
 
     /// Set the AVPlayer rate directly without changing the saved desiredSpeed.
-    /// Used for animated speed ramping.
+    /// Used for animated speed ramping. Contract: any ramp driving the rate
+    /// through here must end by converging via `pause(reason:)` /
+    /// `resume(reason:)` / `reassertPlaybackState()`.
     func setPlaybackRate(_ rate: Float) {
         player.rate = rate
     }
 
     /// Start or resume playback at the user's chosen speed.
     private func playAtDesiredSpeed() {
-        if isPaused || isSystemPaused {
+        if isEffectivelyPaused {
             debugLog("PlayerCoordinator: playAtDesiredSpeed suppressed (paused)")
             return
         }
@@ -532,7 +545,7 @@ final class PlayerCoordinator {
             // `isAsleep` (both observe didWake; order isn't guaranteed) and
             // the restart isn't re-gated by the sleep check.
             DispatchQueue.main.async { [weak self] in self?.playNextVideo() }
-        } else if !isPaused && !isSystemPaused {
+        } else if !isEffectivelyPaused {
             debugLog("PlayerCoordinator: wake — nudging player to refresh layer")
             player.pause()
             playAtDesiredSpeed()

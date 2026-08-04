@@ -48,7 +48,19 @@ struct MainPopoverView: View {
 
             // Playlist strip (horizontal scrolling thumbnails)
             PlaylistSectionView(playbackManager: playbackManager)
-            
+
+            // System pause reason (coverage/battery/thermal/camera) —
+            // scoped to the display the popover opened on.
+            if let mention = playbackManager.pauseMention(for: playbackManager.popoverScreenUUID) {
+                Label(mention.text, systemImage: mention.icon)
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 4)
+                    .padding(.top, 6)
+            }
+
             // Conditional alert bars
             if !isCheckingDefault && !isAerialDefault {
                 Divider()

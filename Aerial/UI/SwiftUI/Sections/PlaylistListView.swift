@@ -68,29 +68,30 @@ struct PlaylistListView: View {
                 if isCurrent {
                     VStack(spacing: 0) {
                         Spacer(minLength: 0)
-                        ZStack(alignment: .leading) {
-                            Rectangle()
-                                .fill(Color.aerial.opacity(0.25))
-                                .frame(height: 6)
-                            Rectangle()
-                                .fill(Color.aerial)
-                                .frame(width: 80 * CGFloat(playbackManager.playbackProgress),
-                                       height: 6)
-                        }
+                        PlaybackProgressBar(width: 80)
                     }
                     .frame(width: 80, height: 45)
                     .allowsHitTesting(false)
                 }
 
-                // Play/pause overlay — three visual states (battery-
-                // paused, user-paused, playing) mirroring PlaylistStripView.
+                // Play/pause overlay — visual states (battery-, thermal/
+                // LPM-, camera-, user-paused, playing) mirroring
+                // PlaylistStripView.
                 if isCurrent && playbackManager.playbackMode != .none {
                     let isBatteryPaused = playbackManager.isBatteryPaused
+                    let thermalCause = playbackManager.thermalPauseCause
+                    let isCameraPaused = playbackManager.isCameraPaused
                     let icon: String = isBatteryPaused
                         ? "battery.25percent"
+                        : thermalCause == .thermalPressure ? "thermometer.medium"
+                        : thermalCause == .lowPowerMode ? "bolt.circle"
+                        : isCameraPaused ? "video.fill"
                         : (playbackManager.isPaused ? "play.fill" : "pause.fill")
                     let label: String = isBatteryPaused
                         ? "Resume (paused on battery)"
+                        : thermalCause == .thermalPressure ? "Resume (paused — thermal pressure)"
+                        : thermalCause == .lowPowerMode ? "Resume (paused — Low Power Mode)"
+                        : isCameraPaused ? "Resume (paused — camera in use)"
                         : (playbackManager.isPaused ? "Resume" : "Pause")
                     Button(action: { playbackManager.togglePause() }) {
                         Image(systemName: icon)

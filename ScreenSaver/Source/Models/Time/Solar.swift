@@ -101,10 +101,16 @@ public struct Solar {
     fileprivate func calculate(_ sunriseSunset: SunriseSunset, for date: Date, and zenith: Zenith) -> Date? {
         guard let utcTimezone = TimeZone(identifier: "UTC") else { return nil }
 
-        // Get the day of the year
+        // Get the day of the year — anchored to the LOCAL calendar day of
+        // `date`, not the UTC day. West of Greenwich the UTC day rolls over
+        // during the evening (5 PM in UTC-7), which made us compute
+        // *tomorrow's* sunrise/sunset and report "night" for the rest of
+        // the evening; far-eastern zones got *yesterday's* all morning.
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = utcTimezone
-        guard let dayInt = calendar.ordinality(of: .day, in: .year, for: date) else { return nil }
+        let localDay = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        guard let dayAnchor = calendar.date(from: localDay) else { return nil }
+        guard let dayInt = calendar.ordinality(of: .day, in: .year, for: dayAnchor) else { return nil }
         let day = Double(dayInt)
 
         // Convert longitude to hour value and calculate an approx. time
@@ -178,11 +184,11 @@ public struct Solar {
 
         let setDate: Date
         if shouldBeYesterday {
-            setDate = Date(timeInterval: -(60 * 60 * 24), since: date)
+            setDate = Date(timeInterval: -(60 * 60 * 24), since: dayAnchor)
         } else if shouldBeTomorrow {
-            setDate = Date(timeInterval: (60 * 60 * 24), since: date)
+            setDate = Date(timeInterval: (60 * 60 * 24), since: dayAnchor)
         } else {
-            setDate = date
+            setDate = dayAnchor
         }
 
         var components = calendar.dateComponents([.day, .month, .year], from: setDate)

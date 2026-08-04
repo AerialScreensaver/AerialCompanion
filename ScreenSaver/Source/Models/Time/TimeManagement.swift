@@ -87,6 +87,7 @@ final class TimeManagement: NSObject {
 
         case .manual:
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter.dateFormat = "HH:mm"
             guard let sunrise = dateFormatter.date(from: PrefsTime.manualSunrise),
                   let sunset = dateFormatter.date(from: PrefsTime.manualSunset) else { return nil }
@@ -194,6 +195,7 @@ final class TimeManagement: NSObject {
         } else if PrefsTime.timeMode == .manual {
             // We get the manual values from our preferences, as string, and convert them to dates
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter.dateFormat = "HH:mm"
 
             guard let dateSunrise = dateFormatter.date(from: PrefsTime.manualSunrise) else {
@@ -222,6 +224,7 @@ final class TimeManagement: NSObject {
             return (sunrise, sunset)
         case .manual:
             let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter.dateFormat = "HH:mm"
 
             guard let dateSunrise = dateFormatter.date(from: PrefsTime.manualSunrise) else {
@@ -282,8 +285,12 @@ final class TimeManagement: NSObject {
         // shift as it takes into account everything correctly for us), if not we todayize the dates. In manual mode,
         // will always be todayized
         if (now < sunrise && now < sunset) || (now > sunrise && now > sunset) {
-            nsunrise = todayizeDate(date: sunrise)!
-            nsunset = todayizeDate(date: sunset)!
+            guard let tr = todayizeDate(date: sunrise),
+                  let ts = todayizeDate(date: sunset) else {
+                return "day"
+            }
+            nsunrise = tr
+            nsunset = ts
         }
 
         if now < nsunrise || now > nsunset {
@@ -303,23 +310,17 @@ final class TimeManagement: NSObject {
 
     // Change a date's day to today
     private func todayizeDate(date: Date) -> Date? {
-        // Get today's date as a string
-        let dateFormatter = DateFormatter()
-        let current = Date()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let today = dateFormatter.string(from: current)
-
-        // Extract hour from date
-        dateFormatter.dateFormat = "HH:mm:ss +zzzz"
-        let format = today + " " + dateFormatter.string(from: date)
-
-        // Now return the todayized string
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        if let newdate = dateFormatter.date(from: format) {
-            return newdate
-        } else {
-            return nil
-        }
+        // Pure Calendar math — no DateFormatter. Explicit "HH" patterns get
+        // rewritten when the user forces 12-hour time in System Settings
+        // (AppleICUForce12HourTime), which corrupted the old Date → string
+        // → Date round-trip this function used to do.
+        let calendar = Calendar.current
+        let time = calendar.dateComponents([.hour, .minute, .second], from: date)
+        var components = calendar.dateComponents([.year, .month, .day], from: Date())
+        components.hour = time.hour
+        components.minute = time.minute
+        components.second = time.second
+        return calendar.date(from: components)
     }
 
     // MARK: Calculate using Solar

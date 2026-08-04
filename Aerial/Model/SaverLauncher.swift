@@ -56,16 +56,16 @@ class SaverLauncher : NSObject, NSWindowDelegate {
         aerialWindowController.close()
     }
 
-    /// Battery-driven pause. Single-instance variant — only one
-    /// window-mode controller exists.
-    func applyBatteryPause() {
-        debugLog("🔋 Window mode battery pause — pausing playback")
-        aerialWindowController.batteryPause()
+    /// Direct pause/resume for a single reason (battery, thermal, camera).
+    /// Single-instance variant — only one window-mode controller exists.
+    func pause(reason: PauseReasons) {
+        debugLog("🪟 Window mode pause +\(reason.summary)")
+        aerialWindowController.pause(reason: reason)
     }
 
-    func applyBatteryResume() {
-        debugLog("🔋 Window mode battery resume — resuming playback")
-        aerialWindowController.batteryResume()
+    func resume(reason: PauseReasons) {
+        debugLog("🪟 Window mode resume -\(reason.summary)")
+        aerialWindowController.resume(reason: reason)
     }
     
     func setUserPaused(_ paused: Bool) {

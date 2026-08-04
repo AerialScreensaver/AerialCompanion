@@ -125,6 +125,21 @@ struct CompanionSettings: Codable {
     /// `"lowBattery"`: pause only when on battery AND remaining capacity is below 20%.
     var desktopPauseOnBatteryMode: String
 
+    // MARK: - Thermal / Low Power Mode pause
+
+    /// Pause the wallpaper while thermal pressure is `.serious` or
+    /// `.critical`. Default ON — protective, rare, and what users want
+    /// when the machine is already cooking.
+    var desktopPauseOnThermal: Bool
+
+    /// Pause the wallpaper while macOS Low Power Mode is enabled.
+    /// Default off — opt-in, consistent with `desktopPauseOnBattery`.
+    var desktopPauseOnLowPower: Bool
+
+    /// Pause the wallpaper while any camera is in use (videoconference
+    /// case). Default off — opt-in.
+    var desktopPauseOnCamera: Bool
+
     // MARK: - Defaults
 
     /// Default settings for fresh install
@@ -151,7 +166,10 @@ struct CompanionSettings: Codable {
         firstLaunchCompleted: nil,
         enabledNowPlayingSources: [],
         desktopPauseOnBattery: false,
-        desktopPauseOnBatteryMode: "anyBattery"
+        desktopPauseOnBatteryMode: "anyBattery",
+        desktopPauseOnThermal: true,
+        desktopPauseOnLowPower: false,
+        desktopPauseOnCamera: false
     )
 
     // MARK: - File Location
@@ -200,7 +218,10 @@ struct CompanionSettings: Codable {
          firstLaunchCompleted: Bool? = nil,
          enabledNowPlayingSources: [String] = [],
          desktopPauseOnBattery: Bool = false,
-         desktopPauseOnBatteryMode: String = "anyBattery") {
+         desktopPauseOnBatteryMode: String = "anyBattery",
+         desktopPauseOnThermal: Bool = true,
+         desktopPauseOnLowPower: Bool = false,
+         desktopPauseOnCamera: Bool = false) {
         self.intLaunchMode = intLaunchMode
         self.debugMode = debugMode
         self.firstTimeSetup = firstTimeSetup
@@ -224,6 +245,9 @@ struct CompanionSettings: Codable {
         self.enabledNowPlayingSources = enabledNowPlayingSources
         self.desktopPauseOnBattery = desktopPauseOnBattery
         self.desktopPauseOnBatteryMode = desktopPauseOnBatteryMode
+        self.desktopPauseOnThermal = desktopPauseOnThermal
+        self.desktopPauseOnLowPower = desktopPauseOnLowPower
+        self.desktopPauseOnCamera = desktopPauseOnCamera
     }
 
     // MARK: - Backward-Compatible Decoding
@@ -253,5 +277,8 @@ struct CompanionSettings: Codable {
         enabledNowPlayingSources = try container.decodeIfPresent([String].self, forKey: .enabledNowPlayingSources) ?? []
         desktopPauseOnBattery = try container.decodeIfPresent(Bool.self, forKey: .desktopPauseOnBattery) ?? false
         desktopPauseOnBatteryMode = try container.decodeIfPresent(String.self, forKey: .desktopPauseOnBatteryMode) ?? "anyBattery"
+        desktopPauseOnThermal = try container.decodeIfPresent(Bool.self, forKey: .desktopPauseOnThermal) ?? true
+        desktopPauseOnLowPower = try container.decodeIfPresent(Bool.self, forKey: .desktopPauseOnLowPower) ?? false
+        desktopPauseOnCamera = try container.decodeIfPresent(Bool.self, forKey: .desktopPauseOnCamera) ?? false
     }
 }

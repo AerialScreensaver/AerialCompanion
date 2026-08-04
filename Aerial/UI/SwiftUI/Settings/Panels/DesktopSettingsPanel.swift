@@ -49,6 +49,13 @@ struct DesktopSettingsPanel: View {
     /// on a Mac that doesn't have a battery (Mac mini, Studio, etc.).
     @State private var hasBatteryHardware: Bool = false
 
+    /// Pause the wallpaper under serious/critical thermal pressure.
+    @State private var pauseOnThermal: Bool = true
+    /// Pause the wallpaper while macOS Low Power Mode is on.
+    @State private var pauseOnLowPower: Bool = false
+    /// Pause the wallpaper while any camera is in use.
+    @State private var pauseOnCamera: Bool = false
+
     // MARK: - macOS wallpaper-video reclaim
     /// Mirrors `Preferences.reclaimMacOSWallpaperVideosAtStartup`.
     @State private var reclaimMacOSAtStartup: Bool = false
@@ -69,6 +76,10 @@ struct DesktopSettingsPanel: View {
                 autoPauseSection
 
                 pauseOnBatterySection
+
+                powerAndThermalSection
+
+                cameraSection
 
                 restartAtLaunchSection
 
@@ -256,6 +267,68 @@ struct DesktopSettingsPanel: View {
             .padding(12)
         } label: {
             Label("Pause on Battery", systemImage: "battery.25percent")
+                .font(Font.title3.bold())
+                .padding(4)
+        }
+    }
+
+    // MARK: - Power & Thermal Section
+
+    private var powerAndThermalSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Toggle("Pause under thermal pressure", isOn: $pauseOnThermal)
+                    .font(.system(size: 14))
+                    .onChange(of: pauseOnThermal) { newValue in
+                        Preferences.desktopPauseOnThermal = newValue
+                        PlaybackManager.shared.evaluateThermalState()
+                    }
+
+                Text("Automatically pauses playback while this Mac reports serious thermal pressure (fans at full tilt), and resumes once it cools down.")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+
+                Divider()
+
+                Toggle("Pause in Low Power Mode", isOn: $pauseOnLowPower)
+                    .font(.system(size: 14))
+                    .onChange(of: pauseOnLowPower) { newValue in
+                        Preferences.desktopPauseOnLowPower = newValue
+                        PlaybackManager.shared.evaluateThermalState()
+                    }
+
+                Text("Pauses playback while macOS Low Power Mode is enabled. Click the popover's play button to override either pause for the current session.")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+            }
+            .padding(12)
+        } label: {
+            Label("Power & Thermal", systemImage: "thermometer.medium")
+                .font(Font.title3.bold())
+                .padding(4)
+        }
+    }
+
+    // MARK: - Camera Section
+
+    private var cameraSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Toggle("Pause while the camera is in use", isOn: $pauseOnCamera)
+                    .font(.system(size: 14))
+                    .onChange(of: pauseOnCamera) { newValue in
+                        Preferences.desktopPauseOnCamera = newValue
+                        PlaybackManager.shared.evaluateCameraState()
+                    }
+
+                Text("Pauses playback whenever any app uses a camera — videoconferences, recordings — and resumes when it turns off. Aerial only reads the camera's on/off state, never the picture.")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(12)
+        } label: {
+            Label("Camera", systemImage: "video")
                 .font(Font.title3.bold())
                 .padding(4)
         }
@@ -511,6 +584,9 @@ struct DesktopSettingsPanel: View {
         pauseOnBattery = Preferences.desktopPauseOnBattery
         pauseOnBatteryMode = Preferences.desktopPauseOnBatteryMode
         hasBatteryHardware = Battery.hasBattery()
+        pauseOnThermal = Preferences.desktopPauseOnThermal
+        pauseOnLowPower = Preferences.desktopPauseOnLowPower
+        pauseOnCamera = Preferences.desktopPauseOnCamera
         reclaimMacOSAtStartup = Preferences.reclaimMacOSWallpaperVideosAtStartup
     }
 

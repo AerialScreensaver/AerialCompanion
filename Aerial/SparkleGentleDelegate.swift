@@ -12,6 +12,28 @@ import Cocoa
 import Sparkle
 import UserNotifications
 
+/// The beta update-channel opt-in. Stored in `UserDefaults.standard`
+/// (same home as `autoInstallMode`); when the user has never touched
+/// the toggle, a build whose version contains "beta" auto-enrolls —
+/// beta users keep receiving betas without hunting for a setting,
+/// stable installs stay on the stable channel.
+enum BetaChannel {
+    static let defaultsKey = "betaUpdates"
+
+    static var isEnabled: Bool {
+        get {
+            if UserDefaults.standard.object(forKey: defaultsKey) != nil {
+                return UserDefaults.standard.bool(forKey: defaultsKey)
+            }
+            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+            return version.contains("beta")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: defaultsKey)
+        }
+    }
+}
+
 final class SparkleGentleDelegate: NSObject, ObservableObject, SPUUpdaterDelegate, SPUStandardUserDriverDelegate {
 
     @Published var updateAvailable: Bool = false
@@ -73,6 +95,16 @@ final class SparkleGentleDelegate: NSObject, ObservableObject, SPUUpdaterDelegat
     }
 
     // MARK: - SPUUpdaterDelegate
+
+    /// Update channels this install listens to, consulted on every
+    /// check. Items in the appcast tagged `<sparkle:channel>beta</…>`
+    /// are only visible when "beta" is returned here; untagged (stable)
+    /// items are always visible — so a beta user still receives a newer
+    /// stable release (Sparkle picks the highest build number across
+    /// allowed channels).
+    func allowedChannels(for updater: SPUUpdater) -> Set<String> {
+        BetaChannel.isEnabled ? ["beta"] : []
+    }
 
     func updater(_ updater: SPUUpdater, willInstallUpdateOnQuit item: SUAppcastItem, immediateInstallationBlock immediateInstallHandler: @escaping () -> Void) -> Bool {
         let mode = UserDefaults.standard.string(forKey: "autoInstallMode") ?? AutoInstallMode.off.rawValue

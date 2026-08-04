@@ -106,12 +106,12 @@ class SwiftAerialWindow: NSWindowController {
         aerialView?.setUserPaused(paused)
     }
 
-    func batteryPause() {
-        aerialView?.batteryPause()
+    func pause(reason: PauseReasons) {
+        aerialView?.pause(reason: reason)
     }
 
-    func batteryResume() {
-        aerialView?.batteryResume()
+    func resume(reason: PauseReasons) {
+        aerialView?.resume(reason: reason)
     }
 
     func skipTo(playlistIndex: Int) {
